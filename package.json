@@ -1,0 +1,43 @@
+{
+  "name": "react-next-study",
+  "version": "1.0.0",
+  "description": "study for nextJs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node server.js",
+    "build": "next build",
+    "start": "NODE_ENV=production node server.js"
+  },
+  "author": "sunginHwang",
+  "license": "ISC",
+  "dependencies": {
+    "@zeit/next-sass": "^0.2.0",
+    "autoprefixer": "^8.6.4",
+    "axios": "^0.18.0",
+    "css-loader": "^0.28.11",
+    "glob": "^7.1.2",
+    "immutable": "^3.8.2",
+    "install": "^0.12.1",
+    "next": "latest",
+    "next-redux-wrapper": "^2.0.0-beta.6",
+    "next-routes": "^1.4.2",
+    "node-sass": "^4.9.0",
+    "npm": "^6.1.0",
+    "postcss-easy-import": "^3.0.0",
+    "postcss-flexbugs-fixes": "^3.3.1",
+    "postcss-loader": "^2.1.5",
+    "raw-loader": "^0.5.1",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
+    "react-redux": "^5.0.7",
+    "react-spinners": "^0.3.2",
+    "redux": "^4.0.0",
+    "redux-actions": "^2.3.0",
+    "redux-devtools-extension": "^2.13.2",
+    "redux-saga": "^0.16.0",
+    "redux-thunk": "^2.2.0",
+    "sass-loader": "^7.0.3",
+    "style-loader": "^0.21.0"
+  }
+}
