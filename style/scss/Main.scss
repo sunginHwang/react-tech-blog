@@ -1,10 +1,10 @@
 $blueColor: #78ccdd;
 
-body{
+body {
   background-color: #e8e8e8;
 }
 
-.tag{
+.tag {
   background-color: $blueColor;
   color: white;
   width: 200px;
@@ -15,9 +15,9 @@ body{
 
 }
 
-.customTag{
+.customTag {
   color: $blueColor;
-  button{
+  button {
     color: purple;
     width: 200px;
     height: 100px;
@@ -25,9 +25,17 @@ body{
   }
 }
 
-.linkTag{
+.markDownWrapper {
+  background-color: #fff;
+  margin: 1em;
+  padding: 1em;
+  width: 50%;
+  height: 50%;
+}
+
+.linkTag {
   color: $blueColor;
-  &:hover{
+  &:hover {
     color: rebeccapurple;
   }
 }
