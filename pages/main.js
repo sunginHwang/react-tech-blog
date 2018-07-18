@@ -1,6 +1,7 @@
 import Layout from '../component/common/layout/Layout';
 import Mainlayout from '../component/common/layout/Mainlayout';
 import ReactMarkdown from 'react-markdown';
+import CodeBlock from '../component/editer/CodeBlock';
 import React from "react";
 import style from '../style/scss/Main.scss';
 
@@ -30,7 +31,11 @@ class main extends React.Component {
                         <textarea onChange={(e)=>{this.stateChange(e.target.value);}}>{this.state.content}</textarea>
                     </div>
                     <div className={style.markDownWrapper}>
-                        <ReactMarkdown  source={this.state.content} skipHtml={true}/>
+                        <ReactMarkdown  source={this.state.content}
+                                        skipHtml={true}
+                                        escapeHtml={false}
+                                        renderers={{code: CodeBlock}}
+                        />
                     </div>
                     <Mainlayout/>
                 </div>
