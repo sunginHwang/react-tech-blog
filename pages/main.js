@@ -9,36 +9,37 @@ import style from '../style/scss/Main.scss';
 
 class main extends React.Component {
 
-    constructor(){
+    constructor() {
         super();
         this.state = {
-            content : '12'
+            content: '12'
         }
     }
 
-    stateChange(content){
+    stateChange(content) {
         this.setState({content: content});
     }
-     imageUploadClick = async () => {
+
+    imageUploadClick = async () => {
         const fileInput = document.createElement('input');
         fileInput.type = 'file';
         fileInput.onchange = (e) => {
             if (!fileInput.files) return;
-            FileApi.saveImageAndGetImageUrl(fileInput.files[0]).then(async(imgUrl)  => {
-                if(imgUrl ==='') return;
-                await this.stateChange(this.state.content+this.convertImageToCodeImage(imgUrl));
+            FileApi.saveImageAndGetImageUrl(fileInput.files[0]).then(async (imgUrl) => {
+                if (imgUrl === '') return;
+                await this.stateChange(this.state.content + this.convertImageToCodeImage(imgUrl));
             });
         };
         fileInput.click();
     };
 
-    convertImageToCodeImage(imageUrl){
+    convertImageToCodeImage(imageUrl) {
         return `${'\n'}![${imageUrl}](${imageUrl})${'\n'}`;
     }
 
     render() {
 
-        return(
+        return (
             <Layout title='메인 페이지'>
                 <div>
                     <span>스마트 마크다운 에디터 스터디</span>
@@ -46,13 +47,16 @@ class main extends React.Component {
                     <br/>
                     <button onClick={this.imageUploadClick}>이미지 업로드</button>
                     <div className={style.markDownWrapper}>
-                        <textarea onChange={(e)=>{this.stateChange(e.target.value);}}>{this.state.content}</textarea>
+                        <textarea onChange={(e) => {
+                            this.stateChange(e.target.value);
+                        }}
+                                  value={this.state.content}/>
                     </div>
                     <div className={style.markDownWrapper}>
-                        <ReactMarkdown  source={this.state.content}
-                                        skipHtml={true}
-                                        escapeHtml={false}
-                                        renderers={{code: CodeBlock}}
+                        <ReactMarkdown source={this.state.content}
+                                       skipHtml={true}
+                                       escapeHtml={false}
+                                       renderers={{code: CodeBlock}}
                         />
                     </div>
                     <Mainlayout/>
