@@ -31,7 +31,18 @@ body {
   padding: 1em;
   width: 40%;
   display: inline-block;
-  height: 1200px;
+  height: 700px;
+  word-break: break-word;
+  overflow-y: scroll;
+}
+
+.markDownEditer {
+  width: 100%;
+  display: inline-block;
+  height: 100%;
+  border: none;
+  resize: none;
+  overflow-y: scroll;
 }
 
 .markDownWrapper img{

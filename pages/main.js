@@ -16,6 +16,33 @@ class main extends React.Component {
         }
     }
 
+    componentDidMount(){
+        if (window) {
+            window.addEventListener('drop', (e)=>{
+                console.log('drop');
+                console.log(e);
+            });
+            window.addEventListener('dragenter', (e)=>{
+                console.log('dragenter');
+                console.log(e);
+            });
+            window.addEventListener('dragleave', (e)=>{
+                console.log('dragleave');
+                console.log(e);
+            });
+            window.addEventListener('dragover', (e)=>{
+                console.log('dragover');
+                console.log(e);
+            });
+        }
+        if (document && document.body) {
+            document.body.addEventListener('paste', (e)=>{
+                console.log('paste');
+                console.log(e);
+            });
+        }
+    }
+
     stateChange(content) {
         this.setState({content: content});
     }
@@ -46,18 +73,22 @@ class main extends React.Component {
                     <br/>
                     <br/>
                     <button onClick={this.imageUploadClick}>이미지 업로드</button>
-                    <div className={style.markDownWrapper}>
-                        <textarea onChange={(e) => {
-                            this.stateChange(e.target.value);
-                        }}
-                                  value={this.state.content}/>
-                    </div>
-                    <div className={style.markDownWrapper}>
-                        <ReactMarkdown source={this.state.content}
-                                       skipHtml={true}
-                                       escapeHtml={false}
-                                       renderers={{code: CodeBlock}}
-                        />
+                    <div >
+                        <div className={style.markDownWrapper}>
+                            <textarea className={style.markDownEditer}
+                                      onChange={(e) => {
+                                          this.stateChange(e.target.value);
+                                      }}
+                                      value={this.state.content}/>
+                        </div>
+
+                        <div className={style.markDownWrapper}>
+                            <ReactMarkdown source={this.state.content}
+                                           skipHtml={true}
+                                           escapeHtml={false}
+                                           renderers={{code: CodeBlock}}
+                            />
+                        </div>
                     </div>
                     <Mainlayout/>
                 </div>

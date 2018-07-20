@@ -15,7 +15,7 @@ export const saveImageAndGetImageUrl = async (imageFile) => {
                 }}
         });
         const { state, img_url } = await result.data;
-        await console.log(`${tempPhotoServerUrl}/uploads/${img_url}`);
+
         if(state !== 'success'){
             return await '12';
         }else{
