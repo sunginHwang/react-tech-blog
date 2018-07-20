@@ -19,26 +19,24 @@ class main extends React.Component {
     componentDidMount(){
         if (window) {
             window.addEventListener('drop', (e)=>{
-                console.log('drop');
-                console.log(e);
-            });
-            window.addEventListener('dragenter', (e)=>{
-                console.log('dragenter');
-                console.log(e);
-            });
-            window.addEventListener('dragleave', (e)=>{
-                console.log('dragleave');
-                console.log(e);
-            });
-            window.addEventListener('dragover', (e)=>{
-                console.log('dragover');
-                console.log(e);
+                e.preventDefault();
+                const {  files } = e.dataTransfer;
+
+                for (let i = 0; i < files.length; i++) {
+                    this.imageUpload(files[i]);
+                }
             });
         }
         if (document && document.body) {
             document.body.addEventListener('paste', (e)=>{
                 console.log('paste');
-                console.log(e);
+                const { items } = e.clipboardData || e.originalEvent.clipboardData;
+                if (items.length !== 2) return;
+                if (items[1].kind !== 'file') return;
+                const file = items[1].getAsFile();
+                this.imageUpload(file);
+
+                e.preventDefault();
             });
         }
     }
@@ -52,12 +50,16 @@ class main extends React.Component {
         fileInput.type = 'file';
         fileInput.onchange = (e) => {
             if (!fileInput.files) return;
-            FileApi.saveImageAndGetImageUrl(fileInput.files[0]).then(async (imgUrl) => {
-                if (imgUrl === '') return;
-                await this.stateChange(this.state.content + this.convertImageToCodeImage(imgUrl));
-            });
+            this.imageUpload(fileInput.files[0]);
         };
         fileInput.click();
+    };
+
+    imageUpload = async (file) =>{
+        FileApi.saveImageAndGetImageUrl(file).then(async (imgUrl) => {
+            if (imgUrl === '') return;
+            await this.stateChange(this.state.content + this.convertImageToCodeImage(imgUrl));
+        });
     };
 
     convertImageToCodeImage(imageUrl) {
