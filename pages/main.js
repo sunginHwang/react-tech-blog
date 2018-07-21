@@ -2,6 +2,7 @@ import Layout from '../component/common/layout/Layout';
 import Mainlayout from '../component/common/layout/Mainlayout';
 import ReactMarkdown from 'react-markdown';
 import CodeBlock from '../component/editer/CodeBlock';
+import WriteEditer from '../component/editer/WriteEditer/WriteEditer';
 import React from "react";
 import * as FileApi from '../core/apis/FileApi';
 
@@ -16,57 +17,57 @@ class main extends React.Component {
         }
     }
 
-    componentDidMount(){
-        if (window) {
-            window.addEventListener('drop', (e)=>{
-                e.preventDefault();
-                const {  files } = e.dataTransfer;
 
-                for (let i = 0; i < files.length; i++) {
-                    this.imageUpload(files[i]);
-                }
-            });
-        }
-        if (document && document.body) {
-            document.body.addEventListener('paste', (e)=>{
-                console.log('paste');
-                const { items } = e.clipboardData || e.originalEvent.clipboardData;
-                if (items.length !== 2) return;
-                if (items[1].kind !== 'file') return;
-                const file = items[1].getAsFile();
-                this.imageUpload(file);
-
-                e.preventDefault();
-            });
-        }
-    }
-
-    stateChange(content) {
+    onChangeContent = (content) => {
+        console.log(content);
         this.setState({content: content});
-    }
+    };
 
-    imageUploadClick = async () => {
+    dndImage = (e) => {
+        e.preventDefault();
+        const {files} = e.dataTransfer;
+
+        for (let i = 0; i < files.length; i++) {
+            console.log(i);
+            this.uploadImage(files[i]);
+        }
+    };
+
+    pasteImage = (e) => {
+        const {items} = e.clipboardData || e.originalEvent.clipboardData;
+        if (items.length !== 2) return;
+        if (items[1].kind !== 'file') return;
+        const file = items[1].getAsFile();
+        this.uploadImage(file);
+
+        e.preventDefault();
+
+    };
+
+    onClickUploadImage = async () => {
         const fileInput = document.createElement('input');
         fileInput.type = 'file';
         fileInput.onchange = (e) => {
             if (!fileInput.files) return;
-            this.imageUpload(fileInput.files[0]);
+            this.uploadImage(fileInput.files[0]);
         };
         fileInput.click();
     };
 
-    imageUpload = async (file) =>{
-        FileApi.saveImageAndGetImageUrl(file).then(async (imgUrl) => {
-            if (imgUrl === '') return;
-            await this.stateChange(this.state.content + this.convertImageToCodeImage(imgUrl));
-        });
+    uploadImage = async (file) => {
+        FileApi.saveImageAndGetImageUrl(file)
+            .then(async (imgUrl) => {
+                if (imgUrl === '') return;
+                await this.onChangeContent(this.state.content + main.convertImageToCodeImage(imgUrl));
+            });
     };
 
-    convertImageToCodeImage(imageUrl) {
+    static convertImageToCodeImage(imageUrl) {
         return `${'\n'}![${imageUrl}](${imageUrl})${'\n'}`;
     }
 
     render() {
+        const {dndImage, pasteImage, onChangeContent} = this;
 
         return (
             <Layout title='메인 페이지'>
@@ -74,16 +75,15 @@ class main extends React.Component {
                     <span>스마트 마크다운 에디터 스터디</span>
                     <br/>
                     <br/>
-                    <button onClick={this.imageUploadClick}>이미지 업로드</button>
-                    <div >
+                    <button onClick={this.onClickUploadImage}>이미지 업로드</button>
+                    <div>
                         <div className={style.markDownWrapper}>
-                            <textarea className={style.markDownEditer}
-                                      onChange={(e) => {
-                                          this.stateChange(e.target.value);
-                                      }}
-                                      value={this.state.content}/>
+                            <WriteEditer dndImage={(e)=>{dndImage(e)}}
+                                         pasteImage={(e)=>{pasteImage(e)}}
+                                         changeContent={(e)=>{onChangeContent(e)}}
+                                         content={this.state.content}
+                            />
                         </div>
-
                         <div className={style.markDownWrapper}>
                             <ReactMarkdown source={this.state.content}
                                            skipHtml={true}
