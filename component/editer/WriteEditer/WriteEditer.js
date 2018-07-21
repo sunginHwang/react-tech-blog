@@ -36,13 +36,17 @@ export default class WriteEditer extends React.Component {
     }
 
     render() {
-        const { changeContent, content } = this.props;
+        const { changeContent, content, clickUploadImage } = this.props;
         return (
-            <textarea className={style.markDownEditer}
-                      onChange={(e) => {
-                          changeContent(e.target.value);
-                      }}
-                      value={content}/>
+            <div style={{height:'100%'}}>
+                <button onClick={clickUploadImage}>이미지 업로드</button>
+                <textarea className={style.markDownEditer}
+                          onChange={(e) => {
+                              changeContent(e.target.value);
+                          }}
+                          value={content}/>
+            </div>
+
         )
     }
 }

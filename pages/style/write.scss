@@ -1,0 +1,14 @@
+.markDownWrapper {
+  background-color: #fff;
+  margin: 1em;
+  padding: 1em;
+  width: 40%;
+  display: inline-block;
+  height: 700px;
+  word-break: break-word;
+  overflow-y: scroll;
+}
+
+.markDownWrapper img{
+  max-width: 100%;
+}

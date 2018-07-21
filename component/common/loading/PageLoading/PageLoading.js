@@ -1,5 +1,6 @@
 import { HashLoader } from 'react-spinners';
 import style from './PageLoading.scss';
+import React from "react";
 
 export default ({loading}) => (
     loading ?

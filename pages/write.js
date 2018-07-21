@@ -1,14 +1,14 @@
-import Layout from '../component/common/layout/Layout';
-import Mainlayout from '../component/common/layout/Mainlayout';
-import ReactMarkdown from 'react-markdown';
-import CodeBlock from '../component/editer/CodeBlock';
-import WriteEditer from '../component/editer/WriteEditer/WriteEditer';
 import React from "react";
+
+import Layout from '../component/common/layout/Layout';
+import WriteEditer from '../component/editer/WriteEditer/WriteEditer';
+import MarkDownView from '../component/view/MarkDownView/MarkDownView';
+
 import * as FileApi from '../core/apis/FileApi';
 
-import style from '../style/scss/Main.scss';
+import style from './style/write.scss';
 
-class main extends React.Component {
+class write extends React.Component {
 
     constructor() {
         super();
@@ -23,16 +23,17 @@ class main extends React.Component {
         this.setState({content: content});
     };
 
+    /*이미지 드래그 삽입 ( 복수 드래그 가능 )*/
     dndImage = (e) => {
         e.preventDefault();
         const {files} = e.dataTransfer;
 
         for (let i = 0; i < files.length; i++) {
-            console.log(i);
             this.uploadImage(files[i]);
         }
     };
 
+    /*키보드 cv 복사로 이미지 삽입*/
     pasteImage = (e) => {
         const {items} = e.clipboardData || e.originalEvent.clipboardData;
         if (items.length !== 2) return;
@@ -44,6 +45,7 @@ class main extends React.Component {
 
     };
 
+    /*이미지 버튼 삽입*/
     onClickUploadImage = async () => {
         const fileInput = document.createElement('input');
         fileInput.type = 'file';
@@ -54,6 +56,7 @@ class main extends React.Component {
         fileInput.click();
     };
 
+    /*이미지 업로딩*/
     uploadImage = async (file) => {
         FileApi.saveImageAndGetImageUrl(file)
             .then(async (imgUrl) => {
@@ -62,41 +65,38 @@ class main extends React.Component {
             });
     };
 
+    /* 이미지 태그 markdown 용으로 컨버팅 */
     static convertImageToCodeImage(imageUrl) {
         return `${'\n'}![${imageUrl}](${imageUrl})${'\n'}`;
     }
 
     render() {
-        const {dndImage, pasteImage, onChangeContent} = this;
+        const { dndImage, pasteImage, onChangeContent, onClickUploadImage} = this;
 
         return (
-            <Layout title='메인 페이지'>
+            <Layout title='게시글 작성'>
                 <div>
                     <span>스마트 마크다운 에디터 스터디</span>
                     <br/>
                     <br/>
-                    <button onClick={this.onClickUploadImage}>이미지 업로드</button>
                     <div>
                         <div className={style.markDownWrapper}>
                             <WriteEditer dndImage={(e)=>{dndImage(e)}}
                                          pasteImage={(e)=>{pasteImage(e)}}
+                                         clickUploadImage={(e)=>{onClickUploadImage()}}
                                          changeContent={(e)=>{onChangeContent(e)}}
-                                         content={this.state.content}
-                            />
+                                         content={this.state.content}/>
                         </div>
                         <div className={style.markDownWrapper}>
-                            <ReactMarkdown source={this.state.content}
-                                           skipHtml={true}
-                                           escapeHtml={false}
-                                           renderers={{code: CodeBlock}}
-                            />
+                            <MarkDownView content={this.state.content}
+                                          skipHtml={true}
+                                          escapeHtml={false}/>
                         </div>
                     </div>
-                    <Mainlayout/>
                 </div>
             </Layout>
         )
     }
 }
 
-export default main;
+export default write;
