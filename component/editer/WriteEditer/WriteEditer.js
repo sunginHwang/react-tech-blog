@@ -1,4 +1,6 @@
 import React from "react";
+import { MdAddToPhotos } from 'react-icons/lib/md';
+
 import style from './WriteEditer.scss';
 
 export default class WriteEditer extends React.Component {
@@ -39,14 +41,14 @@ export default class WriteEditer extends React.Component {
         const { changeContent, content, clickUploadImage } = this.props;
         return (
             <div style={{height:'100%'}}>
-                <div>
+                <div className={style.writeTitleArea} >
                     <input className={style.writeTitle}
                            type='text'
                            placeholder='제목을 입력해 주세요.'
                            value=''/>
-                    <button
+                    <div
                         className={style.imageInsertBtn}
-                        onClick={clickUploadImage}>이미지 업로드</button>
+                        onClick={clickUploadImage}><span><MdAddToPhotos/>이미지 업로드</span></div>
                 </div>
 
                 <textarea className={style.markDownEditer}

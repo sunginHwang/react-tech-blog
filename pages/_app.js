@@ -3,6 +3,7 @@ import React from 'react'
 import withRedux from 'next-redux-wrapper'
 import {initializeStore} from '../core/store'
 import { Provider } from 'react-redux'
+import '../style/scss/DefaultSetting.scss';
 
 export default withRedux(initializeStore)(class MyApp extends App {
 

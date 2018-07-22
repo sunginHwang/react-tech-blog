@@ -85,8 +85,8 @@ class write extends React.Component {
                                          content={this.state.content}/>
                         </div>
                         <div className={style.markDownWrapper +' '+ style.view}>
-                            <div>
-                                <p>preview</p>
+                            <div className={style.previewTitleArea}>
+                                <span className={style.previewTitle}>preview</span>
                             </div>
                             <MarkDownView content={this.state.content}
                                           skipHtml={true}
