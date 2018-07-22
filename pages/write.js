@@ -61,12 +61,12 @@ class write extends React.Component {
         FileApi.saveImageAndGetImageUrl(file)
             .then(async (imgUrl) => {
                 if (imgUrl === '') return;
-                await this.onChangeContent(this.state.content + main.convertImageToCodeImage(imgUrl));
+                await this.onChangeContent(this.state.content + this.convertImageToCodeImage(imgUrl));
             });
     };
 
     /* 이미지 태그 markdown 용으로 컨버팅 */
-    static convertImageToCodeImage(imageUrl) {
+    convertImageToCodeImage(imageUrl) {
         return `${'\n'}![${imageUrl}](${imageUrl})${'\n'}`;
     }
 
@@ -85,6 +85,9 @@ class write extends React.Component {
                                          content={this.state.content}/>
                         </div>
                         <div className={style.markDownWrapper +' '+ style.view}>
+                            <div>
+                                <p>preview</p>
+                            </div>
                             <MarkDownView content={this.state.content}
                                           skipHtml={true}
                                           escapeHtml={false}/>
