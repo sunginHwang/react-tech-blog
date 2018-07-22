@@ -39,8 +39,18 @@ export default class WriteEditer extends React.Component {
         const { changeContent, content, clickUploadImage } = this.props;
         return (
             <div style={{height:'100%'}}>
-                <button onClick={clickUploadImage}>이미지 업로드</button>
+                <div>
+                    <input className={style.writeTitle}
+                           type='text'
+                           placeholder='제목을 입력해 주세요.'
+                           value=''/>
+                    <button
+                        className={style.imageInsertBtn}
+                        onClick={clickUploadImage}>이미지 업로드</button>
+                </div>
+
                 <textarea className={style.markDownEditer}
+                          placeholder='작성할 내용을 입력해 주세요.'
                           onChange={(e) => {
                               changeContent(e.target.value);
                           }}

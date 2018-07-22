@@ -13,7 +13,7 @@ class write extends React.Component {
     constructor() {
         super();
         this.state = {
-            content: '12'
+            content: ''
         }
     }
 
@@ -76,10 +76,7 @@ class write extends React.Component {
         return (
             <Layout title='게시글 작성'>
                 <div>
-                    <span>스마트 마크다운 에디터 스터디</span>
-                    <br/>
-                    <br/>
-                    <div>
+                    <div className={style.write}>
                         <div className={style.markDownWrapper}>
                             <WriteEditer dndImage={(e)=>{dndImage(e)}}
                                          pasteImage={(e)=>{pasteImage(e)}}
@@ -87,7 +84,7 @@ class write extends React.Component {
                                          changeContent={(e)=>{onChangeContent(e)}}
                                          content={this.state.content}/>
                         </div>
-                        <div className={style.markDownWrapper}>
+                        <div className={style.markDownWrapper +' '+ style.view}>
                             <MarkDownView content={this.state.content}
                                           skipHtml={true}
                                           escapeHtml={false}/>

@@ -1,0 +1,49 @@
+.mainHeaderWrapper{
+  height: 60px;
+}
+.mainHeader{
+  position: fixed;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 100;
+  background-color: #fff;
+  color: #ff2d60;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  height: 60px;
+  border-color: rgba(23, 42, 58, .1);
+  border-width: 2px;
+}
+
+.flexAuto {
+  -webkit-box-flex: 1;
+  -ms-flex: 1 auto;
+  flex: 1 auto;
+}
+
+.headerLeftArea{
+  float: left;
+  display: flex;
+}
+
+.headerRightArea{
+  float: right;
+  display: flex;
+}
+
+.headerLogo{
+  font-weight: bolder;
+  font-size: 20px;
+  padding: 1em;
+}
+
+.headerMenu{
+  padding: 1em;
+}
