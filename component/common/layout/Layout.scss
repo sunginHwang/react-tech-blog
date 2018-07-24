@@ -1,3 +1,7 @@
+@import '../../../style/scss/CommonUtil';
+@import '../../../style/scss/CommonLayout';
+
+
 .tag {
   background-color: #78ccdd;
   color: white;
@@ -10,8 +14,8 @@
 }
 
 .contentArea{
-  background-color: #fff !important;
+  background-color: $white-color !important;
   width: 100%;
-  height: calc(100vh - 100px);
+  height: $main-content-height;
   text-align: center;
 }

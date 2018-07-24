@@ -1,5 +1,8 @@
+@import '../../../style/scss/CommonUtil';
+@import '../../../style/scss/CommonLayout';
+
 .mainHeaderWrapper{
-  height: 60px;
+  height: $main-header-height;
 }
 .mainHeader{
   position: fixed;
@@ -13,12 +16,12 @@
   right: 0;
   left: 0;
   z-index: 100;
-  background-color: #fff;
-  color: #ff2d60;
+  background-color: $white-color;
+  color: $main-theme-color;
   border-bottom-style: solid;
   border-bottom-width: 1px;
-  height: 60px;
-  border-color: rgba(23, 42, 58, .1);
+  height: $main-header-height;
+  border-color: $custom-gray-color;
   border-width: 2px;
 }
 

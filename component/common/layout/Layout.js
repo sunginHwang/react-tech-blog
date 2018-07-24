@@ -3,8 +3,9 @@ import React from "react";
 import Link from 'next/link';
 
 import PageLoading from '../loading/PageLoading/PageLoading';
-import MainHeader from '../../layout/head/mainHeader/MainHeader';
-import Footer from '../../layout/Footer/Footer';
+import MainHeader from '../../mainTemplate/MainHeader/MainHeader';
+import Footer from '../../mainTemplate/Footer/Footer';
+import SideBar from '../../mainTemplate/SideBar/SideBar';
 
 import style from './Layout.scss';
 
@@ -31,6 +32,7 @@ export default class ReduxExampleContainer extends React.Component {
                 <Head>
                     <title>{ this.props.title }</title>
                 </Head>
+                <SideBar/>
                 <div>
                     <MainHeader/>
                 </div>

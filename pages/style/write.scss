@@ -1,3 +1,5 @@
+@import '../../style/scss/CommonUtil';
+
 .write{
   padding-top: 3em;
 }
@@ -6,7 +8,7 @@
   background-color: #fff;
   margin: 1em;
   padding: 1em;
-  width: 40%;
+  width: 30%;
   display: inline-block;
   height: 700px;
   word-break: break-word;
@@ -17,7 +19,7 @@
   height: 60px;
 }
 .previewTitle{
-  color: #ff2d60;
+  color: $main-theme-color;
   font-size: 30px;
   font-weight: bold;
 }

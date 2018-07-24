@@ -1,0 +1,15 @@
+@import '../../../style/scss/CommonUtil';
+@import '../../../style/scss/CommonLayout';
+
+.footer{
+  height: $main-footer-height;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  -ms-flex-pack: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  background-color: $white-color;
+  border-top: 1px solid $custom-gray-color;
+  color: $main-theme-color;
+}

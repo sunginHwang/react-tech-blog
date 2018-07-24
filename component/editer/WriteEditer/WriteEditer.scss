@@ -1,3 +1,4 @@
+@import '../../../style/scss/CommonUtil';
 
 .markDownEditer {
   width: 100%;
@@ -20,8 +21,8 @@
 .imageInsertBtn{
   float: right;
   cursor: pointer;
-  color: #ff2d60;
-  border: 1px solid #ff2d60;
+  color: $main-theme-color;
+  border: 1px solid $main-theme-color;
   border-radius: 3px;
   padding: 8px;
 }
