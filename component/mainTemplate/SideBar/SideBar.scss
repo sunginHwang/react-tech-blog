@@ -6,14 +6,33 @@
   width: $main-right-width;
   height: 100%;
   position: fixed;
+  z-index: $side-bar-z-index*2;
   background-color: $white-color;
   top: $main-header-height;
   right: 0;
 
   @media screen and (max-width: $mobile-width){
-    .sideBar{
-      height: auto;
-    }
+    right: -$main-right-width;
+    transition: all .2s ease;
+  }
+}
+
+.sideBarOpen{
+  @media screen and (max-width: $mobile-width){
+    right: 0;
+  }
+}
+
+.sideBarWhiteSpace{
+  @media screen and (max-width: $mobile-width){
+      background-color: rgba(0,0,0,.7);
+      position: fixed;
+    transition: all .2s ease;
+     top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      z-index: $side-bar-z-index;
   }
 }
 

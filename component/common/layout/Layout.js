@@ -13,29 +13,53 @@ import style from './Layout.scss';
 export default class ReduxExampleContainer extends React.Component {
     constructor(...args) {
         super(...args);
-        this.state = { pageLoading: true }
+        this.state = {pageLoading: true, sideBarOpen: false, showMobileHeader: false}
     }
 
     componentDidMount() {
         this.loadingComplete();
+        this.detectMobileScrollUpAndDown();
+    }
+
+    detectMobileScrollUpAndDown() {
+            let lastScroll = 0;
+
+            window.onscroll = () => {
+                if(!this.state.sideBarOpen){
+                    let currentScroll = document.documentElement.scrollTop || document.body.scrollTop; // Get Current Scroll Value
+
+                    let isScrollDown = currentScroll > 0 && lastScroll <= currentScroll;
+
+                    if (isScrollDown !== this.state.showMobileHeader) {
+                        this.setState({showMobileHeader: isScrollDown})
+                    }
+                }
+            }
     }
 
     loadingComplete() {
         setTimeout(()=>{this.setState({ pageLoading: false });}, 500);
     }
 
+    onClickSideBar = () => {
+        this.setState({sideBarOpen: !this.state.sideBarOpen})
+    };
+
     render() {
 
 
-        return(
+        return (
             <div>
                 <Head>
-                    <title>{ this.props.title }</title>
+                    <title>{this.props.title}</title>
                 </Head>
-                <SideBar/>
-                <div>
-                    <MainHeader/>
-                </div>
+                <SideBar
+                    isOpen={this.state.sideBarOpen}
+                />
+                <MainHeader
+                    showMobileHeader={this.state.showMobileHeader}
+                    onClickSideBar={(e) => this.onClickSideBar()}
+                />
                 {/*<div>
                     <Link href='/write'>
                         <button className={style.tag}>글쓰기 페이지 이동</button>
