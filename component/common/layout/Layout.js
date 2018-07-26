@@ -13,7 +13,7 @@ import style from './Layout.scss';
 export default class ReduxExampleContainer extends React.Component {
     constructor(...args) {
         super(...args);
-        this.state = {pageLoading: true, sideBarOpen: false, showMobileHeader: false}
+        this.state = {pageLoading: false, sideBarOpen: false, showMobileHeader: false}
     }
 
     componentDidMount() {
@@ -38,7 +38,7 @@ export default class ReduxExampleContainer extends React.Component {
     }
 
     loadingComplete() {
-        setTimeout(()=>{this.setState({ pageLoading: false });}, 500);
+        /*setTimeout(()=>{this.setState({ pageLoading: false });}, 500);*/
     }
 
     onClickSideBar = () => {

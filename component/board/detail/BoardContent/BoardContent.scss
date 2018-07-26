@@ -1,0 +1,10 @@
+@import '../../../../style/scss/CommonLayout';
+
+.boardContentWrapper{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2em;
+  @media screen and (max-width: $mobile-width){
+  }
+}
