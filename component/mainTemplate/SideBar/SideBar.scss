@@ -40,14 +40,17 @@ ul{
   margin-top: 2em !important;
 
   li{
-    text-align: left;
-    display: block;
-    text-decoration: none;
-    padding: 1em;
-    border-left: 2px solid transparent;
-    font-weight: 300;
-    color: #2c3e50;
-    cursor: pointer;
+    a{
+      text-align: left;
+      display: block;
+      text-decoration: none;
+      padding: 1em;
+      border-left: 2px solid transparent;
+      font-weight: 300;
+      color: #2c3e50;
+      cursor: pointer;
+    }
+
     &:hover{
       color: $main-theme-color;
       background-color: $custom-gray-color;
