@@ -1,4 +1,5 @@
 import style from './SideBar.scss';
+import Link from 'next/link';
 
 export default ({isOpen}) => (
     <div>
