@@ -7,7 +7,7 @@ export default class detailView extends React.Component {
     constructor() {
         super();
         this.state = {
-            title: '계시글 제목입니다 츄',
+            title: '리엑트 미들웨어 사용법을 알아보자.',
             content: '\n' +
             '# Live demo\n' +
             '\n' +
@@ -15,24 +15,17 @@ export default class detailView extends React.Component {
             '\n' +
             '* Implements [GitHub Flavored Markdown](https://github.github.com/gfm/)\n' +
             '* Renders actual, "native" React DOM elements\n' +
-            '* Allowsfffffffffffff you to escape or skip HTML (try toggling the checkboxes above)\n' +
+            '* AllowsffffffffffffdangerouslySetInnerHTML is useddangerouslySetInnerHTML is useddangerouslySetInnerHTML is useddangerouslySetInnerHTML is useddangerouslySetInnerHTML is useddangerouslySetInnerHTML is usedf you to escape or skip HTML (try toggling the checkboxes above)\n' +
             '* If you escape or skip the HTML, no `dangerouslySetInnerHTML` is used! Yay!\n' +
             '\n' +
             '## HTML block below\n' +
             '\n' +
-            '<blockquote>\n' +
-            '  This blockquote will cffffffffffhange based on the HTML settings above.\n' +
-            '</blockquote>\n' +
             '\n' +
             '## How about some code?\n' +
             '```js\n' +
             'var React = require(\'react\');\n' +
             'var Markdown = require(\'react-markdown\');\n' +
             '\n' +
-            'React.render(\n' +
-            '  <Markdown source="# Your markdown here" />,\n' +
-            '  document.getElementById(\'content\')\n' +
-            ');\n' +
             '```\n' +
             '\n' +
             'Pretty neat, eh?\n' +

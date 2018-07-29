@@ -13,7 +13,9 @@ class write extends React.Component {
     constructor() {
         super();
         this.state = {
-            content: ''
+            content: '```js\n' +
+            'wefwef\n' +
+            '```'
         }
     }
 

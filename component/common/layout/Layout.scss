@@ -13,10 +13,17 @@
 
 }
 
-.contentArea{
+.contentWrapper{
   background-color: $white-color !important;
   width: 100%;
-  padding-top: $main-header-height;
+  max-width: 1000px;
   height: $main-content-height;
   text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 7% 0;
+  @media screen and (max-width: $mobile-width){
+    margin-top: $main-header-height;
+    padding:1rem;
+  }
 }

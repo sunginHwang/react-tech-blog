@@ -60,7 +60,7 @@ export default class ReduxExampleContainer extends React.Component {
                     onClickSideBar={(e) => this.onClickSideBar()}
                 />
                 <PageLoading loading={this.state.pageLoading}/>
-                <div className={style.contentArea}>
+                <div className={style.contentWrapper}>
                     {
                         this.props.children
                     }
