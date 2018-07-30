@@ -17,7 +17,7 @@ export default ({
                 <span>2018. 05. 27</span>
             </div>
         </div>
-        <MarkDownView content={contents}
+        <MarkDownView content={contents+contents+contents+contents}
                       skipHtml={true}
                       escapeHtml={false}/>
     </div>

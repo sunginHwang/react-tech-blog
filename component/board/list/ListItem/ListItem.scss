@@ -1,0 +1,26 @@
+@import '../../../../style/scss/CommonUtil';
+
+$margin-bottom: 20px;
+
+.listItem{
+  text-align: left;
+  padding-bottom: 1.5em;
+  padding-top: 1.5em;
+  border-bottom: 2px solid #eeeeee;
+}
+
+.title{
+  color: $title-font-color;
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: $margin-bottom;
+}
+
+.content{
+  margin-bottom: $margin-bottom;
+}
+
+.meta{
+  color: $side-font-gray-color;
+  margin-right: 5px;
+}
