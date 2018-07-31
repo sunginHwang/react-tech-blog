@@ -1,10 +1,10 @@
 import Head from 'next/head';
 import React from "react";
 
-import PageLoading from '../loading/PageLoading/PageLoading';
-import MainHeader from '../../mainTemplate/MainHeader/MainHeader';
-import Footer from '../../mainTemplate/Footer/Footer';
-import SideBar from '../../mainTemplate/SideBar/SideBar';
+import PageLoading from '../../common/loading/PageLoading/PageLoading';
+import MainHeader from '../MainHeader/MainHeader';
+import Footer from '../Footer/Footer';
+import SideBar from '../SideBar/SideBar';
 
 import style from './Layout.scss';
 

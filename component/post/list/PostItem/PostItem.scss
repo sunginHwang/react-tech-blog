@@ -2,7 +2,7 @@
 
 $margin-bottom: 20px;
 
-.listItem{
+.postItem{
   text-align: left;
   padding-bottom: 1.5em;
   padding-top: 1.5em;
@@ -14,10 +14,12 @@ $margin-bottom: 20px;
   font-size: 30px;
   font-weight: 700;
   margin-bottom: $margin-bottom;
+  cursor: pointer;
 }
 
 .content{
   margin-bottom: $margin-bottom;
+  cursor: pointer;
 }
 
 .meta{

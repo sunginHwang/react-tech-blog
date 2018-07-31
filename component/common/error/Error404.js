@@ -1,4 +1,4 @@
-import Layout from '../layout/Layout';
+import Layout from '../../mainTemplate/Layout/Layout';
 import React from "react";
 export default () => (
     <Layout title='404 에러 페이지'>

@@ -1,12 +1,7 @@
 import React from "react";
-
-import Layout from '../component/common/layout/Layout';
-import WriteEditer from '../component/editer/WriteEditer/WriteEditer';
-import MarkDownView from '../component/view/MarkDownView/MarkDownView';
-
+import Layout from '../component/mainTemplate/Layout/Layout';
 import * as FileApi from '../core/apis/FileApi';
-
-import style from './style/write.scss';
+import WriteView from '../component/post/write/WriteView/WriteView';
 
 class write extends React.Component {
 
@@ -21,7 +16,6 @@ class write extends React.Component {
 
 
     onChangeContent = (content) => {
-        console.log(content);
         this.setState({content: content});
     };
 
@@ -74,28 +68,16 @@ class write extends React.Component {
 
     render() {
         const { dndImage, pasteImage, onChangeContent, onClickUploadImage} = this;
-
+        const { content } = this.state;
         return (
             <Layout title='게시글 작성'>
-                <div>
-                    <div className={style.write}>
-                        <div className={style.markDownWrapper}>
-                            <WriteEditer dndImage={(e)=>{dndImage(e)}}
-                                         pasteImage={(e)=>{pasteImage(e)}}
-                                         clickUploadImage={(e)=>{onClickUploadImage()}}
-                                         changeContent={(e)=>{onChangeContent(e)}}
-                                         content={this.state.content}/>
-                        </div>
-                        <div className={style.markDownWrapper +' '+ style.view}>
-                            <div className={style.previewTitleArea}>
-                                <span className={style.previewTitle}>preview</span>
-                            </div>
-                            <MarkDownView content={this.state.content}
-                                          skipHtml={true}
-                                          escapeHtml={false}/>
-                        </div>
-                    </div>
-                </div>
+                <WriteView
+                    dndImage={dndImage}
+                    pasteImage={pasteImage}
+                    changeContent={onChangeContent}
+                    clickUploadImage={onClickUploadImage}
+                    content={content}
+                />
             </Layout>
         )
     }

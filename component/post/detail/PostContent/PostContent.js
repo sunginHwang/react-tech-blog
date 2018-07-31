@@ -1,12 +1,12 @@
 import MarkDownView from '../../../../component/view/MarkDownView/MarkDownView';
-import style from './BoardContent.scss';
+import style from './PostContent.scss';
 
 export default ({
-                    contents,
+                    content,
                     title
                 }) =>
-    <div className={style.boardContentWrapper}>
-        <div className={style.BoardTitleArea}>
+    <div className={style.contentWrapper}>
+        <div className={style.titleArea}>
             <h1 className={style.title}>
                 {title}
             </h1>
@@ -17,7 +17,7 @@ export default ({
                 <span>2018. 05. 27</span>
             </div>
         </div>
-        <MarkDownView content={contents+contents+contents+contents}
+        <MarkDownView content={content}
                       skipHtml={true}
                       escapeHtml={false}/>
     </div>

@@ -1,4 +1,4 @@
-import Layout from '../component/common/layout/Layout';
+import Layout from '../component/mainTemplate/Layout/Layout';
 
 import style from '../style/scss/Main.scss';
 

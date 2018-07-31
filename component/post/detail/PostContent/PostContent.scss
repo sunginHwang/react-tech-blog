@@ -1,7 +1,7 @@
 @import '../../../../style/scss/CommonLayout';
 @import '../../../../style/scss/CommonUtil';
 
-.boardContentWrapper{
+.contentWrapper{
   text-align: left;
   margin-top: 2em;
   @media screen and (max-width: $mobile-width){
@@ -17,7 +17,7 @@
   }
 }
 
-.BoardTitleArea{
+.titleArea{
   padding: 0;
   margin-bottom: 45px;
   border-bottom: 1px solid #eee;

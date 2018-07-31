@@ -1,8 +1,8 @@
 import React from "react";
-import Layout from '../component/common/layout/Layout';
-import BoardContent from '../component/board/detail/BoardContent/BoardContent';
+import Layout from '../component/mainTemplate/Layout/Layout';
+import PostContent from '../component/post/detail/PostContent/PostContent';
 
-export default class detailView extends React.Component {
+export default class postDetail extends React.Component {
 
     constructor() {
         super();
@@ -48,16 +48,17 @@ export default class detailView extends React.Component {
         }
     }
 
-    static getInitialProps ({query: {categoryNo, boardNo}}) {
-        return {categoryNo, boardNo}
+    static getInitialProps ({query: {categoryNo, postNo}}) {
+        return {categoryNo, postNo}
     }
 
     render () {
+        const { title, content } = this.state;
         return (
-            <Layout title={this.state.title}>
-                <BoardContent
-                    title={this.state.title}
-                    contents={this.state.content}/>
+            <Layout title={title}>
+                <PostContent
+                    title={title}
+                    content={content+content+content+content}/>
             </Layout>
         )
     }

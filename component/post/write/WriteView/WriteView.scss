@@ -1,4 +1,5 @@
-@import '../../style/scss/CommonUtil';
+@import '../../../../style/scss/CommonUtil';
+@import '../../../../style/scss/CommonLayout';
 
 .write{
   padding-top: 3em;
@@ -6,13 +7,17 @@
 
 .markDownWrapper {
   background-color: #fff;
-  margin: 1em;
   padding: 1em;
-  width: 30%;
+  width: 45%;
   display: inline-block;
   height: 700px;
   word-break: break-word;
   overflow-y: scroll;
+  @media screen and (max-width: $mobile-width){
+    width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
 }
 
 .previewTitleArea{

@@ -9,7 +9,10 @@ export default ({isOpen}) => (
                     <Link href='/write'>글쓰기 페이지 이동</Link>
                 </li>
                 <li>
-                    <Link  href='/categories/1/boards/3'>자세히 보기</Link>
+                    <Link  href='/categories/1'>리스트 보기</Link>
+                </li>
+                <li>
+                    <Link  href='/categories/1/posts/3'>자세히 보기</Link>
                 </li>
                 <li>
                     <Link  href='/reduxExample'>리덕스 테스트 연동 테스트</Link>

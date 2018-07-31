@@ -1,5 +1,5 @@
 import React from 'react'
-import Layout from '../component/common/layout/Layout';
+import Layout from '../component/mainTemplate/Layout/Layout';
 
 
 class urlRouterExample extends React.Component {
