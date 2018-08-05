@@ -2,50 +2,19 @@ import React from "react";
 import Layout from '../component/mainTemplate/Layout/Layout';
 import PostContent from '../component/post/detail/PostContent/PostContent';
 
-export default class postDetail extends React.Component {
+import * as blogAction from "../core/actions/BlogAction";
+import {bindActionCreators} from "redux";
+import {connect} from "react-redux";
+
+class postDetail extends React.Component {
 
     constructor() {
         super();
-        this.state = {
-            title: '리엑트 미들웨어 사용법을 알아보자.',
-            content: '\n' +
-            '# Live demo\n' +
-            '\n' +
-            'Changes are automatically rendered as you type.\n' +
-            '\n' +
-            '* Implements [GitHub Flavored Markdown](https://github.github.com/gfm/)\n' +
-            '* Renders actual, "native" React DOM elements\n' +
-            '* AllowsffffffffffffdangerouslySetInnerHTML is useddangerouslySetInnerHTML is useddangerouslySetInnerHTML is useddangerouslySetInnerHTML is useddangerouslySetInnerHTML is useddangerouslySetInnerHTML is usedf you to escape or skip HTML (try toggling the checkboxes above)\n' +
-            '* If you escape or skip the HTML, no `dangerouslySetInnerHTML` is used! Yay!\n' +
-            '\n' +
-            '## HTML block below\n' +
-            '\n' +
-            '\n' +
-            '## How about some code?\n' +
-            '```js\n' +
-            'var React = require(\'react\');\n' +
-            'var Markdown = require(\'react-markdown\');\n' +
-            '\n' +
-            '```\n' +
-            '\n' +
-            'Pretty neat, eh?\n' +
-            '\n' +
-            '## Tables?\n' +
-            '\n' +
-            '| Feature | Support |\n' +
-            '| ------ | ----------- |\n' +
-            '| tables | ✔ |\n' +
-            '| alignment | ✔ |\n' +
-            '| wewt | ✔ |\n' +
-            '\n' +
-            '## More info?\n' +
-            '\n' +
-            'Read usage information and more on [GitHub](//github.com/rexxars/react-markdown)\n' +
-            '\n' +
-            '---------------\n' +
-            '\n' +
-            'A component by [VaffelNinja](http://vaffel.ninja) / Espen Hovlandsdal'
-        }
+    }
+
+    componentDidMount(){
+        const { postNo, blogAction } = this.props;
+        blogAction.getPostInfo(postNo);
     }
 
     static getInitialProps ({query: {categoryNo, postNo}}) {
@@ -53,7 +22,7 @@ export default class postDetail extends React.Component {
     }
 
     render () {
-        const { title, content } = this.state;
+        const { title, content } = this.props;
         return (
             <Layout title={title}>
                 <PostContent
@@ -63,3 +32,13 @@ export default class postDetail extends React.Component {
         )
     }
 }
+
+export default connect(
+    (state) => ({
+        title: state.PostInfoReducer.title,
+        content: state.PostInfoReducer.content
+    }),
+    (dispatch) => ({
+        blogAction: bindActionCreators(blogAction, dispatch)
+    })
+)(postDetail);
