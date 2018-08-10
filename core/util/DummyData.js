@@ -66,3 +66,12 @@ export const POST_CONTENT =  '\n' +
     '---------------\n' +
     '\n' +
     'A component by [VaffelNinja](http://vaffel.ninja) / Espen Hovlandsdal';
+
+export const CATEGORIES = [
+    {value:1, label:'react'},
+    {value:2, label:'spring'},
+    {value:3, label:'java'},
+    {value:4, label:'linux'},
+    {value:5, label:'js'},
+    {value:6, label:'etc'}
+];

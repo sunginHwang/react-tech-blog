@@ -5,13 +5,16 @@ import MarkDownView from '../../../view/MarkDownView/MarkDownView';
 
 import style from './WriteView.scss';
 
-const WriteView = ({ dndImage, pasteImage, clickUploadImage, changeContent, content }) => {
+const WriteView = ({ dndImage, pasteImage, clickUploadImage, changeContent, content, categories, changeCategory, selectedCategory }) => {
     return (
             <div className={style.write}>
                 <div className={style.markDownWrapper}>
                     <WriteEditer dndImage={(e)=>{dndImage(e);}}
                                  pasteImage={(e)=>{pasteImage(e)}}
                                  clickUploadImage={(e)=>{clickUploadImage(e)}}
+                                 changeCategory={changeCategory}
+                                 categories={categories}
+                                 selectedCategory={selectedCategory}
                                  changeContent={(e)=>{changeContent(e)}}
                                  content={content}/>
                 </div>

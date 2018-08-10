@@ -2,12 +2,14 @@ import React from "react";
 import Layout from '../component/mainTemplate/Layout/Layout';
 import * as FileApi from '../core/apis/FileApi';
 import WriteView from '../component/post/write/WriteView/WriteView';
+import { CATEGORIES } from '../core/util/DummyData';
 
 class write extends React.Component {
 
     constructor() {
         super();
         this.state = {
+            selectedCategory: null,
             content: '```js\n' +
             'wefwef\n' +
             '```'
@@ -17,6 +19,10 @@ class write extends React.Component {
 
     onChangeContent = (content) => {
         this.setState({content: content});
+    };
+
+    onChangeCategories = (selectedCategory) => {
+        this.setState({selectedCategory : selectedCategory});
     };
 
     /*이미지 드래그 삽입 ( 복수 드래그 가능 )*/
@@ -67,14 +73,17 @@ class write extends React.Component {
     }
 
     render() {
-        const { dndImage, pasteImage, onChangeContent, onClickUploadImage} = this;
-        const { content } = this.state;
+        const { dndImage, pasteImage, onChangeContent, onClickUploadImage, onChangeCategories } = this;
+        const { content, selectedCategory } = this.state;
         return (
             <Layout title='게시글 작성'>
                 <WriteView
                     dndImage={dndImage}
                     pasteImage={pasteImage}
                     changeContent={onChangeContent}
+                    categories={CATEGORIES}
+                    selectedCategory={selectedCategory}
+                    changeCategory={onChangeCategories}
                     clickUploadImage={onClickUploadImage}
                     content={content}
                 />

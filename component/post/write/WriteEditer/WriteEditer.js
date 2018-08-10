@@ -1,5 +1,6 @@
 import React from "react";
 import { MdAddToPhotos } from 'react-icons/lib/md';
+import Select from 'react-select';
 
 import style from './WriteEditer.scss';
 
@@ -38,9 +39,21 @@ export default class WriteEditer extends React.Component {
     }
 
     render() {
-        const { changeContent, content, clickUploadImage } = this.props;
+        const { changeContent, content, clickUploadImage, categories, changeCategory, selectedCategory } = this.props;
+
         return (
             <div style={{height:'100%'}}>
+                <div className={style.writeTopArea}>
+                    <img className={style.author} src="http://www.woolta.com:81/uploads/addebc73bb618a35adf529283cf78ce7.png"/>
+                    <span className={style.author}>황성인</span>
+                </div>
+                <div className={style.writeTopArea}>
+                    <Select
+                        value={selectedCategory}
+                        onChange={changeCategory}
+                        options={categories}
+                    />
+                </div>
                 <div className={style.writeTitleArea} >
                     <input className={style.writeTitle}
                            type='text'
