@@ -3,7 +3,9 @@ import style from './PostContent.scss';
 
 export default ({
                     content,
-                    title
+                    title,
+                    author,
+                    createdAt
                 }) =>
     <div className={style.contentWrapper}>
         <div className={style.titleArea}>
@@ -12,9 +14,9 @@ export default ({
             </h1>
             <div className={style.subTitleArea}>
                 <img className={style.author} src="http://www.woolta.com:81/uploads/addebc73bb618a35adf529283cf78ce7.png"/>
-                <span>황성인</span>
+                <span>{author}</span>
                 <span> / </span>
-                <span>2018. 05. 27</span>
+                <span>{createdAt}</span>
             </div>
         </div>
         <MarkDownView content={content}

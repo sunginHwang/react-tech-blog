@@ -4,6 +4,7 @@ import { asyncSaga } from '../util/reduxUtil';
 import * as BlogApi  from '../apis/BlogApi';
 
 function * asyncPostInfo(info) {
+    console.log(info);
     yield call(asyncSaga,BlogAction.getPostInfo, BlogApi.getPostInfo, info.payload);
 }
 

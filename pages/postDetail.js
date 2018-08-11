@@ -13,7 +13,8 @@ class postDetail extends React.Component {
     }
 
     componentDidMount(){
-        const { postNo, blogAction } = this.props;
+        const { postNo, blogAction, categoryNo } = this.props;
+        console.log(this.props);
         blogAction.getPostInfo(postNo);
     }
 
@@ -22,12 +23,14 @@ class postDetail extends React.Component {
     }
 
     render () {
-        const { title, content } = this.props;
+        const { post } = this.props;
         return (
-            <Layout title={title}>
+            <Layout title={post.title}>
                 <PostContent
-                    title={title}
-                    content={content+content+content+content}/>
+                    title={post.title}
+                    author={post.author}
+                    content={post.content}
+                    createdAt={post.createdAt}/>
             </Layout>
         )
     }
@@ -35,8 +38,7 @@ class postDetail extends React.Component {
 
 export default connect(
     (state) => ({
-        title: state.PostInfoReducer.title,
-        content: state.PostInfoReducer.content
+        post: state.PostInfoReducer.post
     }),
     (dispatch) => ({
         blogAction: bindActionCreators(blogAction, dispatch)
