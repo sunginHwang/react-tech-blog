@@ -3,27 +3,80 @@ import Layout from '../component/mainTemplate/Layout/Layout';
 import * as FileApi from '../core/apis/FileApi';
 import WriteView from '../component/post/write/WriteView/WriteView';
 import { CATEGORIES } from '../core/util/DummyData';
+import * as blogAction from "../core/actions/BlogAction";
+import {bindActionCreators} from "redux";
+import {connect} from "react-redux";
 
 class write extends React.Component {
 
     constructor() {
         super();
-        this.state = {
-            selectedCategory: null,
-            content: '```js\n' +
-            'wefwef\n' +
-            '```'
-        }
     }
 
 
     onChangeContent = (content) => {
-        this.setState({content: content});
+        const { blogAction } = this.props;
+        blogAction.setContent(content);
+    };
+
+    onChangeTitle = (title) => {
+        const { blogAction } = this.props;
+        blogAction.setTitle(title);
     };
 
     onChangeCategories = (selectedCategory) => {
-        this.setState({selectedCategory : selectedCategory});
+        const { blogAction } = this.props;
+        blogAction.setCategory(selectedCategory);
     };
+
+    upsertPost = () => {
+        console.log(this.props);
+        const { title, content, category, postNo, blogAction } = this.props;
+        console.log(2);
+        const { validateUpsertPost } = this;
+
+        if(validateUpsertPost(title, content, category)){
+
+            const upsertData = {
+                postNo: postNo,
+                title: title,
+                contents: content,
+                categoryNo: category.value
+            };
+
+            try {
+                blogAction.upsertPost(upsertData);
+            }catch(e){
+                console.log(e);
+            }
+
+        }
+    };
+
+    validateUpsertPost(title, content, category){
+
+        if(title.length < 1 || title.length > 20){
+            alert('제목은 1~20글자 사이로 입력하세요.');
+            return false;
+        }
+
+        if(content === ''){
+            alert('게시글 내용을 작성해 주세요.');
+            return false;
+        }
+
+        if(category === null){
+            alert('카테고리를 선택해주세요.');
+            return false;
+        }
+
+        if(parseInt(category.value,10) < 0){
+            alert('카테고리 선택이 잘못되었습니다. 다시 선택해주세요.');
+            return false;
+        }
+
+        return true;
+    }
 
     /*이미지 드래그 삽입 ( 복수 드래그 가능 )*/
     dndImage = (e) => {
@@ -73,23 +126,37 @@ class write extends React.Component {
     }
 
     render() {
-        const { dndImage, pasteImage, onChangeContent, onClickUploadImage, onChangeCategories } = this;
-        const { content, selectedCategory } = this.state;
+        const { dndImage, pasteImage, onChangeContent, onChangeTitle, onClickUploadImage, onChangeCategories , upsertPost} = this;
+        const { title, content, category } = this.props;
+
         return (
             <Layout title='게시글 작성'>
                 <WriteView
                     dndImage={dndImage}
                     pasteImage={pasteImage}
-                    changeContent={onChangeContent}
                     categories={CATEGORIES}
-                    selectedCategory={selectedCategory}
+                    selectedCategory={category}
+                    changeContent={onChangeContent}
+                    changeTitle={onChangeTitle}
+                    savePost={upsertPost}
                     changeCategory={onChangeCategories}
                     clickUploadImage={onClickUploadImage}
                     content={content}
+                    title={title}
                 />
             </Layout>
         )
     }
 }
 
-export default write;
+export default connect(
+    (state) => ({
+        postNo: state.PostWriteReducer.postNo,
+        title: state.PostWriteReducer.title,
+        content: state.PostWriteReducer.content,
+        category : state.PostWriteReducer.category
+    }),
+    (dispatch) => ({
+        blogAction: bindActionCreators(blogAction, dispatch)
+    })
+)(write);

@@ -5,10 +5,13 @@ import MarkDownView from '../../../view/MarkDownView/MarkDownView';
 
 import style from './WriteView.scss';
 
-const WriteView = ({ dndImage, pasteImage, clickUploadImage, changeContent, content, categories, changeCategory, selectedCategory }) => {
+const WriteView = ({ dndImage, pasteImage, clickUploadImage, changeContent, changeTitle, title , content, categories, changeCategory, selectedCategory, savePost }) => {
     return (
             <div className={style.write}>
-                <div className={style.markDownWrapper}>
+                <div>
+                    <button onClick={(e)=>{savePost();}} >저장</button>
+                </div>
+                <div className={style.markDownWrapper+' '+ style.edit}>
                     <WriteEditer dndImage={(e)=>{dndImage(e);}}
                                  pasteImage={(e)=>{pasteImage(e)}}
                                  clickUploadImage={(e)=>{clickUploadImage(e)}}
@@ -16,6 +19,8 @@ const WriteView = ({ dndImage, pasteImage, clickUploadImage, changeContent, cont
                                  categories={categories}
                                  selectedCategory={selectedCategory}
                                  changeContent={(e)=>{changeContent(e)}}
+                                 changeTitle={(e)=>{changeTitle(e)}}
+                                 title={title}
                                  content={content}/>
                 </div>
                 <div className={style.markDownWrapper +' '+ style.view}>

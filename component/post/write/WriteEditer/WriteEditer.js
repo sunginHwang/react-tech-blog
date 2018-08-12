@@ -39,7 +39,7 @@ export default class WriteEditer extends React.Component {
     }
 
     render() {
-        const { changeContent, content, clickUploadImage, categories, changeCategory, selectedCategory } = this.props;
+        const { changeContent, changeTitle, content, clickUploadImage, categories, changeCategory, selectedCategory, title } = this.props;
 
         return (
             <div style={{height:'100%'}}>
@@ -58,7 +58,10 @@ export default class WriteEditer extends React.Component {
                     <input className={style.writeTitle}
                            type='text'
                            placeholder='제목을 입력해 주세요.'
-                           value=''/>
+                           onChange={(e) => {
+                               changeTitle(e.target.value);
+                           }}
+                           value={title}/>
                     <div
                         className={style.imageInsertBtn}
                         onClick={clickUploadImage}><span><MdAddToPhotos/>이미지 업로드</span></div>

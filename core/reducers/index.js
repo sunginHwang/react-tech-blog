@@ -2,10 +2,12 @@ import { combineReducers } from 'redux';
 import { ReduxSagaExampleReducer } from './ReduxSagaExample';
 import { PostListReducer } from './PostList';
 import { PostInfoReducer } from './PostInfo';
+import { PostWriteReducer } from "./PostWrite";
 
 
 export default combineReducers({
     ReduxSagaExampleReducer,
     PostListReducer,
-    PostInfoReducer
+    PostInfoReducer,
+    PostWriteReducer
 });
