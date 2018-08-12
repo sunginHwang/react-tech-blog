@@ -8,6 +8,10 @@ export const getPostInfo =  (categoryNo, postNo) => {
     return axios.get(`http://localhost:8080/post/categories/1/posts/${categoryNo}`);
 };
 
+export const getCategories =  () => {
+    return axios.get(`http://localhost:8080/post/categories`);
+};
+
 export const upsertPost =  (postData) => {
     return axios.post(`http://localhost:8080/post`,postData);
 };

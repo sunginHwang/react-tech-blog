@@ -7,9 +7,12 @@ import Footer from '../Footer/Footer';
 import SideBar from '../SideBar/SideBar';
 
 import style from './Layout.scss';
+import * as blogAction from "../../../core/actions/BlogAction";
+import {bindActionCreators} from "redux";
+import {connect} from "react-redux";
 
 
-export default class Layout extends React.Component {
+ class Layout extends React.Component {
     constructor(...args) {
         super(...args);
         this.state = {pageLoading: false, sideBarOpen: false, showMobileHeader: false}
@@ -17,7 +20,20 @@ export default class Layout extends React.Component {
 
     componentDidMount() {
         this.loadingComplete();
+        this.handleLoadCategories();
         this.detectMobileScrollUpAndDown();
+    }
+
+    handleLoadCategories(){
+        const { blogAction, categories } = this.props;
+        if(categories.length === 0){
+            try {
+                blogAction.getCategories();
+            } catch (e) {
+                console.log(e);
+            }
+        }
+
     }
 
     detectMobileScrollUpAndDown() {
@@ -54,6 +70,7 @@ export default class Layout extends React.Component {
                 </Head>
                 <SideBar
                     isOpen={this.state.sideBarOpen}
+                    categories={this.props.categories}
                 />
                 <MainHeader
                     showMobileHeader={this.state.showMobileHeader}
@@ -71,3 +88,12 @@ export default class Layout extends React.Component {
         )
     }
 }
+
+export default connect(
+    (state) => ({
+        categories : state.CategoryReducer.categories
+    }),
+    (dispatch) => ({
+        blogAction: bindActionCreators(blogAction, dispatch)
+    })
+)(Layout);

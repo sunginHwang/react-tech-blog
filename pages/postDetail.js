@@ -14,7 +14,6 @@ class postDetail extends React.Component {
 
     componentDidMount(){
         const { postNo, blogAction, categoryNo } = this.props;
-        console.log(this.props);
         blogAction.getPostInfo(postNo);
     }
 

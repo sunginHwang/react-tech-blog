@@ -3,6 +3,7 @@ import SampleApi from './SampleApi';
 import PostListSaga from './PostListSaga';
 import PostInfoSaga from './PostInfoSaga';
 import PostUpsertSaga from './PostUpsertSaga';
+import CategorySaga from './CategorySaga';
 
 
 export default function* rootSaga() {
@@ -10,6 +11,7 @@ export default function* rootSaga() {
         fork(SampleApi),
         fork(PostListSaga),
         fork(PostInfoSaga),
-        fork(PostUpsertSaga)
+        fork(PostUpsertSaga),
+        fork(CategorySaga)
     ])
 }

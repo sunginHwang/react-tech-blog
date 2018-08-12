@@ -9,9 +9,7 @@ import style from '../style/scss/Main.scss';
 class reduxExample extends React.Component {
 
     async componentDidMount(){
-        await console.log('componentDidMount');
         await this.props.sampleAction.asyncCall(2);
-        await console.log(12);
     }
 
     successBtnClick(){

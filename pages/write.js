@@ -2,7 +2,6 @@ import React from "react";
 import Layout from '../component/mainTemplate/Layout/Layout';
 import * as FileApi from '../core/apis/FileApi';
 import WriteView from '../component/post/write/WriteView/WriteView';
-import { CATEGORIES } from '../core/util/DummyData';
 import * as blogAction from "../core/actions/BlogAction";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
@@ -30,9 +29,7 @@ class write extends React.Component {
     };
 
     upsertPost = () => {
-        console.log(this.props);
         const { title, content, category, postNo, blogAction } = this.props;
-        console.log(2);
         const { validateUpsertPost } = this;
 
         if(validateUpsertPost(title, content, category)){
@@ -127,14 +124,14 @@ class write extends React.Component {
 
     render() {
         const { dndImage, pasteImage, onChangeContent, onChangeTitle, onClickUploadImage, onChangeCategories , upsertPost} = this;
-        const { title, content, category } = this.props;
+        const { title, content, category, categories } = this.props;
 
         return (
             <Layout title='게시글 작성'>
                 <WriteView
                     dndImage={dndImage}
                     pasteImage={pasteImage}
-                    categories={CATEGORIES}
+                    categories={categories}
                     selectedCategory={category}
                     changeContent={onChangeContent}
                     changeTitle={onChangeTitle}
@@ -154,7 +151,8 @@ export default connect(
         postNo: state.PostWriteReducer.postNo,
         title: state.PostWriteReducer.title,
         content: state.PostWriteReducer.content,
-        category : state.PostWriteReducer.category
+        category : state.PostWriteReducer.category,
+        categories : state.CategoryReducer.categories
     }),
     (dispatch) => ({
         blogAction: bindActionCreators(blogAction, dispatch)

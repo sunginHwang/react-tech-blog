@@ -4,7 +4,6 @@ import Error404 from '../component/common/error/Error404';
 export default class Error extends React.Component {
     static getInitialProps({ res, err }) {
         const statusCode = res ? res.statusCode : err ? err.statusCode : null;
-        console.log(statusCode);
         return { statusCode }
     }
 

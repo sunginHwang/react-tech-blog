@@ -20,3 +20,7 @@ export const SET_TITLE = 'set_title';
 export const setTitle = createAction(SET_TITLE);
 export const SET_CONTENT= 'set_content';
 export const setContent = createAction(SET_CONTENT);
+
+// 카테고리
+export const CATEGORIES = asyncActionTypeCreator('categories','ASYNC');
+export const getCategories = asyncActionCreator(CATEGORIES);
