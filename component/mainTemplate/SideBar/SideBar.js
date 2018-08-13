@@ -1,11 +1,14 @@
 import style from './SideBar.scss';
 import Link from 'next/link';
+import Router from 'next/router'
 
 export default ({isOpen, categories}) => {
 
     const postCategories = categories.map((category)=>{
         return <li key={category.value}>
-                 <Link href={`/categories/${category.value}`}>{category.label}</Link>
+                 <a onClick={(e)=>{
+                     Router.push(`/postList?categoryNo=${category.value}`, `/postList?categoryNo=${category.value}`)
+                 }} >{category.label}</a>
               </li>
     });
 

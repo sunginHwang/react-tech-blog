@@ -1,12 +1,11 @@
 import React from "react";
-import Router from 'next/router'
 
-import Layout from '../component/mainTemplate/Layout/Layout';
 import PostLayout from '../component/post/list/PostLayout/PostLayout';
 
 import * as blogAction from "../core/actions/BlogAction";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
+import Router from "next/router";
 
 class postList extends React.Component {
 
@@ -15,6 +14,11 @@ class postList extends React.Component {
     }
 
     componentDidMount() {
+        const {categoryNo} = this.props;
+        this.loadPostList(categoryNo);
+    }
+
+    componentDidUpdate(prevProps, prevState) {
         const {categoryNo} = this.props;
         this.loadPostList(categoryNo);
     }
@@ -31,8 +35,8 @@ class postList extends React.Component {
 
     onClickDetailPage = (postNo) => {
         const {categoryNo} = this.props;
-        Router.push(`/categories/${categoryNo}/posts/${postNo}`);
-
+        //Router.push(`/categories/${categoryNo}/posts/${postNo}/`,`${categoryNo}/posts/${postNo}`);
+        Router.push(`/postDetail?postNo=${postNo}&categoryNo=${categoryNo}`, `/postDetail?postNo=${postNo}&categoryNo=${categoryNo}`)
     };
 
     static getInitialProps({query: {categoryNo}}) {
@@ -41,12 +45,11 @@ class postList extends React.Component {
 
     render() {
         const {postList} = this.props;
+
         return (
-            <Layout title={'test'}>
                 <PostLayout
                     clickDetailPage={this.onClickDetailPage}
                     posts={postList}/>
-            </Layout>
         )
     }
 }

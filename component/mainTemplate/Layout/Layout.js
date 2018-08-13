@@ -19,10 +19,17 @@ import {connect} from "react-redux";
     }
 
     componentDidMount() {
+        console.log('componentDidMount');
         this.loadingComplete();
         this.handleLoadCategories();
         this.detectMobileScrollUpAndDown();
     }
+
+     componentDidUpdate(prevProps, prevState) {
+         console.log('componentDidUpdate');
+         console.log(prevProps);
+         console.log(prevState);
+     }
 
     handleLoadCategories(){
         const { blogAction, categories } = this.props;
@@ -66,7 +73,7 @@ import {connect} from "react-redux";
         return (
             <div>
                 <Head>
-                    <title>{this.props.title}</title>
+                    <title>{"woolta"}</title>
                 </Head>
                 <SideBar
                     isOpen={this.state.sideBarOpen}
