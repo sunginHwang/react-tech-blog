@@ -7,7 +7,7 @@ export default ({isOpen, categories}) => {
     const postCategories = categories.map((category)=>{
         return <li key={category.value}>
                  <a onClick={(e)=>{
-                     Router.push(`/postList?categoryNo=${category.value}`, `/postList?categoryNo=${category.value}`)
+                     Router.push(`/postList?categoryNo=${category.value}`, `/categories/${category.value}`)
                  }} >{category.label}</a>
               </li>
     });

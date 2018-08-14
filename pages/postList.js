@@ -35,8 +35,7 @@ class postList extends React.Component {
 
     onClickDetailPage = (postNo) => {
         const {categoryNo} = this.props;
-        //Router.push(`/categories/${categoryNo}/posts/${postNo}/`,`${categoryNo}/posts/${postNo}`);
-        Router.push(`/postDetail?postNo=${postNo}&categoryNo=${categoryNo}`, `/postDetail?postNo=${postNo}&categoryNo=${categoryNo}`)
+        Router.push(`/postDetail?postNo=${postNo}&categoryNo=${categoryNo}`, `/categories/${categoryNo}/posts/${postNo}`)
     };
 
     static getInitialProps({query: {categoryNo}}) {
