@@ -20,7 +20,11 @@ class postList extends React.Component {
 
     componentDidUpdate(prevProps, prevState) {
         const {categoryNo} = this.props;
-        this.loadPostList(categoryNo);
+
+        if(prevProps.categoryNo != categoryNo){
+            this.loadPostList(categoryNo);
+        }
+
     }
 
     loadPostList = async (categoryNo) => {

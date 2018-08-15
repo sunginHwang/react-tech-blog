@@ -1,6 +1,6 @@
 import React from 'react'
 import dynamic from 'next/dynamic'
-import Layout from '../component/mainTemplate/Layout/Layout';
+import Layout from '../container/Layout/Layout';
 import PageLoading from '../component/common/loading/PageLoading/PageLoading';
 
 const DynamicImport = dynamic(import('../component/dynamic/dynamicImport'), {

@@ -1,5 +1,4 @@
 import React from "react";
-import Layout from '../component/mainTemplate/Layout/Layout';
 import * as FileApi from '../core/apis/FileApi';
 import WriteView from '../component/post/write/WriteView/WriteView';
 import * as blogAction from "../core/actions/BlogAction";
@@ -14,25 +13,25 @@ class write extends React.Component {
 
 
     onChangeContent = (content) => {
-        const { blogAction } = this.props;
+        const {blogAction} = this.props;
         blogAction.setContent(content);
     };
 
     onChangeTitle = (title) => {
-        const { blogAction } = this.props;
+        const {blogAction} = this.props;
         blogAction.setTitle(title);
     };
 
     onChangeCategories = (selectedCategory) => {
-        const { blogAction } = this.props;
+        const {blogAction} = this.props;
         blogAction.setCategory(selectedCategory);
     };
 
     upsertPost = () => {
-        const { title, content, category, postNo, blogAction } = this.props;
-        const { validateUpsertPost } = this;
+        const {title, content, category, postNo, blogAction} = this.props;
+        const {validateUpsertPost} = this;
 
-        if(validateUpsertPost(title, content, category)){
+        if (validateUpsertPost(title, content, category)) {
 
             const upsertData = {
                 postNo: postNo,
@@ -43,31 +42,31 @@ class write extends React.Component {
 
             try {
                 blogAction.upsertPost(upsertData);
-            }catch(e){
+            } catch (e) {
                 console.log(e);
             }
 
         }
     };
 
-    validateUpsertPost(title, content, category){
+    validateUpsertPost(title, content, category) {
 
-        if(title.length < 1 || title.length > 20){
+        if (title.length < 1 || title.length > 20) {
             alert('제목은 1~20글자 사이로 입력하세요.');
             return false;
         }
 
-        if(content === ''){
+        if (content === '') {
             alert('게시글 내용을 작성해 주세요.');
             return false;
         }
 
-        if(category === null){
+        if (category === null) {
             alert('카테고리를 선택해주세요.');
             return false;
         }
 
-        if(parseInt(category.value,10) < 0){
+        if (parseInt(category.value, 10) < 0) {
             alert('카테고리 선택이 잘못되었습니다. 다시 선택해주세요.');
             return false;
         }
@@ -123,25 +122,23 @@ class write extends React.Component {
     }
 
     render() {
-        const { dndImage, pasteImage, onChangeContent, onChangeTitle, onClickUploadImage, onChangeCategories , upsertPost} = this;
-        const { title, content, category, categories } = this.props;
+        const {dndImage, pasteImage, onChangeContent, onChangeTitle, onClickUploadImage, onChangeCategories, upsertPost} = this;
+        const {title, content, category, categories} = this.props;
 
         return (
-            <Layout title='게시글 작성'>
-                <WriteView
-                    dndImage={dndImage}
-                    pasteImage={pasteImage}
-                    categories={categories}
-                    selectedCategory={category}
-                    changeContent={onChangeContent}
-                    changeTitle={onChangeTitle}
-                    savePost={upsertPost}
-                    changeCategory={onChangeCategories}
-                    clickUploadImage={onClickUploadImage}
-                    content={content}
-                    title={title}
-                />
-            </Layout>
+            <WriteView
+                dndImage={dndImage}
+                pasteImage={pasteImage}
+                categories={categories}
+                selectedCategory={category}
+                changeContent={onChangeContent}
+                changeTitle={onChangeTitle}
+                savePost={upsertPost}
+                changeCategory={onChangeCategories}
+                clickUploadImage={onClickUploadImage}
+                content={content}
+                title={title}
+            />
         )
     }
 }
@@ -151,8 +148,8 @@ export default connect(
         postNo: state.PostWriteReducer.postNo,
         title: state.PostWriteReducer.title,
         content: state.PostWriteReducer.content,
-        category : state.PostWriteReducer.category,
-        categories : state.CategoryReducer.categories
+        category: state.PostWriteReducer.category,
+        categories: state.CategoryReducer.categories
     }),
     (dispatch) => ({
         blogAction: bindActionCreators(blogAction, dispatch)

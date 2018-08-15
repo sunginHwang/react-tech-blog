@@ -1,5 +1,5 @@
 import React from 'react'
-import Layout from '../component/mainTemplate/Layout/Layout';
+import Layout from '../container/Layout/Layout';
 
 
 const route = ({name}) => {
