@@ -4,8 +4,8 @@ export const getPostList =  (categoryNo) => {
     return axios.get(`http://localhost:8080/post/categories/${categoryNo}/posts`);
 };
 
-export const getPostInfo =  (categoryNo, postNo) => {
-    return axios.get(`http://localhost:8080/post/categories/1/posts/${categoryNo}`);
+export const getPostInfo =  (post) => {
+    return axios.get(`http://localhost:8080/post/categories/${post.categoryNo}/posts/${post.postNo}`);
 };
 
 export const getCategories =  () => {
