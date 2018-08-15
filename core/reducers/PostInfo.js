@@ -19,7 +19,7 @@ export const PostInfoReducer =  handleActions({
         return { ...state, post: result.payload.data.data};
     },
     [Blog.getPostInfo.failure]: (state, payload) => {
-        return { ...state, initialState };
+        return { ...state, post: initialState.post };
     },
 }, initialState);
 

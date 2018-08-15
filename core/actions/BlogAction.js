@@ -24,3 +24,7 @@ export const setContent = createAction(SET_CONTENT);
 // 카테고리
 export const CATEGORIES = asyncActionTypeCreator('categories','ASYNC');
 export const getCategories = asyncActionCreator(CATEGORIES);
+
+// 임시 에러 처리 방법
+export const TOGGLE_ERROR= 'toggle_error';
+export const toggleError = createAction(TOGGLE_ERROR);

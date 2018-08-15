@@ -13,12 +13,10 @@ class postDetail extends React.Component {
 
     componentDidMount(){
         const { postNo, blogAction, categoryNo } = this.props;
-        console.log("detailCreate");
         blogAction.getPostInfo({postNo, categoryNo});
     }
 
     componentDidUpdate(prevProps, prevState) {
-        console.log("detailUpdate");
     }
 
     static getInitialProps ({query: {categoryNo, postNo}}) {

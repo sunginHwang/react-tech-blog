@@ -11,6 +11,18 @@ class write extends React.Component {
         super();
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        this.handlerDetectError();
+    }
+
+    handlerDetectError = () =>{
+        if(this.props.error){
+            console.log(this.props.errorMsg);
+            alert(this.props.errorMsg);
+            this.props.blogAction.toggleError(false);
+        }
+    };
+
 
     onChangeContent = (content) => {
         const {blogAction} = this.props;
@@ -27,7 +39,7 @@ class write extends React.Component {
         blogAction.setCategory(selectedCategory);
     };
 
-    upsertPost = () => {
+    upsertPost = async () => {
         const {title, content, category, postNo, blogAction} = this.props;
         const {validateUpsertPost} = this;
 
@@ -40,16 +52,11 @@ class write extends React.Component {
                 categoryNo: category.value
             };
 
-            try {
-                blogAction.upsertPost(upsertData);
-            } catch (e) {
-                console.log(e);
-            }
-
+            await blogAction.upsertPost(upsertData);
         }
     };
 
-    validateUpsertPost(title, content, category) {
+    validateUpsertPost = (title, content, category) => {
 
         if (title.length < 1 || title.length > 20) {
             alert('제목은 1~20글자 사이로 입력하세요.');
@@ -72,7 +79,7 @@ class write extends React.Component {
         }
 
         return true;
-    }
+    };
 
     /*이미지 드래그 삽입 ( 복수 드래그 가능 )*/
     dndImage = (e) => {
@@ -149,7 +156,9 @@ export default connect(
         title: state.PostWriteReducer.title,
         content: state.PostWriteReducer.content,
         category: state.PostWriteReducer.category,
-        categories: state.CategoryReducer.categories
+        categories: state.CategoryReducer.categories,
+        error: state.PostWriteReducer.error,
+        errorMsg: state.PostWriteReducer.errorMsg
     }),
     (dispatch) => ({
         blogAction: bindActionCreators(blogAction, dispatch)

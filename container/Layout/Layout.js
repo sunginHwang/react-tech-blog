@@ -19,7 +19,6 @@ class Layout extends React.Component {
 
 
     componentDidMount() {
-        console.log('componentDidMount');
         this.loadingComplete();
         this.handleLoadCategories();
         this.detectMobileScrollUpAndDown();

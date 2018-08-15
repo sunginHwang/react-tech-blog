@@ -6,6 +6,8 @@ const initialState = {
     category: null,
     title: '',
     content: '',
+    error: false,
+    errorMsg: ''
 };
 
 export const PostWriteReducer =  handleActions({
@@ -18,15 +20,17 @@ export const PostWriteReducer =  handleActions({
     [Blog.setTitle]: (state, result) => {
         return { ...state, title:result.payload };
     },
+    [Blog.toggleError]: (state, result) => {
+        return { ...state, error:result.payload };
+    },
     [Blog.upsertPost.request]: (state, payload) => {
         return { ...state };
     },
     [Blog.upsertPost.success]: (state, result) => {
-        console.log(result);
         return { ...state };
     },
-    [Blog.upsertPost.failure]: (state, payload) => {
-        return { ...state };
+    [Blog.upsertPost.failure]: (state, result) => {
+        return { ...state, error: true, errorMsg: result.payload.response.data.message };
     },
 }, initialState);
 

@@ -10,7 +10,6 @@ export const CategoryReducer =  handleActions({
         return { ...state };
     },
     [Blog.getCategories.success]: (state, result) => {
-        console.log(result);
         return { ...state, categories: result.payload.data.data};
     },
     [Blog.getCategories.failure]: (state, payload) => {
