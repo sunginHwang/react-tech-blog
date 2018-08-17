@@ -3,7 +3,9 @@
 .markDownEditer {
   width: 100%;
   display: inline-block;
+  outline-style: none;
   height: 75%;
+  font-size: 16px;
   border: none;
   resize: none;
   overflow-y: scroll;
@@ -14,17 +16,14 @@
 .writeTitle{
   float: left;
   border: none;
+  outline-style: none;
   font-size: 24px;
   margin-bottom: 20px;
 }
 
 .imageInsertBtn{
   float: right;
-  cursor: pointer;
-  color: $main-theme-color;
-  border: 1px solid $main-theme-color;
-  border-radius: 3px;
-  padding: 8px;
+  @extend .main-button
 }
 
 .writeTopArea{

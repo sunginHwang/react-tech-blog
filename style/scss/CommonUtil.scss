@@ -7,5 +7,13 @@ $custom-gray-color: rgba(23, 42, 58, .1);
 $side-font-gray-color : #a6a6a6;
 $title-font-color: #4d5256;
 
+.main-button{
+  cursor: pointer;
+  color: $main-theme-color;
+  border: 1px solid $main-theme-color;
+  border-radius: 3px;
+  padding: 8px;
+}
+
 /*font*/
 @import url(https://fonts.googleapis.com/css?family=Roboto);

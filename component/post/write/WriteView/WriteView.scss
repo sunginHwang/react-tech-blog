@@ -1,8 +1,11 @@
 @import '../../../../style/scss/CommonUtil';
 @import '../../../../style/scss/CommonLayout';
 
+$wrapper-height:700px;
+$wrapper-title-height:60px;
+
 .write{
-  padding-top: 3em;
+  padding-top: 1.5em;
 }
 
 .markDownWrapper {
@@ -10,19 +13,32 @@
   padding: 1em;
   width: 45%;
   display: inline-block;
-  height: 700px;
+  height: $wrapper-height;
   word-break: break-word;
-  overflow-y: scroll;
   @media screen and (max-width: $mobile-width){
     width: 100%;
     padding-left: 1rem;
     padding-right: 1rem;
   }
+  .titleArea{
+    height: $wrapper-title-height;
+  }
+
+  .contentArea{
+    overflow-y: scroll;
+    height: $wrapper-height -$wrapper-title-height;
+    cursor: pointer;
+  }
+
+}
+.saveBtn{
+  float: right;
+  text-align: center;
+  width: 5em;
+  @extend .main-button;
 }
 
-.previewTitleArea{
-  height: 60px;
-}
+
 .previewTitle{
   color: $main-theme-color;
   font-size: 30px;

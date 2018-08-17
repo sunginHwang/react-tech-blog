@@ -128,8 +128,12 @@ class write extends React.Component {
         return `${'\n'}![${imageUrl}](${imageUrl})${'\n'}`;
     }
 
+    onClickShowOriginPreview = () => {
+        console.log(12);
+    };
+
     render() {
-        const {dndImage, pasteImage, onChangeContent, onChangeTitle, onClickUploadImage, onChangeCategories, upsertPost} = this;
+        const {dndImage, pasteImage, onChangeContent, onChangeTitle, onClickUploadImage, onChangeCategories, upsertPost, onClickShowOriginPreview} = this;
         const {title, content, category, categories} = this.props;
 
         return (
@@ -143,6 +147,7 @@ class write extends React.Component {
                 savePost={upsertPost}
                 changeCategory={onChangeCategories}
                 clickUploadImage={onClickUploadImage}
+                clickShowOriginPreview={onClickShowOriginPreview}
                 content={content}
                 title={title}
             />

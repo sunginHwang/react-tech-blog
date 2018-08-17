@@ -13,11 +13,17 @@ class postDetail extends React.Component {
 
     componentDidMount(){
         const { postNo, blogAction, categoryNo } = this.props;
+        this.handleScrollTop();
         blogAction.getPostInfo({postNo, categoryNo});
     }
 
     componentDidUpdate(prevProps, prevState) {
+        this.handleScrollTop();
     }
+
+    handleScrollTop = () =>{
+        window.scrollTo(0,0);
+    };
 
     static getInitialProps ({query: {categoryNo, postNo}}) {
         return {categoryNo, postNo}

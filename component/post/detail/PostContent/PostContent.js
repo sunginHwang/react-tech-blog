@@ -19,8 +19,11 @@ export default ({
                 <span>{createdAt}</span>
             </div>
         </div>
-        <MarkDownView content={content}
-                      skipHtml={true}
-                      escapeHtml={false}/>
+        <div className={style.contentArea}>
+            <MarkDownView content={content}
+                          skipHtml={true}
+                          escapeHtml={false}/>
+        </div>
+
     </div>
 
