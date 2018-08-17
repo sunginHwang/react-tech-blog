@@ -4,11 +4,15 @@ import WriteView from '../component/post/write/WriteView/WriteView';
 import * as blogAction from "../core/actions/BlogAction";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
+import OriginPreview from '../component/post/write/OriginPreview/OriginPreview';
 
 class write extends React.Component {
 
     constructor() {
         super();
+        this.state = {
+            visible: false
+        };
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -130,6 +134,7 @@ class write extends React.Component {
 
     onClickShowOriginPreview = () => {
         console.log(12);
+        this.setState({visible: !this.state.visible});
     };
 
     render() {
@@ -137,20 +142,27 @@ class write extends React.Component {
         const {title, content, category, categories} = this.props;
 
         return (
-            <WriteView
-                dndImage={dndImage}
-                pasteImage={pasteImage}
-                categories={categories}
-                selectedCategory={category}
-                changeContent={onChangeContent}
-                changeTitle={onChangeTitle}
-                savePost={upsertPost}
-                changeCategory={onChangeCategories}
-                clickUploadImage={onClickUploadImage}
-                clickShowOriginPreview={onClickShowOriginPreview}
-                content={content}
-                title={title}
-            />
+            <div>
+                <WriteView
+                    dndImage={dndImage}
+                    pasteImage={pasteImage}
+                    categories={categories}
+                    selectedCategory={category}
+                    changeContent={onChangeContent}
+                    changeTitle={onChangeTitle}
+                    savePost={upsertPost}
+                    changeCategory={onChangeCategories}
+                    clickUploadImage={onClickUploadImage}
+                    clickShowOriginPreview={onClickShowOriginPreview}
+                    content={content}
+                    title={title}
+                />
+                <OriginPreview
+                    content={content}
+                    clickCloseVisible={onClickShowOriginPreview}
+                    visible={this.state.visible}
+                />
+            </div>
         )
     }
 }
