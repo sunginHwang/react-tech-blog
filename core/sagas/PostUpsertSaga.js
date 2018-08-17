@@ -11,7 +11,8 @@ function * postUpsertSaga(info) {
     try {
         const json = yield call(BlogApi.upsertPost, info.payload); // 비동기처리 promise
         yield put(BlogAction.upsertPost.success(json)); // 비동기 처리 성공
-        yield put(Router.push(`/postDetail?postNo=1&categoryNo=1`, `/categories/1/posts/1`));
+        const { postNo, categoryNo } = yield json.data.data;
+        yield put(Router.push(`/postDetail?postNo=${postNo}&categoryNo=${categoryNo}`, `/categories/${categoryNo}/posts/${postNo}`));
     } catch(error) {
         yield put(BlogAction.upsertPost.failure(error)); // 비동기 처리 실패
     }
