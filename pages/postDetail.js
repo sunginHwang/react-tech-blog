@@ -1,7 +1,7 @@
 import React from "react";
 import PostContent from '../component/post/detail/PostContent/PostContent';
 
-import * as blogAction from "../core/actions/BlogAction";
+import * as postViewAction from "../core/actions/Post/PostViewAction";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 
@@ -12,9 +12,9 @@ class postDetail extends React.Component {
     }
 
     componentDidMount(){
-        const { postNo, blogAction, categoryNo } = this.props;
+        const { postNo, postViewAction, categoryNo } = this.props;
         this.handleScrollTop();
-        blogAction.getPostInfo({postNo, categoryNo});
+        postViewAction.getPostInfo({postNo, categoryNo});
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -48,6 +48,6 @@ export default connect(
         post: state.PostInfoReducer.post
     }),
     (dispatch) => ({
-        blogAction: bindActionCreators(blogAction, dispatch)
+        postViewAction: bindActionCreators(postViewAction, dispatch)
     })
 )(postDetail);

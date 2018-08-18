@@ -7,7 +7,7 @@ import Footer from '../../component/mainTemplate/Footer/Footer';
 import SideBar from '../../component/mainTemplate/SideBar/SideBar';
 
 import style from './Layout.scss';
-import * as blogAction from "../../core/actions/BlogAction";
+import * as categoryAction from "../../core/actions/CategoryAction";
 import * as layoutAction from "../../core/actions/LayoutAction";
 
 import {bindActionCreators} from "redux";
@@ -25,10 +25,10 @@ class Layout extends React.Component {
     }
 
     handleLoadCategories() {
-        const {blogAction, categories} = this.props;
+        const {categoryAction, categories} = this.props;
         if (categories.length === 0) {
             try {
-                blogAction.getCategories();
+                categoryAction.getCategories();
             } catch (e) {
                 console.log(e);
             }
@@ -112,7 +112,7 @@ export default connect(
         mobileHeader: state.LayoutReducer.mobileHeader
     }),
     (dispatch) => ({
-        blogAction: bindActionCreators(blogAction, dispatch),
+        categoryAction: bindActionCreators(categoryAction, dispatch),
         layoutAction: bindActionCreators(layoutAction, dispatch)
     })
 )(Layout);

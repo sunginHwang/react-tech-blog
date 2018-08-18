@@ -10,7 +10,7 @@ const OriginPreview =  ({
                     clickCloseVisible
                 }) =>{
     return (
-        <ModalWrapper visible={visible}>
+        <ModalWrapper visible={visible} modalClick={clickCloseVisible}>
             <div className={style.originPreview} >
                 <div className={style.content} onClick={(e)=>clickCloseVisible()}>
                     <MarkDownView content={content}

@@ -1,5 +1,5 @@
 import { handleActions } from 'redux-actions';
-import * as Blog from '../actions/BlogAction';
+import * as action from '../actions/Post/PostUpsertAction';
 
 const initialState = {
     postNo: 0,
@@ -7,29 +7,33 @@ const initialState = {
     title: '',
     content: '',
     error: false,
-    errorMsg: ''
+    errorMsg: '',
+    previewModal : false
 };
 
 export const PostWriteReducer =  handleActions({
-    [Blog.setCategory]: (state, result) => {
+    [action.setCategory]: (state, result) => {
         return { ...state, category:result.payload };
     },
-    [Blog.setContent]: (state, result) => {
+    [action.setContent]: (state, result) => {
         return { ...state, content: result.payload };
     },
-    [Blog.setTitle]: (state, result) => {
+    [action.setTitle]: (state, result) => {
         return { ...state, title:result.payload };
     },
-    [Blog.toggleError]: (state, result) => {
+    [action.toggleError]: (state, result) => {
         return { ...state, error:result.payload };
     },
-    [Blog.upsertPost.request]: (state, payload) => {
+    [action.toggleOriginPreview]: (state, result) => {
+        return { ...state, previewModal: result.payload};
+    },
+    [action.upsertPost.request]: (state, payload) => {
         return { ...state };
     },
-    [Blog.upsertPost.success]: (state, result) => {
+    [action.upsertPost.success]: (state, result) => {
         return { ...state };
     },
-    [Blog.upsertPost.failure]: (state, result) => {
+    [action.upsertPost.failure]: (state, result) => {
         return { ...state, error: true, errorMsg: result.payload.response.data.message };
     },
 }, initialState);

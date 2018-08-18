@@ -4,7 +4,7 @@ import { PostListReducer } from './PostList';
 import { PostInfoReducer } from './PostInfo';
 import { PostWriteReducer } from './PostWrite';
 import { CategoryReducer} from "./Category";
-import { LayoutReducer } from './LayoutReducer';
+import { LayoutReducer } from './Layout';
 
 
 export default combineReducers({

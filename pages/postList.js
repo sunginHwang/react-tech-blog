@@ -2,7 +2,7 @@ import React from "react";
 
 import PostLayout from '../component/post/list/PostLayout/PostLayout';
 
-import * as blogAction from "../core/actions/BlogAction";
+import * as postsAction from "../core/actions/Post/PostsAction";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import Router from "next/router";
@@ -28,13 +28,7 @@ class postList extends React.Component {
     }
 
     loadPostList = async (categoryNo) => {
-        const {blogAction} = this.props;
-        try {
-            await blogAction.getPosts(categoryNo);
-        } catch (e) {
-            await console.log(e);
-            await alert('해당 카테고리 분류의 글을 가져올 수 없습니다.');
-        }
+        await this.props.postsAction.getPosts(categoryNo);
     };
 
     onClickDetailPage = (postNo) => {
@@ -62,6 +56,6 @@ export default connect(
         postList: state.PostListReducer.postList
     }),
     (dispatch) => ({
-        blogAction: bindActionCreators(blogAction, dispatch)
+        postsAction: bindActionCreators(postsAction, dispatch)
     })
 )(postList);

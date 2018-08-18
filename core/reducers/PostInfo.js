@@ -1,5 +1,5 @@
 import { handleActions } from 'redux-actions';
-import * as Blog from '../actions/BlogAction';
+import * as action from '../actions/Post/PostViewAction';
 
 const initialState = {
     post:{
@@ -12,13 +12,13 @@ const initialState = {
 };
 
 export const PostInfoReducer =  handleActions({
-    [Blog.getPostInfo.request]: (state, payload) => {
+    [action.getPostInfo.request]: (state, payload) => {
         return { ...state };
     },
-    [Blog.getPostInfo.success]: (state, result) => {
+    [action.getPostInfo.success]: (state, result) => {
         return { ...state, post: result.payload.data.data};
     },
-    [Blog.getPostInfo.failure]: (state, payload) => {
+    [action.getPostInfo.failure]: (state, payload) => {
         return { ...state, post: initialState.post };
     },
 }, initialState);

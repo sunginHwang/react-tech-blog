@@ -1,7 +1,7 @@
 import React from "react";
 import * as FileApi from '../core/apis/FileApi';
 import WriteView from '../component/post/write/WriteView/WriteView';
-import * as blogAction from "../core/actions/BlogAction";
+import * as postUpsertAction from "../core/actions/Post/PostUpsertAction";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import OriginPreview from '../component/post/write/OriginPreview/OriginPreview';
@@ -10,9 +10,6 @@ class write extends React.Component {
 
     constructor() {
         super();
-        this.state = {
-            visible: false
-        };
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -21,30 +18,29 @@ class write extends React.Component {
 
     handlerDetectError = () =>{
         if(this.props.error){
-            console.log(this.props.errorMsg);
             alert(this.props.errorMsg);
-            this.props.blogAction.toggleError(false);
+            this.props.postUpsertAction.toggleError(false);
         }
     };
 
 
     onChangeContent = (content) => {
-        const {blogAction} = this.props;
-        blogAction.setContent(content);
+        const {postUpsertAction} = this.props;
+        postUpsertAction.setContent(content);
     };
 
     onChangeTitle = (title) => {
-        const {blogAction} = this.props;
-        blogAction.setTitle(title);
+        const {postUpsertAction} = this.props;
+        postUpsertAction.setTitle(title);
     };
 
     onChangeCategories = (selectedCategory) => {
-        const {blogAction} = this.props;
-        blogAction.setCategory(selectedCategory);
+        const {postUpsertAction} = this.props;
+        postUpsertAction.setCategory(selectedCategory);
     };
 
     upsertPost = async () => {
-        const {title, content, category, postNo, blogAction} = this.props;
+        const {title, content, category, postNo } = this.props;
         const {validateUpsertPost} = this;
 
         if (validateUpsertPost(title, content, category)) {
@@ -56,7 +52,7 @@ class write extends React.Component {
                 categoryNo: category.value
             };
 
-            await blogAction.upsertPost(upsertData);
+            await postUpsertAction.upsertPost(upsertData);
         }
     };
 
@@ -133,13 +129,13 @@ class write extends React.Component {
     }
 
     onClickShowOriginPreview = () => {
-        console.log(12);
-        this.setState({visible: !this.state.visible});
+        const { postUpsertAction, previewModal } = this.props;
+        postUpsertAction.toggleOriginPreview(!previewModal);
     };
 
     render() {
         const {dndImage, pasteImage, onChangeContent, onChangeTitle, onClickUploadImage, onChangeCategories, upsertPost, onClickShowOriginPreview} = this;
-        const {title, content, category, categories} = this.props;
+        const {title, content, category, categories, previewModal} = this.props;
 
         return (
             <div>
@@ -160,7 +156,7 @@ class write extends React.Component {
                 <OriginPreview
                     content={content}
                     clickCloseVisible={onClickShowOriginPreview}
-                    visible={this.state.visible}
+                    visible={previewModal}
                 />
             </div>
         )
@@ -175,9 +171,10 @@ export default connect(
         category: state.PostWriteReducer.category,
         categories: state.CategoryReducer.categories,
         error: state.PostWriteReducer.error,
-        errorMsg: state.PostWriteReducer.errorMsg
+        errorMsg: state.PostWriteReducer.errorMsg,
+        previewModal: state.PostWriteReducer.previewModal
     }),
     (dispatch) => ({
-        blogAction: bindActionCreators(blogAction, dispatch)
+        postUpsertAction: bindActionCreators(postUpsertAction, dispatch)
     })
 )(write);
