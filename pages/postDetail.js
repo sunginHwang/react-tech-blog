@@ -37,6 +37,7 @@ class postDetail extends React.Component {
                     title={post.title}
                     author={post.author}
                     content={post.content}
+                    categoryLabel={post.categoryLabel}
                     createdAt={post.createdAt}/>
             </div>
         )

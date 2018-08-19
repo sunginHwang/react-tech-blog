@@ -1,6 +1,6 @@
 @import '../../../../style/scss/CommonUtil';
 
-$margin-bottom: 20px;
+$margin-bottom: 15px;
 
 .postItem{
   text-align: left;
@@ -11,7 +11,7 @@ $margin-bottom: 20px;
 
 .title{
   color: $title-font-color;
-  font-size: 30px;
+  font-size: 28px;
   font-weight: 700;
   margin-bottom: $margin-bottom;
   cursor: pointer;
@@ -20,9 +20,23 @@ $margin-bottom: 20px;
 .content{
   margin-bottom: $margin-bottom;
   cursor: pointer;
+  font-size: 17px;
+  color: #585858;
 }
 
 .meta{
   color: $side-font-gray-color;
+  font-size: 13px;
   margin-right: 5px;
+}
+
+.separator{
+  font-size: 13px;
+  color: #ebebeb;
+  margin-right: 5px;
+}
+
+.categoryLabel{
+  color: $main-theme-color !important;
+  margin-right: 10px !important;
 }

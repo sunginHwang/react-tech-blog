@@ -13,6 +13,7 @@ const PostLayout = ({ posts,
                   key={post.postNo}
                   title={post.title}
                   contents={post.subDescription}
+                  categoryLabel={post.categoryLabel}
                   author={post.author}
                   date={post.createdAt}/>
     });

@@ -5,8 +5,9 @@ import * as postUpsertAction from "../core/actions/Post/PostUpsertAction";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import OriginPreview from '../component/post/write/OriginPreview/OriginPreview';
+import { convertImageToCodeImage } from '../core/util/ImageUtil';
 
-class write extends React.Component {
+class postEdit extends React.Component {
 
     constructor() {
         super();
@@ -39,8 +40,8 @@ class write extends React.Component {
         postUpsertAction.setCategory(selectedCategory);
     };
 
-    upsertPost = async () => {
-        const {title, content, category, postNo } = this.props;
+    upsertPost = () => {
+        const {title, content, category, postNo, postUpsertAction } = this.props;
         const {validateUpsertPost} = this;
 
         if (validateUpsertPost(title, content, category)) {
@@ -51,8 +52,7 @@ class write extends React.Component {
                 contents: content,
                 categoryNo: category.value
             };
-
-            await postUpsertAction.upsertPost(upsertData);
+            postUpsertAction.upsertPost(upsertData);
         }
     };
 
@@ -119,14 +119,11 @@ class write extends React.Component {
         FileApi.saveImageAndGetImageUrl(file)
             .then(async (imgUrl) => {
                 if (imgUrl === '') return;
-                await this.onChangeContent(this.state.content + this.convertImageToCodeImage(imgUrl));
+                await this.onChangeContent(this.state.content + convertImageToCodeImage(imgUrl));
             });
     };
 
-    /* 이미지 태그 markdown 용으로 컨버팅 */
-    convertImageToCodeImage(imageUrl) {
-        return `${'\n'}![${imageUrl}](${imageUrl})${'\n'}`;
-    }
+
 
     onClickShowOriginPreview = () => {
         const { postUpsertAction, previewModal } = this.props;
@@ -177,4 +174,4 @@ export default connect(
     (dispatch) => ({
         postUpsertAction: bindActionCreators(postUpsertAction, dispatch)
     })
-)(write);
+)(postEdit);

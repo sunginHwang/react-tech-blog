@@ -1,6 +1,4 @@
 import style from './SideBar.scss';
-import Link from 'next/link';
-import Router from 'next/router'
 
 export default ({isOpen, categories, clickCategoryPage, clickSideBarPage }) => {
 
@@ -14,7 +12,7 @@ export default ({isOpen, categories, clickCategoryPage, clickSideBarPage }) => {
                 <div className={style.sideBar + ' ' + (isOpen ? style.sideBarOpen : '')}>
                     <ul>
                         <li>
-                            <a onClick={()=>{clickSideBarPage('/write')}}>글쓰기 페이지 이동</a>
+                            <a onClick={()=>{clickSideBarPage('/edit','/postEdit')}}>글쓰기 페이지 이동</a>
                         </li>
                         {postCategories}
                     </ul>

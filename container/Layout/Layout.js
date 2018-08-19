@@ -68,8 +68,8 @@ class Layout extends React.Component {
         this.handleToggleSideBar(false);
     };
 
-    onClickSideBarPage = (url) => {
-        Router.push(url);
+    onClickSideBarPage = (url, browserUrl) => {
+        Router.push(browserUrl, url);
         this.handleToggleSideBar(false);
     };
 

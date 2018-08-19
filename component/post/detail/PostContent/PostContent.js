@@ -5,6 +5,7 @@ export default ({
                     content,
                     title,
                     author,
+                    categoryLabel,
                     createdAt
                 }) =>
     <div className={style.contentWrapper}>
@@ -15,7 +16,9 @@ export default ({
             <div className={style.subTitleArea}>
                 <img className={style.author} src="http://www.woolta.com:81/uploads/addebc73bb618a35adf529283cf78ce7.png"/>
                 <span>{author}</span>
-                <span> / </span>
+                <span className={style.seperator}> | </span>
+                <span className={style.categoryLabel}>{categoryLabel}</span>
+                <span className={style.seperator}> | </span>
                 <span>{createdAt}</span>
             </div>
         </div>
