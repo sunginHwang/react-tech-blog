@@ -14,7 +14,7 @@ const initialState = {
 
 export const PostInfoReducer =  handleActions({
     [action.getPostInfo.request]: (state, payload) => {
-        return { ...state };
+        return { ...state, post: initialState.post };
     },
     [action.getPostInfo.success]: (state, result) => {
         return { ...state, post: result.payload.data.data};
@@ -22,6 +22,9 @@ export const PostInfoReducer =  handleActions({
     [action.getPostInfo.failure]: (state, payload) => {
         return { ...state, post: initialState.post };
     },
+    [action.postInfoInitialize]: (state, result) => {
+        return { ...state, post: initialState.post };
+    }
 }, initialState);
 
 

@@ -28,11 +28,14 @@ export function asyncActionCreator(actions) {
     return actionCreator
 }
 
-
+function delay(ms) {
+    return new Promise(resolve => setTimeout(() => resolve(true), ms))
+}
 /*비동기 통신 자동화*/
 export function * asyncSaga(asyncFunction, apiFunction, payload) {
 
     yield put(asyncFunction.request()); // 요청대기
+
     try {
         const json = yield call(apiFunction,payload); // 비동기처리 promise
         yield put(asyncFunction.success(json)); // 비동기 처리 성공

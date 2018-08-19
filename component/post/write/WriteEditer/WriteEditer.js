@@ -45,7 +45,7 @@ export default class WriteEditer extends React.Component {
             <div style={{height:'100%'}}>
                 <div className={style.writeTopArea}>
                     <img className={style.author} src="http://www.woolta.com:81/uploads/addebc73bb618a35adf529283cf78ce7.png"/>
-                    <span className={style.author}> 작성자 : 황성인</span>
+                    <span className={style.authorName}> 작성자 : 황성인</span>
                 </div>
                 <div className={style.writeTopArea}>
                     <Select

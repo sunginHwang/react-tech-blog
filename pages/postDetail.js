@@ -21,6 +21,10 @@ class postDetail extends React.Component {
         this.handleScrollTop();
     }
 
+    componentWillUnmount(){
+        this.props.postViewAction.postInfoInitialize();
+    }
+
     handleScrollTop = () =>{
         window.scrollTo(0,0);
     };
@@ -33,12 +37,14 @@ class postDetail extends React.Component {
         const { post } = this.props;
         return (
             <div>
+                {post.postNo != 0 &&
                 <PostContent
                     title={post.title}
                     author={post.author}
                     content={post.content}
                     categoryLabel={post.categoryLabel}
                     createdAt={post.createdAt}/>
+            }
             </div>
         )
     }

@@ -27,5 +27,6 @@ body{font-family: 'Roboto', sans-serif;}
   padding: 5% 0;
   @media screen and (max-width: $mobile-width){
     margin-top: $main-header-height;
+    padding: 3% 0;
   }
 }

@@ -1,16 +1,16 @@
 @import '../../../../style/scss/CommonUtil';
 
-$margin-bottom: 15px;
+$margin-bottom: 10px;
 
 .postItem{
   text-align: left;
-  padding-bottom: 1.5em;
-  padding-top: 1.5em;
-  border-bottom: 2px solid #eeeeee;
+  padding-bottom: 1em;
+  padding-top: 1.7em;
+  border-bottom: 2px solid $bottom-line-color;
 }
 
 .title{
-  color: $title-font-color;
+  color: $main-theme-color;
   font-size: 28px;
   font-weight: 700;
   margin-bottom: $margin-bottom;
@@ -21,7 +21,7 @@ $margin-bottom: 15px;
   margin-bottom: $margin-bottom;
   cursor: pointer;
   font-size: 17px;
-  color: #585858;
+  color: $main-theme-color;
 }
 
 .meta{
@@ -37,6 +37,6 @@ $margin-bottom: 15px;
 }
 
 .categoryLabel{
-  color: $main-theme-color !important;
+  color:#9ba5a0 !important;
   margin-right: 10px !important;
 }

@@ -54,4 +54,8 @@ $wrapper-title-height:60px;
 }
 .edit{
   margin-right: 3em;
+
+  @media screen and (max-width: $mobile-width){
+    margin-right: 0;
+  }
 }
