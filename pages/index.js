@@ -1,5 +1,3 @@
-import Layout from '../container/Layout/Layout';
-
 import style from '../style/scss/Main.scss';
 
 export default () =>

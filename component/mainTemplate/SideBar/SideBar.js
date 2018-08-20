@@ -14,6 +14,9 @@ export default ({isOpen, categories, clickCategoryPage, clickSideBarPage }) => {
                         <li>
                             <a onClick={()=>{clickSideBarPage('/edit','/postEdit')}}>글쓰기 페이지 이동</a>
                         </li>
+                        <li>
+                            <a onClick={()=>{clickSideBarPage('/login','/login')}}>로그인</a>
+                        </li>
                         {postCategories}
                     </ul>
                 </div>

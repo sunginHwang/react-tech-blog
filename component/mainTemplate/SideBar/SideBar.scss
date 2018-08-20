@@ -13,6 +13,28 @@
   right: -$main-right-width;
   transition: all .2s ease;
 
+  ul{
+    margin-top: 2em !important;
+
+    li{
+      a{
+        text-align: left;
+        display: block;
+        text-decoration: none;
+        padding: 1em;
+        border-left: 2px solid transparent;
+        font-weight: 400;
+        color: $main-theme-color;
+        cursor: pointer;
+      }
+
+      &:hover{
+        color: $main-theme-color;
+        background-color: $custom-gray-color;
+      }
+    }
+  }
+
 }
 
 .sideBarOpen{
@@ -30,24 +52,3 @@
       z-index: $side-bar-z-index;
 }
 
-ul{
-  margin-top: 2em !important;
-
-  li{
-    a{
-      text-align: left;
-      display: block;
-      text-decoration: none;
-      padding: 1em;
-      border-left: 2px solid transparent;
-      font-weight: 400;
-      color: $main-theme-color;
-      cursor: pointer;
-    }
-
-    &:hover{
-      color: $main-theme-color;
-      background-color: $custom-gray-color;
-    }
-  }
-}
