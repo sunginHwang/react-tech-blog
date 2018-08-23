@@ -4,7 +4,7 @@ import * as style from './LoginView.scss';
 const LoginView = ({
     id,
     password,
-    clickLogin
+   onLoginClick
                }) => {
 
     return (
@@ -20,7 +20,7 @@ const LoginView = ({
                 <div className={style.loginSubArea}>
                     <button
                         className={style.loginButton}
-                        onClick={(e)=>clickLogin()}>Login</button>
+                        onClick={(e)=>onLoginClick()}>Login</button>
                 </div>
             </div>
         </div>

@@ -5,6 +5,7 @@ import { PostInfoReducer } from './PostInfo';
 import { PostWriteReducer } from './PostWrite';
 import { CategoryReducer} from "./Category";
 import { LayoutReducer } from './Layout';
+import { AuthReducer } from './Auth';
 
 
 export default combineReducers({
@@ -13,5 +14,6 @@ export default combineReducers({
     PostInfoReducer,
     PostWriteReducer,
     CategoryReducer,
-    LayoutReducer
+    LayoutReducer,
+    AuthReducer
 });
