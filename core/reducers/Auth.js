@@ -1,24 +1,36 @@
-import { handleActions } from 'redux-actions';
+import {handleActions} from 'redux-actions';
 import * as action from '../actions/User/UserAction';
 
 const initialState = {
-    authInfo:{
+    id: '',
+    password: '',
+
+    authInfo: {
         userId: '',
-        imageUrl:'',
+        imageUrl: '',
         authToken: ''
     },
 
 };
 
-export const AuthReducer =  handleActions({
+export const AuthReducer = handleActions({
+    [action.changeLoginInputInfo]: (state, action) => {
+        const {type, value} = action.payload;
+        if (type === 'id') {
+            return {...state, id: value};
+        } else if (type === 'password') {
+            return {...state, password: value};
+        }
+
+    },
     [action.login.request]: (state, payload) => {
-        return { ...state };
+        return {...state};
     },
     [action.login.success]: (state, result) => {
-        return { ...state, authInfo: result.payload.data.data};
+        return {...state, authInfo: result.payload.data.data};
     },
     [action.login.failure]: (state, payload) => {
-        return { ...state, authInfo: initialState.authInfo };
+        return {...state, authInfo: initialState.authInfo};
     },
 }, initialState);
 

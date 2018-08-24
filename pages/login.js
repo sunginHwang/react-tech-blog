@@ -13,22 +13,33 @@ class login extends React.Component {
     componentDidMount() {
     }
 
+    onChangeLoginInfo = (inputType, value) => {
+        const {UserAction} = this.props;
+        UserAction.changeLoginInputInfo({
+            type: inputType,
+            value: value
+        });
+    };
+
     handleLogin = async () => {
-        const { UserAction } = this.props;
+        const {UserAction, id, password } = this.props;
 
         const loginInfo = {
-            id: "gommpo",
-            password: "as455"
+            id: id,
+            password: password
         };
 
         UserAction.login(loginInfo)
     };
 
     render() {
-
+        const { id, password } = this.props;
         return (
             <LoginView
+                id={id}
+                password={password}
                 onLoginClick={this.handleLogin}
+                onChangeLoginInfo={this.onChangeLoginInfo}
             />
         )
     }
@@ -36,7 +47,8 @@ class login extends React.Component {
 
 export default connect(
     (state) => ({
-        post: state.PostInfoReducer.post
+        id: state.AuthReducer.id,
+        password: state.AuthReducer.password,
     }),
     (dispatch) => ({
         UserAction: bindActionCreators(UserAction, dispatch)
