@@ -74,7 +74,7 @@ class Layout extends React.Component {
     };
 
     render() {
-        const {categories, sideBar, mobileHeader, pageLoading} = this.props;
+        const {categories, sideBar, mobileHeader, authInfo, pageLoading} = this.props;
 
         return (
             <div>
@@ -83,6 +83,7 @@ class Layout extends React.Component {
                 </Head>
                 <SideBar
                     isOpen={sideBar}
+                    authInfo={authInfo}
                     clickCategoryPage={this.onClickCategoryPage}
                     clickSideBarPage={this.onClickSideBarPage}
                     categories={categories}
@@ -107,9 +108,10 @@ class Layout extends React.Component {
 export default connect(
     (state) => ({
         categories: state.CategoryReducer.categories,
+        authInfo: state.AuthReducer.authInfo,
         pageLoading: state.LayoutReducer.pageLoading,
         sideBar: state.LayoutReducer.sideBar,
-        mobileHeader: state.LayoutReducer.mobileHeader
+        mobileHeader: state.LayoutReducer.mobileHeader,
     }),
     (dispatch) => ({
         categoryAction: bindActionCreators(categoryAction, dispatch),

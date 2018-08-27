@@ -1,4 +1,5 @@
 import MarkDownView from '../../../../component/view/MarkDownView/MarkDownView';
+import UserImg from '../../../../component/user/UserImg/UserImg';
 import style from './PostContent.scss';
 
 export default ({
@@ -14,7 +15,11 @@ export default ({
                 {title}
             </h1>
             <div className={style.subTitleArea}>
-                <img className={style.author} src="http://www.woolta.com:81/uploads/addebc73bb618a35adf529283cf78ce7.png"/>
+                <span className={style.author}>
+                    <UserImg
+                        img='http://www.woolta.com:81/uploads/addebc73bb618a35adf529283cf78ce7.png'/>
+                </span>
+
                 <span>{author}</span>
                 <span className={style.seperator}> | </span>
                 <span className={style.categoryLabel}>{categoryLabel}</span>
