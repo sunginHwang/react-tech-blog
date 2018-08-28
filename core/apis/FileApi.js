@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axiosAuth from '../lib/axiosAuth';
 
 const tempPhotoServerUrl = 'http://www.woolta.com:81';
 
@@ -7,7 +7,7 @@ export const saveImageAndGetImageUrl = async (imageFile) => {
     data.append("file", imageFile);
 
     try{
-        const result = await axios.post(`${tempPhotoServerUrl}/api/board/insert_image`,data, {
+        const result = await axiosAuth.post(`${tempPhotoServerUrl}/api/board/insert_image`,data, {
             withCredentials: false,
             onUploadProgress: (e) => {
                 if (window.nanobar) {

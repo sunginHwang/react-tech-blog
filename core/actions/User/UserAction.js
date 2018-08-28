@@ -8,3 +8,6 @@ export const login = asyncActionCreator(LOGIN);
 
 export const CHANGE_LOGIN_INPUT_INFO= 'USER_ACTION_CHANGE_LOGIN_INPUT_INFO';
 export const changeLoginInputInfo = createAction(CHANGE_LOGIN_INPUT_INFO);
+
+export const LOAD_AUTH_INFO = asyncActionTypeCreator('LOAD_AUTH_INFO','ASYNC');
+export const loadAuthInfo = asyncActionCreator(LOAD_AUTH_INFO);

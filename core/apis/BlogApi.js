@@ -1,17 +1,17 @@
-import axios from 'axios';
+import axiosAuth from '../lib/axiosAuth';
 
 export const getPostList =  (categoryNo) => {
-    return axios.get(`http://localhost:8080/post/categories/${categoryNo}/posts`);
+    return axiosAuth.get(`http://localhost:8080/post/categories/${categoryNo}/posts`);
 };
 
 export const getPostInfo =  (post) => {
-    return axios.get(`http://localhost:8080/post/categories/${post.categoryNo}/posts/${post.postNo}`);
+    return axiosAuth.get(`http://localhost:8080/post/categories/${post.categoryNo}/posts/${post.postNo}`);
 };
 
 export const getCategories =  () => {
-    return axios.get(`http://localhost:8080/post/categories`);
+    return axiosAuth.get(`http://localhost:8080/post/categories`);
 };
 
 export const upsertPost =  (postData) => {
-    return axios.post(`http://localhost:8080/post`,postData);
+    return axiosAuth.post(`http://localhost:8080/post`,postData);
 };

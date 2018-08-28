@@ -6,6 +6,7 @@ const initialState = {
     password: '',
 
     authInfo: {
+        no: 0,
         userId: '',
         imageUrl: '',
         authToken: ''
@@ -23,13 +24,22 @@ export const AuthReducer = handleActions({
         }
 
     },
-    [action.login.request]: (state, payload) => {
+    [action.login.request]: (state, result) => {
         return {...state};
     },
     [action.login.success]: (state, result) => {
         return {...state, authInfo: result.payload.data.data};
     },
-    [action.login.failure]: (state, payload) => {
+    [action.login.failure]: (state, result) => {
+        return {...state, authInfo: initialState.authInfo};
+    },
+    [action.loadAuthInfo.request]: (state, result) => {
+        return {...state};
+    },
+    [action.loadAuthInfo.success]: (state, result) => {
+        return {...state, authInfo: result.payload.data.data};
+    },
+    [action.loadAuthInfo.failure]: (state, result) => {
         return {...state, authInfo: initialState.authInfo};
     },
 }, initialState);
