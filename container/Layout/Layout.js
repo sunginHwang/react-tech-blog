@@ -6,14 +6,15 @@ import MainHeader from '../../component/mainTemplate/MainHeader/MainHeader';
 import Footer from '../../component/mainTemplate/Footer/Footer';
 import SideBar from '../../component/mainTemplate/SideBar/SideBar';
 
-import style from './Layout.scss';
 import * as categoryAction from "../../core/actions/CategoryAction";
 import * as layoutAction from "../../core/actions/LayoutAction";
+import * as userAction from "../../core/actions/User/UserAction";
 
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import Router from "next/router";
 
+import style from './Layout.scss';
 
 class Layout extends React.Component {
 
@@ -68,6 +69,11 @@ class Layout extends React.Component {
         this.handleToggleSideBar(false);
     };
 
+    onClickLogout = () => {
+        console.log('logout');
+        this.props.userAction.logout();
+    };
+
     onClickSideBarPage = (url, browserUrl) => {
         Router.push(browserUrl, url);
         this.handleToggleSideBar(false);
@@ -86,6 +92,7 @@ class Layout extends React.Component {
                     authInfo={authInfo}
                     clickCategoryPage={this.onClickCategoryPage}
                     clickSideBarPage={this.onClickSideBarPage}
+                    clickLogout={this.onClickLogout}
                     categories={categories}
                 />
                 <MainHeader
@@ -115,6 +122,8 @@ export default connect(
     }),
     (dispatch) => ({
         categoryAction: bindActionCreators(categoryAction, dispatch),
-        layoutAction: bindActionCreators(layoutAction, dispatch)
+        layoutAction: bindActionCreators(layoutAction, dispatch),
+        userAction: bindActionCreators(userAction, dispatch)
+
     })
 )(Layout);

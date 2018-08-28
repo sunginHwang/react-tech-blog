@@ -26,6 +26,11 @@ function * loginSaga(info) {
     }
 }
 
+function * logoutSaga() {
+    yield axiosAuth.defaults.headers.common[ACCESS_HEADER_TOKEN] = '';
+    yield localStorage.removeItem(ACCESS_TOKEN);
+}
+
 function * loadAuthInfoSaga() {
     yield put(UserAction.loadAuthInfo.request());
 
@@ -41,6 +46,7 @@ function * loadAuthInfoSaga() {
 export default function* root() {
     yield all([
         takeLatest(UserAction.LOGIN.INDEX, loginSaga),
-        takeLatest(UserAction.LOAD_AUTH_INFO.INDEX, loadAuthInfoSaga)
+        takeLatest(UserAction.LOAD_AUTH_INFO.INDEX, loadAuthInfoSaga),
+        takeLatest(UserAction.LOGOUT, logoutSaga),
     ]);
 }

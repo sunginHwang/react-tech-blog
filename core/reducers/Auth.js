@@ -24,6 +24,9 @@ export const AuthReducer = handleActions({
         }
 
     },
+    [action.logout]: (state, result) => {
+        return {...state, authInfo: initialState.authInfo};
+    },
     [action.login.request]: (state, result) => {
         return {...state};
     },
