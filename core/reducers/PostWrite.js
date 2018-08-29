@@ -31,10 +31,14 @@ export const PostWriteReducer =  handleActions({
         return { ...state };
     },
     [action.upsertPost.success]: (state, result) => {
-        return { ...state };
+        return { ...state, postNo: initialState.postNo, category: initialState.category, title: initialState.title, content: initialState.content };
     },
     [action.upsertPost.failure]: (state, result) => {
         return { ...state, error: true, errorMsg: result.payload.response.data.message };
+    },
+    [action.settingPostInfo]: (state, result) => {
+        console.log(result);
+        return { ...state, postNo: result.payload.postNo, category: result.payload.category, title: result.payload.title, content: result.payload.content };
     },
 }, initialState);
 

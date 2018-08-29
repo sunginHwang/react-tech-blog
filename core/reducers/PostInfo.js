@@ -24,6 +24,9 @@ export const PostInfoReducer =  handleActions({
     },
     [action.postInfoInitialize]: (state, result) => {
         return { ...state, post: initialState.post };
+    },
+    [action.modifyPost]: (state, result) => {
+        return { ...state };
     }
 }, initialState);
 

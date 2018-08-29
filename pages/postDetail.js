@@ -11,8 +11,8 @@ class postDetail extends React.Component {
         super();
     }
 
-    componentDidMount(){
-        const { postNo, postViewAction, categoryNo } = this.props;
+    componentDidMount() {
+        const {postNo, postViewAction, categoryNo} = this.props;
         this.handleScrollTop();
         postViewAction.getPostInfo({postNo, categoryNo});
     }
@@ -21,20 +21,43 @@ class postDetail extends React.Component {
         this.handleScrollTop();
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
         this.props.postViewAction.postInfoInitialize();
     }
 
-    handleScrollTop = () =>{
-        window.scrollTo(0,0);
+    handleScrollTop = () => {
+        window.scrollTo(0, 0);
     };
 
-    static getInitialProps ({query: {categoryNo, postNo}}) {
+    onClickPostModify = () => {
+        const {postViewAction, post} = this.props;
+        const {postNo, title, content, categoryLabel} = post;
+
+        postViewAction.modifyPost({
+            postNo: postNo,
+            title: title,
+            content: content,
+            category: [
+                {
+                    "value": 1,
+                    "label": "React"
+                }
+            ]
+        });
+
+        console.log('modifyEvent');
+    };
+
+    handleDeletePost = () => {
+        console.log('deleteEvent');
+    };
+
+    static getInitialProps({query: {categoryNo, postNo}}) {
         return {categoryNo, postNo}
     }
 
-    render () {
-        const { post } = this.props;
+    render() {
+        const {post} = this.props;
         return (
             <div>
                 {post.postNo != 0 &&
@@ -43,8 +66,10 @@ class postDetail extends React.Component {
                     author={post.author}
                     content={post.content}
                     categoryLabel={post.categoryLabel}
+                    clickPostModify={this.onClickPostModify}
+                    deletePost={this.handleDeletePost}
                     createdAt={post.createdAt}/>
-            }
+                }
             </div>
         )
     }
@@ -55,6 +80,6 @@ export default connect(
         post: state.PostInfoReducer.post
     }),
     (dispatch) => ({
-        postViewAction: bindActionCreators(postViewAction, dispatch)
+        postViewAction: bindActionCreators(postViewAction, dispatch),
     })
 )(postDetail);

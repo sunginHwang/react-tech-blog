@@ -9,12 +9,6 @@
     padding-right: 1rem;
   }
 
-
-  span{
-    color: $side-font-gray-color;
-    margin-right: 5px;
-    display: inline-block;
-  }
 }
 
 .titleArea{
@@ -45,8 +39,24 @@
 }
 
 .subTitleArea{
+
   margin-bottom: 20px;
+  span{
+    color: $side-font-gray-color;
+    margin-right: 5px;
+    display: inline-block;
+  }
 }
+
+.eventButton{
+    text-align: center;
+    width: 3em;
+    float: right;
+    margin-left: 10px;
+    padding: 5px !important;
+    @extend .main-button;
+}
+
 .author{
   margin-right: 5px;
   width: 30px;

@@ -24,3 +24,6 @@ export const toggleError = createAction(TOGGLE_ERROR);
 // 미리보기 모달
 export const TOGGLE_ORIGIN_PREVIEW_MODAL= 'Post_upsert_toggle_origin_preview_modal';
 export const toggleOriginPreview = createAction(TOGGLE_ORIGIN_PREVIEW_MODAL);
+
+export const SETTING_POST_INFO= 'POST_UPSERT_SETTING_POST_INFO';
+export const settingPostInfo = createAction(SETTING_POST_INFO);

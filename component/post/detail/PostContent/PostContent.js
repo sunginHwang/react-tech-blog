@@ -7,6 +7,8 @@ export default ({
                     title,
                     author,
                     categoryLabel,
+                    clickPostModify,
+                    deletePost,
                     createdAt
                 }) =>
     <div className={style.contentWrapper}>
@@ -25,6 +27,14 @@ export default ({
                 <span className={style.categoryLabel}>{categoryLabel}</span>
                 <span className={style.seperator}> | </span>
                 <span>{createdAt}</span>
+                <div className={style.eventButton}
+                    onClick={()=>{clickPostModify();}}>
+                    수정
+                </div>
+                <div className={style.eventButton}
+                     onClick={()=>{deletePost();}}>
+                    삭제
+                </div>
             </div>
         </div>
         <div className={style.contentArea}>
