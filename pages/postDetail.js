@@ -30,22 +30,18 @@ class postDetail extends React.Component {
     };
 
     onClickPostModify = () => {
-        const {postViewAction, post} = this.props;
+        const {postViewAction, post, categories} = this.props;
         const {postNo, title, content, categoryLabel} = post;
+
+        const category = categories.filter((c)=>c.label === categoryLabel);
 
         postViewAction.modifyPost({
             postNo: postNo,
             title: title,
             content: content,
-            category: [
-                {
-                    "value": 1,
-                    "label": "React"
-                }
-            ]
+            category: category
         });
 
-        console.log('modifyEvent');
     };
 
     handleDeletePost = () => {
@@ -77,7 +73,8 @@ class postDetail extends React.Component {
 
 export default connect(
     (state) => ({
-        post: state.PostInfoReducer.post
+        post: state.PostInfoReducer.post,
+        categories: state.CategoryReducer.categories
     }),
     (dispatch) => ({
         postViewAction: bindActionCreators(postViewAction, dispatch),
