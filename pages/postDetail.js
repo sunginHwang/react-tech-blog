@@ -33,7 +33,7 @@ class postDetail extends React.Component {
         const {postViewAction, post, categories} = this.props;
         const {postNo, title, content, categoryLabel} = post;
 
-        const category = categories.filter((c)=>c.label === categoryLabel);
+        const category = categories.filter((c) => c.label === categoryLabel);
 
         postViewAction.modifyPost({
             postNo: postNo,
@@ -45,6 +45,19 @@ class postDetail extends React.Component {
     };
 
     handleDeletePost = () => {
+
+        const {postViewAction, post, categories} = this.props;
+        const {postNo, categoryLabel} = post;
+
+        const category = categories.find((c) => c.label === categoryLabel);
+
+        const deleteData = {
+            postNo: postNo,
+            categoryNo: category.value
+        };
+
+        postViewAction.deletePost(deleteData);
+
         console.log('deleteEvent');
     };
 

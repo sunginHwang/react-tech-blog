@@ -15,3 +15,7 @@ export const getCategories =  () => {
 export const upsertPost =  (postData) => {
     return axiosAuth.post(`http://localhost:8080/post`,postData);
 };
+
+export const deletePost =  (postData) => {
+    return axiosAuth.delete(`http://localhost:8080/post`,{ data: { categoryNo: postData.categoryNo, postNo: postData.postNo }});
+};

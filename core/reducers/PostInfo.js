@@ -22,6 +22,15 @@ export const PostInfoReducer =  handleActions({
     [action.getPostInfo.failure]: (state, payload) => {
         return { ...state, post: initialState.post };
     },
+    [action.deletePost.request]: (state, payload) => {
+        return { ...state };
+    },
+    [action.deletePost.success]: (state, result) => {
+        return { ...state, post: initialState.post};
+    },
+    [action.deletePost.failure]: (state, payload) => {
+        return { ...state };
+    },
     [action.postInfoInitialize]: (state, result) => {
         return { ...state, post: initialState.post };
     },

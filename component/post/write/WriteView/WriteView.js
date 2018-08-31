@@ -28,7 +28,7 @@ const WriteView = ({ dndImage, pasteImage, clickUploadImage, changeContent, chan
                     </div>
                     <div className={style.contentArea} onClick={()=>clickShowOriginPreview()}>
                         <MarkDownView content={content}
-                                      skipHtml={true}
+                                      skipHtml={false}
                                       escapeHtml={false}/>
                     </div>
 
