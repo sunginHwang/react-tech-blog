@@ -14,7 +14,7 @@ const OriginPreview =  ({
             <div className={style.originPreview} >
                 <div className={style.content} onClick={(e)=>clickCloseVisible()}>
                     <MarkDownView content={content}
-                                  skipHtml={true}
+                                  skipHtml={false}
                                   escapeHtml={false}/>
                 </div>
 

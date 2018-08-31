@@ -119,7 +119,7 @@ class postEdit extends React.Component {
         FileApi.saveImageAndGetImageUrl(file)
             .then(async (imgUrl) => {
                 if (imgUrl === '') return;
-                await this.onChangeContent(this.state.content + convertImageToCodeImage(imgUrl));
+                await this.onChangeContent(this.props.content + convertImageToCodeImage(imgUrl));
             });
     };
 

@@ -15,6 +15,7 @@ $wrapper-title-height:60px;
   display: inline-block;
   height: $wrapper-height;
   word-break: break-word;
+
   @media screen and (max-width: $mobile-width){
     width: 100%;
     padding-left: 1rem;

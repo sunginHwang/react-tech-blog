@@ -39,7 +39,7 @@ export default ({
         </div>
         <div className={style.contentArea}>
             <MarkDownView content={content}
-                          skipHtml={true}
+                          skipHtml={false}
                           escapeHtml={false}/>
         </div>
 
