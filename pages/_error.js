@@ -7,7 +7,7 @@ export default class Error extends React.Component {
         return { statusCode }
     }
 
-    getErrorPage(statusCode){
+    findErrorPage(statusCode){
         switch (statusCode){
             case 404: return <Error404/>;
             default: return <div>`${statusCode} 에러 입니다.`</div>;
@@ -16,9 +16,9 @@ export default class Error extends React.Component {
 
     render() {
         const { statusCode } = this.props;
-        const { getErrorPage } = this;
+        const { findErrorPage } = this;
 
-        let errorComponent = getErrorPage(statusCode);
+        let errorComponent = findErrorPage(statusCode);
 
         return (
             <div>

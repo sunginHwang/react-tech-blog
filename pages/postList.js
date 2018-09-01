@@ -15,19 +15,19 @@ class postList extends React.Component {
 
     componentDidMount() {
         const {categoryNo} = this.props;
-        this.loadPostList(categoryNo);
+        this.onLoadPostList(categoryNo);
     }
 
     componentDidUpdate(prevProps, prevState) {
         const {categoryNo} = this.props;
 
-        if(prevProps.categoryNo != categoryNo){
-            this.loadPostList(categoryNo);
+        if(prevProps.categoryNo !== categoryNo){
+            this.onLoadPostList(categoryNo);
         }
 
     }
 
-    loadPostList = async (categoryNo) => {
+    onLoadPostList = async (categoryNo) => {
         await this.props.postsAction.getPosts(categoryNo);
     };
 
@@ -45,7 +45,7 @@ class postList extends React.Component {
 
         return (
                 <PostLayout
-                    clickDetailPage={this.onClickDetailPage}
+                    onClickDetailPage={this.onClickDetailPage}
                     posts={postList}/>
         )
     }

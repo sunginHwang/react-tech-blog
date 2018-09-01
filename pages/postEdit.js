@@ -14,10 +14,10 @@ class postEdit extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        this.handlerDetectError();
+        this.onDetectError();
     }
 
-    handlerDetectError = () =>{
+    onDetectError = () =>{
         if(this.props.error){
             alert(this.props.errorMsg);
             this.props.postUpsertAction.toggleError(false);
@@ -26,23 +26,23 @@ class postEdit extends React.Component {
 
 
     onChangeContent = (content) => {
-        const {postUpsertAction} = this.props;
+        const { postUpsertAction } = this.props;
         postUpsertAction.setContent(content);
     };
 
     onChangeTitle = (title) => {
-        const {postUpsertAction} = this.props;
+        const { postUpsertAction } = this.props;
         postUpsertAction.setTitle(title);
     };
 
     onChangeCategories = (selectedCategory) => {
-        const {postUpsertAction} = this.props;
+        const { postUpsertAction } = this.props;
         postUpsertAction.setCategory(selectedCategory);
     };
 
     upsertPost = () => {
-        const {title, content, category, postNo, postUpsertAction } = this.props;
-        const {validateUpsertPost} = this;
+        const { title, content, category, postNo, postUpsertAction } = this.props;
+        const { validateUpsertPost } = this;
 
         if (validateUpsertPost(title, content, category)) {
 
@@ -82,7 +82,7 @@ class postEdit extends React.Component {
     };
 
     /*이미지 드래그 삽입 ( 복수 드래그 가능 )*/
-    dndImage = (e) => {
+    onDndImage = (e) => {
         e.preventDefault();
         const {files} = e.dataTransfer;
 
@@ -92,7 +92,7 @@ class postEdit extends React.Component {
     };
 
     /*키보드 cv 복사로 이미지 삽입*/
-    pasteImage = (e) => {
+    onPasteImage = (e) => {
         const {items} = e.clipboardData || e.originalEvent.clipboardData;
         if (items.length !== 2) return;
         if (items[1].kind !== 'file') return;
@@ -131,28 +131,28 @@ class postEdit extends React.Component {
     };
 
     render() {
-        const {dndImage, pasteImage, onChangeContent, onChangeTitle, onClickUploadImage, onChangeCategories, upsertPost, onClickShowOriginPreview} = this;
+        const { onDndImage, onPasteImage, onChangeContent, onChangeTitle, onClickUploadImage, onChangeCategories, upsertPost, onClickShowOriginPreview} = this;
         const {title, content, category, categories, previewModal} = this.props;
 
         return (
             <div>
                 <WriteView
-                    dndImage={dndImage}
-                    pasteImage={pasteImage}
+                    onDndImage={onDndImage}
+                    onPasteImage={onPasteImage}
                     categories={categories}
                     selectedCategory={category}
-                    changeContent={onChangeContent}
-                    changeTitle={onChangeTitle}
+                    onChangeContent={onChangeContent}
+                    onChangeTitle={onChangeTitle}
                     savePost={upsertPost}
-                    changeCategory={onChangeCategories}
-                    clickUploadImage={onClickUploadImage}
-                    clickShowOriginPreview={onClickShowOriginPreview}
+                    onChangeCategories={onChangeCategories}
+                    onClickUploadImage={onClickUploadImage}
+                    onClickShowOriginPreview={onClickShowOriginPreview}
                     content={content}
                     title={title}
                 />
                 <OriginPreview
                     content={content}
-                    clickCloseVisible={onClickShowOriginPreview}
+                    onToggleView={onClickShowOriginPreview}
                     visible={previewModal}
                 />
             </div>

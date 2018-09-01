@@ -1,7 +1,7 @@
-import Layout from '../../../container/Layout/Layout';
+import LayoutContainer from '../../../container/LayoutContainer/LayoutContainer';
 import React from "react";
 export default () => (
-    <Layout title='404 에러 페이지'>
+    <LayoutContainer title='404 에러 페이지'>
         <span>해당 페이지는 존재 하지 않아요 흑흑 ㅜㅜ</span>
-    </Layout>
+    </LayoutContainer>
 )

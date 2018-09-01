@@ -14,18 +14,18 @@ import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import Router from "next/router";
 
-import style from './Layout.scss';
+import style from './LayoutContainer.scss';
 
-class Layout extends React.Component {
+class LayoutContainer extends React.Component {
 
 
     componentDidMount() {
         this.loadingComplete();
-        this.handleLoadCategories();
-        this.detectMobileScrollUpAndDown();
+        this.loadCategories();
+        this.onDetectMobileScrollUpAndDown();
     }
 
-    handleLoadCategories() {
+    loadCategories() {
         const {categoryAction, categories} = this.props;
         if (categories.length === 0) {
             try {
@@ -37,7 +37,7 @@ class Layout extends React.Component {
 
     }
 
-    detectMobileScrollUpAndDown = () => {
+    onDetectMobileScrollUpAndDown = () => {
         let lastScroll = 0;
 
         const {layoutAction, sideBar} = this.props;
@@ -60,23 +60,22 @@ class Layout extends React.Component {
         setTimeout(()=>{this.props.layoutAction.togglePageLoading(false);}, 500);*/
     }
 
-    handleToggleSideBar = ( toggleValue ) => {
+    onToggleSideBar = ( toggleValue ) => {
         this.props.layoutAction.toggleSideBar(toggleValue);
     };
 
     onClickCategoryPage = (categoryNo) => {
         Router.push(`/postList?categoryNo=${categoryNo}`, `/categories/${categoryNo}`);
-        this.handleToggleSideBar(false);
+        this.onToggleSideBar(false);
     };
 
     onClickLogout = () => {
-        console.log('logout');
         this.props.userAction.logout();
     };
 
     onClickSideBarPage = (url, browserUrl) => {
         Router.push(browserUrl, url);
-        this.handleToggleSideBar(false);
+        this.onToggleSideBar(false);
     };
 
     render() {
@@ -90,14 +89,14 @@ class Layout extends React.Component {
                 <SideBar
                     isOpen={sideBar}
                     authInfo={authInfo}
-                    clickCategoryPage={this.onClickCategoryPage}
-                    clickSideBarPage={this.onClickSideBarPage}
-                    clickLogout={this.onClickLogout}
+                    onClickCategoryPage={this.onClickCategoryPage}
+                    onClickSideBarPage={this.onClickSideBarPage}
+                    onClickLogout={this.onClickLogout}
                     categories={categories}
                 />
                 <MainHeader
                     showMobileHeader={mobileHeader}
-                    onClickSideBar={(e) => this.handleToggleSideBar(!sideBar)}
+                    onClickSideBar={(e) => this.onToggleSideBar(!sideBar)}
                 />
                 <PageLoading loading={pageLoading}/>
                 <div className={style.contentWrapper}>
@@ -105,7 +104,6 @@ class Layout extends React.Component {
                         this.props.children
                     }
                 </div>
-
                 <Footer/>
             </div>
         )
@@ -126,4 +124,4 @@ export default connect(
         userAction: bindActionCreators(userAction, dispatch)
 
     })
-)(Layout);
+)(LayoutContainer);

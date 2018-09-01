@@ -30,8 +30,8 @@ class postDetail extends React.Component {
     };
 
     onClickPostModify = () => {
-        const {postViewAction, post, categories} = this.props;
-        const {postNo, title, content, categoryLabel} = post;
+        const { postViewAction, post, categories } = this.props;
+        const { postNo, title, content, categoryLabel } = post;
 
         const category = categories.filter((c) => c.label === categoryLabel);
 
@@ -44,10 +44,10 @@ class postDetail extends React.Component {
 
     };
 
-    handleDeletePost = () => {
+    onClickDeletePost = () => {
 
-        const {postViewAction, post, categories} = this.props;
-        const {postNo, categoryLabel} = post;
+        const { postViewAction, post, categories } = this.props;
+        const { postNo, categoryLabel } = post;
 
         const category = categories.find((c) => c.label === categoryLabel);
 
@@ -57,8 +57,6 @@ class postDetail extends React.Component {
         };
 
         postViewAction.deletePost(deleteData);
-
-        console.log('deleteEvent');
     };
 
     static getInitialProps({query: {categoryNo, postNo}}) {
@@ -66,17 +64,17 @@ class postDetail extends React.Component {
     }
 
     render() {
-        const {post} = this.props;
+        const { post } = this.props;
         return (
             <div>
-                {post.postNo != 0 &&
+                { post.postNo !== 0 &&
                 <PostContent
                     title={post.title}
                     author={post.author}
                     content={post.content}
                     categoryLabel={post.categoryLabel}
-                    clickPostModify={this.onClickPostModify}
-                    deletePost={this.handleDeletePost}
+                    onClickPostModify={this.onClickPostModify}
+                    onClickDeletePost={this.onClickDeletePost}
                     createdAt={post.createdAt}/>
                 }
             </div>

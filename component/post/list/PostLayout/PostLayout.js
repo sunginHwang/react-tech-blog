@@ -4,11 +4,11 @@ import PostItem from '../PostItem/PostItem';
 import style from './PostLayout.scss';
 
 const PostLayout = ({ posts,
-                    clickDetailPage
+                        onClickDetailPage
 }) => {
     const list = posts.map((post) => {
         return <PostItem
-                  clickDetailPage={clickDetailPage}
+                  clickDetailPage={onClickDetailPage}
                   postNo={post.postNo}
                   key={post.postNo}
                   title={post.title}

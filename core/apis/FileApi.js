@@ -7,13 +7,7 @@ export const saveImageAndGetImageUrl = async (imageFile) => {
     data.append("file", imageFile);
 
     try{
-        const result = await axiosAuth.post(`${tempPhotoServerUrl}/api/board/insert_image`,data, {
-            withCredentials: false,
-            onUploadProgress: (e) => {
-                if (window.nanobar) {
-                    window.nanobar.go(e.loaded / e.total * 100);
-                }}
-        });
+        const result = await axiosAuth.post(`${tempPhotoServerUrl}/api/board/insert_image`,data);
         const { state, img_url } = await result.data;
 
         if(state !== 'success'){

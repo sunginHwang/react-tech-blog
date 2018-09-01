@@ -21,7 +21,7 @@ class login extends React.Component {
         });
     };
 
-    handleLogin = async () => {
+    onLogin = async () => {
         const {UserAction, id, password } = this.props;
 
         const loginInfo = {
@@ -38,7 +38,7 @@ class login extends React.Component {
             <LoginView
                 id={id}
                 password={password}
-                onLoginClick={this.handleLogin}
+                onLoginClick={this.onLogin}
                 onChangeLoginInfo={this.onChangeLoginInfo}
             />
         )

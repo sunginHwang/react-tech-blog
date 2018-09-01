@@ -25,3 +25,4 @@ export default function* root() {
         takeLatest(PostUpsertAction.POST_UPSERT.INDEX, postUpsertSaga) // asyncCall
     ]);
 }
+

@@ -6,14 +6,14 @@ export default ({
                     authInfo,
                     userImg,
                     categories,
-                    clickLogout,
-                    clickCategoryPage,
-                    clickSideBarPage
+                    onClickLogout,
+                    onClickCategoryPage,
+                    onClickSideBarPage
                 }) => {
 
     const postCategories = categories.map((category) => {
         return <li key={category.value}>
-            <a onClick={() => clickCategoryPage(category.value)}>{category.label}</a>
+            <a onClick={() => onClickCategoryPage(category.value)}>{category.label}</a>
         </li>
     });
 
@@ -28,7 +28,7 @@ export default ({
                 </div>
                 <span>{authInfo.userId}</span>
                 <div className={style.logoutArea}
-                     onClick={() => clickLogout()}>
+                     onClick={() => onClickLogout()}>
                     로그아웃
                 </div>
             </a>
@@ -36,7 +36,7 @@ export default ({
         :
         <li>
             <a onClick={() => {
-                clickSideBarPage('/login', '/login')
+                onClickSideBarPage('/login', '/login')
             }}>로그인</a>
         </li>
     ;
@@ -44,18 +44,18 @@ export default ({
     const PostWriteMenu = isLogin === true &&
         <li>
             <a onClick={() => {
-                clickSideBarPage('/edit', '/postEdit')
+                onClickSideBarPage('/edit', '/postEdit')
             }}>글쓰기 페이지 이동</a>
         </li>;
 
     return <div>
-        <div className={style.sideBar + ' ' + (isOpen ? style.sideBarOpen : '')}>
-            <ul>
-                {UserMenu}
-                {PostWriteMenu}
-                {postCategories}
-            </ul>
-        </div>
-        <div className={(isOpen ? style.sideBarWhiteSpace : '')}/>
-    </div>;
+                <div className={style.sideBar + ' ' + (isOpen ? style.sideBarOpen : '')}>
+                    <ul>
+                        {UserMenu}
+                        {PostWriteMenu}
+                        {postCategories}
+                    </ul>
+                </div>
+                <div className={(isOpen ? style.sideBarWhiteSpace : '')}/>
+          </div>;
 };

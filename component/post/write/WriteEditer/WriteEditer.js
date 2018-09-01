@@ -15,31 +15,31 @@ export default class WriteEditer extends React.Component {
     }
 
     createEventListener() {
-        const { dndImage, pasteImage } = this.props;
+        const { onDndImage, onPasteImage } = this.props;
         //dnd Event
         if (window) {
-            window.addEventListener('drop',dndImage);
+            window.addEventListener('drop',onDndImage);
         }
 
         // paste Event
         if (document && document.body) {
-            document.body.addEventListener('paste', pasteImage);
+            document.body.addEventListener('paste', onPasteImage);
         }
     }
 
     removeEventListener() {
-        const { dndImage, pasteImage } = this.props;
+        const { onDndImage, onPasteImage } = this.props;
 
         if (window) {
-            window.removeEventListener('drop', dndImage);
+            window.removeEventListener('drop', onDndImage);
         }
         if (document && document.body) {
-            document.body.removeEventListener('paste', pasteImage);
+            document.body.removeEventListener('paste', onPasteImage);
         }
     }
 
     render() {
-        const { changeContent, changeTitle, content, clickUploadImage, categories, changeCategory, selectedCategory, title } = this.props;
+        const { onChangeContent, onChangeTitle, content, onClickUploadImage, categories, onChangeCategories, selectedCategory, title } = this.props;
 
         return (
             <div style={{height:'100%'}}>
@@ -50,7 +50,7 @@ export default class WriteEditer extends React.Component {
                 <div className={style.writeTopArea}>
                     <Select
                         value={selectedCategory}
-                        onChange={changeCategory}
+                        onChange={onChangeCategories}
                         options={categories}
                     />
                 </div>
@@ -59,19 +59,17 @@ export default class WriteEditer extends React.Component {
                            type='text'
                            placeholder='제목을 입력해 주세요.'
                            onChange={(e) => {
-                               changeTitle(e.target.value);
+                               onChangeTitle(e.target.value);
                            }}
                            value={title}/>
                     <div
                         className={style.imageInsertBtn}
-                        onClick={clickUploadImage}><span><MdAddToPhotos/>이미지 업로드</span></div>
+                        onClick={onClickUploadImage}><span><MdAddToPhotos/>이미지 업로드</span></div>
                 </div>
 
                 <textarea className={style.markDownEditer}
                           placeholder='작성할 내용을 입력해 주세요.'
-                          onChange={(e) => {
-                              changeContent(e.target.value);
-                          }}
+                          onChange={(e) => {onChangeContent(e.target.value);}}
                           value={content}/>
             </div>
 

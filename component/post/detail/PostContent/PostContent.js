@@ -1,14 +1,15 @@
 import MarkDownView from '../../../../component/view/MarkDownView/MarkDownView';
 import UserImg from '../../../../component/user/UserImg/UserImg';
 import style from './PostContent.scss';
+import React from "react";
 
 export default ({
                     content,
                     title,
                     author,
                     categoryLabel,
-                    clickPostModify,
-                    deletePost,
+                    onClickPostModify,
+                    onClickDeletePost,
                     createdAt
                 }) =>
     <div className={style.contentWrapper}>
@@ -21,18 +22,17 @@ export default ({
                     <UserImg
                         img='http://www.woolta.com:81/uploads/addebc73bb618a35adf529283cf78ce7.png'/>
                 </span>
-
                 <span>{author}</span>
-                <span className={style.seperator}> | </span>
-                <span className={style.categoryLabel}>{categoryLabel}</span>
-                <span className={style.seperator}> | </span>
+                <span className={style.separator}> | </span>
+                <span>{categoryLabel}</span>
+                <span className={style.separator}> | </span>
                 <span>{createdAt}</span>
                 <div className={style.eventButton}
-                    onClick={()=>{clickPostModify();}}>
+                    onClick={()=>{onClickPostModify();}}>
                     수정
                 </div>
                 <div className={style.eventButton}
-                     onClick={()=>{deletePost();}}>
+                     onClick={()=>{onClickDeletePost();}}>
                     삭제
                 </div>
             </div>

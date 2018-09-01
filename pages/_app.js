@@ -1,7 +1,7 @@
 import App, { Container } from 'next/app'
 import React from 'react'
 import withRedux from 'next-redux-wrapper'
-import Layout from '../container/Layout/Layout';
+import LayoutContainer from '../container/LayoutContainer/LayoutContainer';
 import UserInfoLoadContainer from '../container/UserInfoLoadContainer/UserInfoLoadContainer';
 import {initializeStore} from '../core/store'
 import { Provider } from 'react-redux'
@@ -18,9 +18,9 @@ export default withRedux(initializeStore)(class MyApp extends App {
                 <Provider store={store}>
                     <div>
                         <UserInfoLoadContainer/>
-                        <Layout>
+                        <LayoutContainer>
                             <Component {...pageProps} />
-                        </Layout>
+                        </LayoutContainer>
                     </div>
                 </Provider>
             </Container>

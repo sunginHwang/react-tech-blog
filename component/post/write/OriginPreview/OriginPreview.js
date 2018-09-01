@@ -7,17 +7,16 @@ import style from './OriginPreview.scss';
 const OriginPreview =  ({
                     content,
                     visible,
-                    clickCloseVisible
+                    onToggleView
                 }) =>{
     return (
-        <ModalWrapper visible={visible} modalClick={clickCloseVisible}>
+        <ModalWrapper visible={visible} modalClick={()=>onToggleView()}>
             <div className={style.originPreview} >
-                <div className={style.content} onClick={(e)=>clickCloseVisible()}>
+                <div className={style.content} onClick={()=>onToggleView()}>
                     <MarkDownView content={content}
                                   skipHtml={false}
                                   escapeHtml={false}/>
                 </div>
-
             </div>
         </ModalWrapper>
     )
