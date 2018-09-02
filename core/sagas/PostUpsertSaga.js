@@ -3,8 +3,7 @@ import * as PostUpsertAction from "../actions/Post/PostUpsertAction";
 import * as PostsAction from "../actions/Post/PostsAction";
 
 import * as BlogApi  from '../apis/BlogApi';
-
-import Router from "next/router";
+import { goPostDetailPage } from '../util/RouteUtil';
 
 
 function * postUpsertSaga(info) {
@@ -14,7 +13,7 @@ function * postUpsertSaga(info) {
         yield put(PostUpsertAction.upsertPost.success(json)); // 비동기 처리 성공
         const { postNo, categoryNo } = yield json.data.data;
         yield put(PostsAction.getPosts(categoryNo));
-        yield Router.push(`/postDetail?postNo=${postNo}&categoryNo=${categoryNo}`, `/categories/${categoryNo}/posts/${postNo}`);
+        yield goPostDetailPage(categoryNo, postNo);
     } catch(error) {
         yield put(PostUpsertAction.upsertPost.failure(error)); // 비동기 처리 실패
     }

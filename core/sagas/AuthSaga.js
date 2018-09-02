@@ -1,11 +1,12 @@
 import {call, all, takeLatest, put} from "redux-saga/effects";
 import * as PostUpsertAction from "../actions/Post/PostUpsertAction";
 import * as UserAction from "../actions/User/UserAction";
+
+import { goMainPage } from '../util/RouteUtil';
 import { ACCESS_TOKEN, ACCESS_HEADER_TOKEN } from '../lib/constants';
 import * as AuthApi  from '../apis/AuthApi';
 import axiosAuth from '../lib/axiosAuth';
 
-import Router from "next/router";
 
 
 
@@ -19,7 +20,7 @@ function * loginSaga(info) {
         const { authToken } = yield json.data.data;
         yield localStorage.setItem(ACCESS_TOKEN, authToken);
         yield axiosAuth.defaults.headers.common[ACCESS_HEADER_TOKEN] = authToken;
-        yield Router.push(`/`, `/`);
+        yield goMainPage();
     } catch(error) {
         yield put(PostUpsertAction.upsertPost.failure(error));
         yield alert('로그인 정보가 맞지 않습니다.');

@@ -31,6 +31,7 @@ export function asyncActionCreator(actions) {
 function delay(ms) {
     return new Promise(resolve => setTimeout(() => resolve(true), ms))
 }
+
 /*비동기 통신 자동화*/
 export function * asyncSaga(asyncFunction, apiFunction, payload) {
 

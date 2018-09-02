@@ -12,9 +12,10 @@ class postDetail extends React.Component {
     }
 
     componentDidMount() {
-        const {postNo, postViewAction, categoryNo} = this.props;
         this.handleScrollTop();
+        const { postNo, postViewAction, categoryNo } = this.props;
         postViewAction.getPostInfo({postNo, categoryNo});
+
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -25,10 +26,12 @@ class postDetail extends React.Component {
         this.props.postViewAction.postInfoInitialize();
     }
 
+    /*스크롤 초기화*/
     handleScrollTop = () => {
         window.scrollTo(0, 0);
     };
 
+    /*게시글 수정*/
     onClickPostModify = () => {
         const { postViewAction, post, categories } = this.props;
         const { postNo, title, content, categoryLabel } = post;
@@ -44,6 +47,7 @@ class postDetail extends React.Component {
 
     };
 
+    /*게시글 삭제*/
     onClickDeletePost = () => {
 
         const { postViewAction, post, categories } = this.props;

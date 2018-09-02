@@ -68,6 +68,11 @@ class postEdit extends React.Component {
             return false;
         }
 
+        if (content.length < 5) {
+            alert('게시글 내용이 너무 적습니다.');
+            return false;
+        }
+
         if (category === null) {
             alert('카테고리를 선택해주세요.');
             return false;
@@ -132,23 +137,25 @@ class postEdit extends React.Component {
 
     render() {
         const { onDndImage, onPasteImage, onChangeContent, onChangeTitle, onClickUploadImage, onChangeCategories, upsertPost, onClickShowOriginPreview} = this;
-        const {title, content, category, categories, previewModal} = this.props;
+        const { title, content, category, categories, previewModal, authInfo } = this.props;
 
         return (
             <div>
                 <WriteView
-                    onDndImage={onDndImage}
-                    onPasteImage={onPasteImage}
+                    title={title}
+                    content={content}
                     categories={categories}
+                    authInfo={authInfo}
                     selectedCategory={category}
-                    onChangeContent={onChangeContent}
-                    onChangeTitle={onChangeTitle}
-                    savePost={upsertPost}
-                    onChangeCategories={onChangeCategories}
+                    upsertPost={upsertPost}
                     onClickUploadImage={onClickUploadImage}
                     onClickShowOriginPreview={onClickShowOriginPreview}
-                    content={content}
-                    title={title}
+                    onChangeContent={onChangeContent}
+                    onChangeTitle={onChangeTitle}
+                    onChangeCategories={onChangeCategories}
+                    onDndImage={onDndImage}
+                    onPasteImage={onPasteImage}
+
                 />
                 <OriginPreview
                     content={content}
@@ -162,6 +169,7 @@ class postEdit extends React.Component {
 
 export default connect(
     (state) => ({
+        authInfo: state.AuthReducer.authInfo,
         postNo: state.PostWriteReducer.postNo,
         title: state.PostWriteReducer.title,
         content: state.PostWriteReducer.content,

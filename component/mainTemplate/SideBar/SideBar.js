@@ -12,13 +12,12 @@ export default ({
                 }) => {
 
     const postCategories = categories.map((category) => {
-        return <li key={category.value}>
-            <a onClick={() => onClickCategoryPage(category.value)}>{category.label}</a>
-        </li>
+            return <li key={category.value}>
+                      <a onClick={() => onClickCategoryPage(category.value)}>{category.label}</a>
+                   </li>
     });
 
     const isLogin = authInfo.userId !== '';
-
 
     const UserMenu = isLogin ?
         <li>
@@ -35,17 +34,13 @@ export default ({
         </li>
         :
         <li>
-            <a onClick={() => {
-                onClickSideBarPage('/login', '/login')
-            }}>로그인</a>
+            <a onClick={() => {onClickSideBarPage('login')}}>로그인</a>
         </li>
     ;
 
     const PostWriteMenu = isLogin === true &&
         <li>
-            <a onClick={() => {
-                onClickSideBarPage('/edit', '/postEdit')
-            }}>글쓰기 페이지 이동</a>
+            <a onClick={() => {onClickSideBarPage('postEdit')}}>글쓰기 페이지 이동</a>
         </li>;
 
     return <div>

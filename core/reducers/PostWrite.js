@@ -27,7 +27,7 @@ export const PostWriteReducer =  handleActions({
     [action.toggleOriginPreview]: (state, result) => {
         return { ...state, previewModal: result.payload};
     },
-    [action.upsertPost.request]: (state, payload) => {
+    [action.upsertPost.request]: (state, result) => {
         return { ...state };
     },
     [action.upsertPost.success]: (state, result) => {
@@ -37,7 +37,6 @@ export const PostWriteReducer =  handleActions({
         return { ...state, error: true, errorMsg: result.payload.response.data.message };
     },
     [action.settingPostInfo]: (state, result) => {
-        console.log(result);
         return { ...state, postNo: result.payload.postNo, category: result.payload.category, title: result.payload.title, content: result.payload.content };
     },
 }, initialState);

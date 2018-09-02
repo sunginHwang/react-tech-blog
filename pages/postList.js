@@ -1,11 +1,11 @@
 import React from "react";
-
-import PostLayout from '../component/post/list/PostLayout/PostLayout';
-
-import * as postsAction from "../core/actions/Post/PostsAction";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
-import Router from "next/router";
+
+import PostLayout from '../component/post/list/PostLayout/PostLayout';
+import * as postsAction from "../core/actions/Post/PostsAction";
+import { goPostDetailPage } from '../core/util/RouteUtil';
+
 
 class postList extends React.Component {
 
@@ -32,8 +32,7 @@ class postList extends React.Component {
     };
 
     onClickDetailPage = (postNo) => {
-        const {categoryNo} = this.props;
-        Router.push(`/postDetail?postNo=${postNo}&categoryNo=${categoryNo}`, `/categories/${categoryNo}/posts/${postNo}`)
+        goPostDetailPage(this.props.categoryNo, postNo);
     };
 
     static getInitialProps({query: {categoryNo}}) {

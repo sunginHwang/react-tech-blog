@@ -1,5 +1,7 @@
 import Head from 'next/head';
 import React from "react";
+import {bindActionCreators} from "redux";
+import {connect} from "react-redux";
 
 import PageLoading from '../../component/common/loading/PageLoading/PageLoading';
 import MainHeader from '../../component/mainTemplate/MainHeader/MainHeader';
@@ -10,9 +12,7 @@ import * as categoryAction from "../../core/actions/CategoryAction";
 import * as layoutAction from "../../core/actions/LayoutAction";
 import * as userAction from "../../core/actions/User/UserAction";
 
-import {bindActionCreators} from "redux";
-import {connect} from "react-redux";
-import Router from "next/router";
+import { goPostListPage, goLoginPage, goPostEditPage } from '../../core/util/RouteUtil';
 
 import style from './LayoutContainer.scss';
 
@@ -65,7 +65,7 @@ class LayoutContainer extends React.Component {
     };
 
     onClickCategoryPage = (categoryNo) => {
-        Router.push(`/postList?categoryNo=${categoryNo}`, `/categories/${categoryNo}`);
+        goPostListPage(categoryNo);
         this.onToggleSideBar(false);
     };
 
@@ -73,8 +73,14 @@ class LayoutContainer extends React.Component {
         this.props.userAction.logout();
     };
 
-    onClickSideBarPage = (url, browserUrl) => {
-        Router.push(browserUrl, url);
+    onClickSideBarPage = (type) => {
+
+        switch(type){
+            case 'login': goLoginPage();break;
+            case 'postEdit': goPostEditPage();break;
+            default: break;
+        }
+
         this.onToggleSideBar(false);
     };
 

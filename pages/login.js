@@ -15,6 +15,7 @@ class login extends React.Component {
 
     onChangeLoginInfo = (inputType, value) => {
         const {UserAction} = this.props;
+
         UserAction.changeLoginInputInfo({
             type: inputType,
             value: value
