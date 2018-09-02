@@ -33,7 +33,7 @@ class postDetail extends React.Component {
         const { postViewAction, post, categories } = this.props;
         const { postNo, title, content, categoryLabel } = post;
 
-        const category = categories.filter((c) => c.label === categoryLabel);
+        const category = categories.find((c) => c.label === categoryLabel);
 
         postViewAction.modifyPost({
             postNo: postNo,
