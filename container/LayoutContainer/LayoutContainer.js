@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import React from "react";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
@@ -89,9 +88,7 @@ class LayoutContainer extends React.Component {
 
         return (
             <div>
-                <Head>
-                    <title>{"woolta"}</title>
-                </Head>
+
                 <SideBar
                     isOpen={sideBar}
                     authInfo={authInfo}
@@ -102,7 +99,7 @@ class LayoutContainer extends React.Component {
                 />
                 <MainHeader
                     showMobileHeader={mobileHeader}
-                    onClickSideBar={(e) => this.onToggleSideBar(!sideBar)}
+                    onClickSideBar={() => this.onToggleSideBar(!sideBar)}
                 />
                 <PageLoading loading={pageLoading}/>
                 <div className={style.contentWrapper}>

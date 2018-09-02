@@ -1,21 +1,22 @@
 import axiosAuth from '../lib/axiosAuth';
+import { BLOG_API } from '../lib/constants';
 
 export const getPostList =  (categoryNo) => {
-    return axiosAuth.get(`http://localhost:8080/post/categories/${categoryNo}/posts`);
+    return axiosAuth.get(`${BLOG_API}/post/categories/${categoryNo}/posts`);
 };
 
 export const getPostInfo =  (post) => {
-    return axiosAuth.get(`http://localhost:8080/post/categories/${post.categoryNo}/posts/${post.postNo}`);
+    return axiosAuth.get(`${BLOG_API}/post/categories/${post.categoryNo}/posts/${post.postNo}`);
 };
 
 export const getCategories =  () => {
-    return axiosAuth.get(`http://localhost:8080/post/categories`);
+    return axiosAuth.get(`${BLOG_API}/post/categories`);
 };
 
 export const upsertPost =  (postData) => {
-    return axiosAuth.post(`http://localhost:8080/post`,postData);
+    return axiosAuth.post(`${BLOG_API}/post`,postData);
 };
 
 export const deletePost =  (postData) => {
-    return axiosAuth.delete(`http://localhost:8080/post`,{ data: { categoryNo: postData.categoryNo, postNo: postData.postNo }});
+    return axiosAuth.delete(`${BLOG_API}/post`,{ data: { categoryNo: postData.categoryNo, postNo: postData.postNo }});
 };

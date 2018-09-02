@@ -1,9 +1,11 @@
 import React from "react";
-import PostContent from '../component/post/detail/PostContent/PostContent';
-
-import * as postViewAction from "../core/actions/Post/PostViewAction";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
+
+import PostContent from '../component/post/detail/PostContent/PostContent';
+import WithHeader from '../hoc/WithHeader';
+import * as postViewAction from "../core/actions/Post/PostViewAction";
+
 
 class postDetail extends React.Component {
 
@@ -20,6 +22,10 @@ class postDetail extends React.Component {
 
     componentDidUpdate(prevProps, prevState) {
         this.handleScrollTop();
+
+        if(prevProps.post.title !== this.props.post.title){
+            this.props.withSetHeaderTitle(this.props.post.title);
+        }
     }
 
     componentWillUnmount() {
@@ -86,7 +92,7 @@ class postDetail extends React.Component {
     }
 }
 
-export default connect(
+export default WithHeader(connect(
     (state) => ({
         post: state.PostInfoReducer.post,
         categories: state.CategoryReducer.categories
@@ -94,4 +100,4 @@ export default connect(
     (dispatch) => ({
         postViewAction: bindActionCreators(postViewAction, dispatch),
     })
-)(postDetail);
+)(postDetail));

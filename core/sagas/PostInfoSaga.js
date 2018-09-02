@@ -16,17 +16,14 @@ function * getPostInfoSaga(info) {
 }
 
 function * modifyPostSaga(info) {
-    yield console.log(info);
     yield put(postUpsertAction.settingPostInfo(info.payload));
     yield goPostEditPage();
-
 }
 
 function * removePostSaga(info) {
     yield put(PostViewAction.deletePost.request()); // 요청대기
 
     try {
-
         yield call(BlogApi.deletePost, info.payload); // 비동기처리 promise
         yield put(PostViewAction.deletePost.success()); // 비동기 처리 성공
         const { categoryNo } = yield info.payload;

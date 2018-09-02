@@ -1,5 +1,7 @@
 import React from "react";
 import LoginView from '../component/user/loginView/LoginView';
+import WithHeader from '../hoc/WithHeader';
+
 import {connect} from "react-redux";
 import * as UserAction from "../core/actions/User/UserAction";
 import {bindActionCreators} from "redux";
@@ -11,6 +13,8 @@ class login extends React.Component {
     }
 
     componentDidMount() {
+        this.props.withSetHeaderTitle('로그인');
+
     }
 
     onChangeLoginInfo = (inputType, value) => {
@@ -46,7 +50,7 @@ class login extends React.Component {
     }
 }
 
-export default connect(
+export default WithHeader(connect(
     (state) => ({
         id: state.AuthReducer.id,
         password: state.AuthReducer.password,
@@ -54,4 +58,4 @@ export default connect(
     (dispatch) => ({
         UserAction: bindActionCreators(UserAction, dispatch)
     })
-)(login);
+)(login));

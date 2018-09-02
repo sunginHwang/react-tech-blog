@@ -2,6 +2,8 @@ import React from "react";
 import * as FileApi from '../core/apis/FileApi';
 import WriteView from '../component/post/write/WriteView/WriteView';
 import * as postUpsertAction from "../core/actions/Post/PostUpsertAction";
+import WithHeader from '../hoc/WithHeader';
+
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import OriginPreview from '../component/post/write/OriginPreview/OriginPreview';
@@ -11,6 +13,10 @@ class postEdit extends React.Component {
 
     constructor() {
         super();
+    }
+
+    componentDidMount() {
+        this.props.withSetHeaderTitle('게시글 작성');
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -167,7 +173,7 @@ class postEdit extends React.Component {
     }
 }
 
-export default connect(
+export default WithHeader(connect(
     (state) => ({
         authInfo: state.AuthReducer.authInfo,
         postNo: state.PostWriteReducer.postNo,
@@ -182,4 +188,4 @@ export default connect(
     (dispatch) => ({
         postUpsertAction: bindActionCreators(postUpsertAction, dispatch)
     })
-)(postEdit);
+)(postEdit));
