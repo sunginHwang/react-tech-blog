@@ -1,6 +1,6 @@
 import {call, all, takeLatest, put} from "redux-saga/effects";
-import * as PostUpsertAction from "../actions/Post/PostUpsertAction";
 import * as UserAction from "../actions/User/UserAction";
+import { asyncSagaCallBack } from '../util/reduxUtil';
 
 import { goMainPage } from '../util/RouteUtil';
 import { ACCESS_TOKEN, ACCESS_HEADER_TOKEN } from '../lib/constants';
@@ -12,19 +12,16 @@ import axiosAuth from '../lib/axiosAuth';
 
 
 function * loginSaga(info) {
-    yield put(UserAction.login.request());
-
-    try {
-        const json = yield call(AuthApi.userLogin, info.payload);
-        yield put(UserAction.login.success(json));
-        const { authToken } = yield json.data.data;
-        yield localStorage.setItem(ACCESS_TOKEN, authToken);
-        yield axiosAuth.defaults.headers.common[ACCESS_HEADER_TOKEN] = authToken;
-        yield goMainPage();
-    } catch(error) {
-        yield put(PostUpsertAction.upsertPost.failure(error));
-        yield alert('로그인 정보가 맞지 않습니다.');
-    }
+    yield call(asyncSagaCallBack, UserAction.login, AuthApi.userLogin, info.payload,
+        async (success) =>{
+            const { authToken } = await success.data;
+            await localStorage.setItem(ACCESS_TOKEN, authToken);
+            axiosAuth.defaults.headers.common[ACCESS_HEADER_TOKEN] = await authToken;
+            await goMainPage();
+        },
+        async (error) => {
+            await alert('로그인 정보가 맞지 않습니다.');
+        });
 }
 
 function * logoutSaga() {
@@ -33,15 +30,12 @@ function * logoutSaga() {
 }
 
 function * loadAuthInfoSaga() {
-    yield put(UserAction.loadAuthInfo.request());
-
-    try {
-        const json = yield call(AuthApi.getAuthInfo);
-        yield put(UserAction.loadAuthInfo.success(json));
-    } catch(error) {
-        yield put(UserAction.loadAuthInfo.failure(error));
-        yield localStorage.removeItem(ACCESS_TOKEN);
-    }
+    yield call(asyncSagaCallBack, UserAction.loadAuthInfo, AuthApi.getAuthInfo, null,
+        async (success) =>{
+        },
+        async (error) => {
+            await localStorage.removeItem(ACCESS_TOKEN);
+        });
 }
 
 export default function* root() {

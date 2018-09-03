@@ -12,32 +12,32 @@ const initialState = {
 };
 
 export const PostWriteReducer =  handleActions({
-    [action.setCategory]: (state, result) => {
-        return { ...state, category:result.payload };
+    [action.setCategory]: (state, action) => {
+        return { ...state, category:action.payload };
     },
-    [action.setContent]: (state, result) => {
-        return { ...state, content: result.payload };
+    [action.setContent]: (state, action) => {
+        return { ...state, content: action.payload };
     },
-    [action.setTitle]: (state, result) => {
-        return { ...state, title:result.payload };
+    [action.setTitle]: (state, action) => {
+        return { ...state, title:action.payload };
     },
-    [action.toggleError]: (state, result) => {
-        return { ...state, error:result.payload };
+    [action.toggleError]: (state, action) => {
+        return { ...state, error:action.payload };
     },
-    [action.toggleOriginPreview]: (state, result) => {
-        return { ...state, previewModal: result.payload};
+    [action.toggleOriginPreview]: (state, action) => {
+        return { ...state, previewModal: action.payload};
     },
-    [action.upsertPost.request]: (state, result) => {
+    [action.upsertPost.request]: (state, action) => {
         return { ...state };
     },
-    [action.upsertPost.success]: (state, result) => {
+    [action.upsertPost.success]: (state, action) => {
         return { ...state, postNo: initialState.postNo, category: initialState.category, title: initialState.title, content: initialState.content };
     },
-    [action.upsertPost.failure]: (state, result) => {
-        return { ...state, error: true, errorMsg: result.payload.response.data.message };
+    [action.upsertPost.failure]: (state, action) => {
+        return { ...state, error: true, errorMsg: action.payload.message };
     },
-    [action.settingPostInfo]: (state, result) => {
-        return { ...state, postNo: result.payload.postNo, category: result.payload.category, title: result.payload.title, content: result.payload.content };
+    [action.settingPostInfo]: (state, action) => {
+        return { ...state, postNo: action.payload.postNo, category: action.payload.category, title: action.payload.title, content: action.payload.content };
     },
 }, initialState);
 

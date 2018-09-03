@@ -24,25 +24,25 @@ export const AuthReducer = handleActions({
         }
 
     },
-    [action.logout]: (state, result) => {
+    [action.logout]: (state, action) => {
         return {...state, authInfo: initialState.authInfo};
     },
-    [action.login.request]: (state, result) => {
+    [action.login.request]: (state, action) => {
         return {...state};
     },
-    [action.login.success]: (state, result) => {
-        return {...state, authInfo: result.payload.data.data};
+    [action.login.success]: (state, action) => {
+        return {...state, authInfo: action.payload.data};
     },
-    [action.login.failure]: (state, result) => {
+    [action.login.failure]: (state, action) => {
         return {...state, authInfo: initialState.authInfo};
     },
-    [action.loadAuthInfo.request]: (state, result) => {
+    [action.loadAuthInfo.request]: (state, action) => {
         return {...state};
     },
-    [action.loadAuthInfo.success]: (state, result) => {
-        return {...state, authInfo: result.payload.data.data};
+    [action.loadAuthInfo.success]: (state, action) => {
+        return {...state, authInfo: action.payload.data};
     },
-    [action.loadAuthInfo.failure]: (state, result) => {
+    [action.loadAuthInfo.failure]: (state, action) => {
         return {...state, authInfo: initialState.authInfo};
     },
 }, initialState);

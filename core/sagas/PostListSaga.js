@@ -1,10 +1,18 @@
-import {call, all, takeLatest } from "redux-saga/effects";
+import {call, all, takeLatest} from "redux-saga/effects";
 import * as PostsAction from "../actions/Post/PostsAction";
-import { asyncSaga } from '../util/reduxUtil';
-import * as BlogApi  from '../apis/BlogApi';
+import { asyncSagaCallBack } from '../util/reduxUtil';
+import {goBack} from '../util/RouteUtil';
+import * as BlogApi from '../apis/BlogApi';
 
-function * getPostListSaga(info) {
-    yield call(asyncSaga,PostsAction.getPosts, BlogApi.getPostList, info.payload);
+function* getPostListSaga(info) {
+    yield call(asyncSagaCallBack, PostsAction.getPosts, BlogApi.getPostList, info.payload,
+        async (success) => {
+        },
+        async (error) => {
+            const { message } = error;
+            await alert(message !== undefined ? message : '조회 실패.');
+            await goBack();
+        });
 }
 
 export default function* root() {

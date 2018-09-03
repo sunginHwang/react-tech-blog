@@ -6,13 +6,13 @@ const initialState = {
 };
 
 export const CategoryReducer =  handleActions({
-    [action.getCategories.request]: (state, payload) => {
+    [action.getCategories.request]: (state, action) => {
         return { ...state };
     },
-    [action.getCategories.success]: (state, result) => {
-        return { ...state, categories: result.payload.data.data};
+    [action.getCategories.success]: (state, action) => {
+        return { ...state, categories: action.payload.data};
     },
-    [action.getCategories.failure]: (state, payload) => {
+    [action.getCategories.failure]: (state, action) => {
         return { ...state, categories: initialState.categories };
     },
 }, initialState);

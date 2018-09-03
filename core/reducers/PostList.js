@@ -6,13 +6,13 @@ const initialState = {
 };
 
 export const PostListReducer =  handleActions({
-    [action.getPosts.request]: (state, payload) => {
+    [action.getPosts.request]: (state, action) => {
         return { ...state };
     },
-    [action.getPosts.success]: (state, result) => {
-        return { ...state, postList: result.payload.data.data };
+    [action.getPosts.success]: (state, action) => {
+        return { ...state, postList: action.payload.data };
     },
-    [action.getPosts.failure]: (state, payload) => {
+    [action.getPosts.failure]: (state, action) => {
         return { ...state, postList:initialState.postList };
     },
 }, initialState);

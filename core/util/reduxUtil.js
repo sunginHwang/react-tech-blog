@@ -38,9 +38,38 @@ export function * asyncSaga(asyncFunction, apiFunction, payload) {
     yield put(asyncFunction.request()); // 요청대기
 
     try {
-        const json = yield call(apiFunction,payload); // 비동기처리 promise
-        yield put(asyncFunction.success(json)); // 비동기 처리 성공
+        const result = yield call(apiFunction,payload); // 비동기처리 promise
+
+        if( result.data.code === 'SUCCESS' ){
+            yield put(asyncFunction.success(result.data)); // 비동기 처리 성공
+        }else{
+            yield put(asyncFunction.failure(result.data)); // 비동기 처리 실패
+        }
+
     } catch(error) {
         yield put(asyncFunction.failure(error)); // 비동기 처리 실패
+    }
+}
+
+export function * asyncSagaCallBack(asyncFunc, apiFunc, payload, successFunc, failureFunc) {
+
+    yield put(asyncFunc.request()); // 요청대기
+
+    try {
+        const result = yield call(apiFunc,payload); // 비동기처리 promise
+
+        if( result.data.code === 'SUCCESS' ){
+            yield put(asyncFunc.success(result.data)); // 비동기 처리 성공
+            yield successFunc(result.data);
+        }else{
+            yield put(asyncFunc.failure(result)); // 비동기 처리 실패
+            yield failureFunc(result.data);
+        }
+
+    } catch(error) {
+        yield put(asyncFunc.failure(error)); // 비동기 처리 실패
+        yield failureFunc({
+            message: error
+        });
     }
 }

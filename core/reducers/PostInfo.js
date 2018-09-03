@@ -13,28 +13,28 @@ const initialState = {
 };
 
 export const PostInfoReducer =  handleActions({
-    [action.getPostInfo.request]: (state, payload) => {
+    [action.getPostInfo.request]: (state, action) => {
         return { ...state, post: initialState.post };
     },
-    [action.getPostInfo.success]: (state, result) => {
-        return { ...state, post: result.payload.data.data};
+    [action.getPostInfo.success]: (state, action) => {
+        return { ...state, post: action.payload.data};
     },
-    [action.getPostInfo.failure]: (state, payload) => {
+    [action.getPostInfo.failure]: (state, action) => {
         return { ...state, post: initialState.post };
     },
-    [action.deletePost.request]: (state, payload) => {
+    [action.deletePost.request]: (state, action) => {
         return { ...state };
     },
-    [action.deletePost.success]: (state, result) => {
+    [action.deletePost.success]: (state, action) => {
         return { ...state, post: initialState.post};
     },
-    [action.deletePost.failure]: (state, payload) => {
+    [action.deletePost.failure]: (state, action) => {
         return { ...state };
     },
-    [action.postInfoInitialize]: (state, result) => {
+    [action.postInfoInitialize]: (state, action) => {
         return { ...state, post: initialState.post };
     },
-    [action.modifyPost]: (state, result) => {
+    [action.modifyPost]: (state, action) => {
         return { ...state };
     }
 }, initialState);

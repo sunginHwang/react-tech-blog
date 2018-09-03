@@ -19,3 +19,7 @@ export const goMainPage = () => {
 export const goLoginPage = () => {
     Router.push('/login','/login');
 };
+
+export const goBack = () => {
+    Router.back();
+};
