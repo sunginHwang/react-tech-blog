@@ -64,6 +64,11 @@ class postEdit extends React.Component {
 
     validateUpsertPost = (title, content, category) => {
 
+        if(this.props.authInfo.no === 0 ){
+            alert('로그인이 필요해요 ㅠㅠ.');
+            return false;
+        }
+
         if (title.length < 1 || title.length > 20) {
             alert('제목은 1~20글자 사이로 입력하세요.');
             return false;

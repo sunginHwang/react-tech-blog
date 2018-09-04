@@ -7,6 +7,7 @@ const initialState = {
         title: '',
         content: '',
         author:'',
+        authorNo: '',
         categoryLabel:'',
         createdAt:''
     }

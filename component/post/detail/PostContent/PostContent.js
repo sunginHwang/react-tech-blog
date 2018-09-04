@@ -8,6 +8,7 @@ export default ({
                     title,
                     author,
                     categoryLabel,
+                    editAuth,
                     onClickPostModify,
                     onClickDeletePost,
                     createdAt
@@ -21,6 +22,7 @@ export default ({
                 author={author}
                 categoryLabel={categoryLabel}
                 createdAt={createdAt}
+                editAuth{editAuth}
                 onClickPostModify={onClickPostModify}
                 onClickDeletePost={onClickDeletePost}
             />

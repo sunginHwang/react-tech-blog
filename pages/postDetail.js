@@ -74,7 +74,8 @@ class postDetail extends React.Component {
     }
 
     render() {
-        const { post } = this.props;
+        const { post, authInfo } = this.props;
+        const isPostingUser = authInfo.no === post.authorNo;
         return (
             <div>
                 { post.postNo !== 0 &&
@@ -82,6 +83,7 @@ class postDetail extends React.Component {
                     title={post.title}
                     author={post.author}
                     content={post.content}
+                    editAuth={isPostingUser}
                     categoryLabel={post.categoryLabel}
                     onClickPostModify={this.onClickPostModify}
                     onClickDeletePost={this.onClickDeletePost}
@@ -94,6 +96,7 @@ class postDetail extends React.Component {
 
 export default WithHeader(connect(
     (state) => ({
+        authInfo: state.AuthReducer.authInfo,
         post: state.PostInfoReducer.post,
         categories: state.CategoryReducer.categories
     }),
