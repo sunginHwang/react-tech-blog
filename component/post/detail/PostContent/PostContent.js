@@ -6,7 +6,8 @@ import React from "react";
 export default ({
                     content,
                     title,
-                    author,
+                    writerName,
+                    writerImg,
                     categoryLabel,
                     editAuth,
                     onClickPostModify,
@@ -19,10 +20,11 @@ export default ({
                 {title}
             </h1>
             <PostSubTitle
-                author={author}
+                writerName={writerName}
+                writerImg={writerImg}
                 categoryLabel={categoryLabel}
                 createdAt={createdAt}
-                editAuth{editAuth}
+                editAuth={editAuth}
                 onClickPostModify={onClickPostModify}
                 onClickDeletePost={onClickDeletePost}
             />

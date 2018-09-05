@@ -6,7 +6,11 @@ const initialState = {
         postNo:0,
         title: '',
         content: '',
-        author:'',
+        writer:{
+            no:0,
+            nickName: '',
+            imageUrl: ''
+        },
         authorNo: '',
         categoryLabel:'',
         createdAt:''

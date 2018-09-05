@@ -75,13 +75,14 @@ class postDetail extends React.Component {
 
     render() {
         const { post, authInfo } = this.props;
-        const isPostingUser = authInfo.no === post.authorNo;
+        const isPostingUser = authInfo.no === post.writer.no;
         return (
             <div>
                 { post.postNo !== 0 &&
                 <PostContent
                     title={post.title}
-                    author={post.author}
+                    writerName={post.writer.nickName}
+                    writerImg={post.writer.imageUrl}
                     content={post.content}
                     editAuth={isPostingUser}
                     categoryLabel={post.categoryLabel}
