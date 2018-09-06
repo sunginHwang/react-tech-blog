@@ -15,6 +15,15 @@ export const PostListReducer =  handleActions({
     [action.getPosts.failure]: (state, action) => {
         return { ...state, postList:initialState.postList };
     },
+    [action.getRecentPosts.request]: (state, action) => {
+        return { ...state };
+    },
+    [action.getRecentPosts.success]: (state, action) => {
+        return { ...state, postList: action.payload.data };
+    },
+    [action.getRecentPosts.failure]: (state, action) => {
+        return { ...state, postList:initialState.postList };
+    },
 }, initialState);
 
 

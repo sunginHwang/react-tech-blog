@@ -14,6 +14,7 @@ const PostLayout = ({ posts,
                   title={post.title}
                   contents={post.subDescription}
                   categoryLabel={post.categoryLabel}
+                  categoryNo={post.categoryNo}
                   author={post.author}
                   date={post.createdAt}/>
     });

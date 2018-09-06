@@ -40,10 +40,6 @@ class postList extends React.Component {
         withSetHeaderTitle(headerTitle);
     };
 
-    onClickDetailPage = (postNo) => {
-        goPostDetailPage(this.props.categoryNo, postNo);
-    };
-
     getCategoryNameByCategoryNo = (categoryNo) => {
         const category = this.props.categories.find((c) => c.value == categoryNo);
         return category !== undefined ? category.label : '';
@@ -58,7 +54,7 @@ class postList extends React.Component {
 
         return (
                 <PostLayout
-                    onClickDetailPage={this.onClickDetailPage}
+                    onClickDetailPage={goPostDetailPage}
                     posts={postList}/>
         )
     }

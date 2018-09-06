@@ -9,6 +9,10 @@ export const getPostInfo =  (post) => {
     return axiosAuth.get(`${BLOG_API}/post/categories/${post.categoryNo}/posts/${post.postNo}`);
 };
 
+export const getRecentPostList = () => {
+    return axiosAuth.get(`${BLOG_API}/post/categories/new/posts`);
+};
+
 export const getCategories =  () => {
     return axiosAuth.get(`${BLOG_API}/post/categories`);
 };

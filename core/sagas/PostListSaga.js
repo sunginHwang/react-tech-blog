@@ -15,8 +15,19 @@ function* getPostListSaga(info) {
         });
 }
 
+function* getRecentPostListSaga(info) {
+    yield call(asyncSagaCallBack, PostsAction.getPosts, BlogApi.getRecentPostList, info.payload,
+        async (success) => {
+        },
+        async (error) => {
+            const { message } = error;
+            await alert(message !== undefined ? message : '조회 실패.');
+        });
+}
+
 export default function* root() {
     yield all([
-        takeLatest(PostsAction.POSTS.INDEX, getPostListSaga) // asyncCall
+        takeLatest(PostsAction.POSTS.INDEX, getPostListSaga), // asyncCall
+        takeLatest(PostsAction.RECENT_POSTS.INDEX, getRecentPostListSaga)
     ]);
 }

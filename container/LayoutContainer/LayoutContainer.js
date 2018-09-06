@@ -11,7 +11,7 @@ import * as categoryAction from "../../core/actions/CategoryAction";
 import * as layoutAction from "../../core/actions/LayoutAction";
 import * as userAction from "../../core/actions/User/UserAction";
 
-import { goPostListPage, goLoginPage, goPostEditPage } from '../../core/util/RouteUtil';
+import { goPostListPage, goLoginPage, goPostEditPage, goMainPage } from '../../core/util/RouteUtil';
 
 import style from './LayoutContainer.scss';
 
@@ -26,12 +26,9 @@ class LayoutContainer extends React.Component {
 
     loadCategories() {
         const {categoryAction, categories} = this.props;
+
         if (categories.length === 0) {
-            try {
                 categoryAction.getCategories();
-            } catch (e) {
-                console.log(e);
-            }
         }
 
     }
@@ -88,7 +85,6 @@ class LayoutContainer extends React.Component {
 
         return (
             <div>
-
                 <SideBar
                     isOpen={sideBar}
                     authInfo={authInfo}
@@ -99,6 +95,7 @@ class LayoutContainer extends React.Component {
                 />
                 <MainHeader
                     showMobileHeader={mobileHeader}
+                    onClickLogo={goMainPage}
                     onClickSideBar={() => this.onToggleSideBar(!sideBar)}
                 />
                 <PageLoading loading={pageLoading}/>
