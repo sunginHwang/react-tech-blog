@@ -42,7 +42,7 @@ class LayoutContainer extends React.Component {
             if (!sideBar) {
                 let currentScroll = document.documentElement.scrollTop || document.body.scrollTop; // Get Current Scroll Value
 
-                let isScrollDown = lastScroll < currentScroll;
+                let isScrollDown = lastScroll < currentScroll && currentScroll >= 0;
                 lastScroll = currentScroll;
 
                 layoutAction.showMobileHeader(isScrollDown);

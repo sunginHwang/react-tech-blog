@@ -20,6 +20,10 @@
     }
   }
 
+  iframe, img, embed, object, video {
+    max-width: 100%;
+  }
+
   blockquote {
     color: #666;
     margin: 0;
