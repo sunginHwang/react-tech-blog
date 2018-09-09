@@ -84,9 +84,6 @@ class LayoutContainer extends React.Component {
 
         return (
             <div>
-                <div>
-                    <p>사이드바 테스트</p>
-                </div>
                 <SideBar
                     isOpen={sideBar}
                     authInfo={authInfo}
