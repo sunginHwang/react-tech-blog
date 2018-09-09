@@ -1,22 +1,20 @@
 import axiosAuth from '../lib/axiosAuth';
-
-const tempPhotoServerUrl = 'http://www.woolta.com:81';
+import { IMAGE_API, BLOG_API } from '../../core/lib/constants';
 
 export const saveImageAndGetImageUrl = async (imageFile) => {
-    let data = new FormData();
-    data.append("file", imageFile);
+    let data = await new FormData();
+    await data.append("imageFile", imageFile);
 
     try{
-        const result = await axiosAuth.post(`${tempPhotoServerUrl}/api/board/insert_image`,data);
-        const { state, img_url } = await result.data;
+        const result = await axiosAuth.post(`${BLOG_API}/file/upload/image`,data);
 
-        if(state !== 'success'){
-            return await '12';
+        if(result.status === 200 && result.data.code === 'SUCCESS'){
+            return await `${IMAGE_API}/${result.data.data.originFileName}`;
         }else{
-            return await `${tempPhotoServerUrl}/uploads/${img_url}`;
+            return alert('이미지 업로드에 실패하였습니다.');
         }
     }catch (e){
-        return await '34';
+        return alert('이미지 업로드에 실패하였습니다.');
     }
 
 };
