@@ -1,4 +1,5 @@
 @import '../../../../style/scss/CommonUtil';
+@import '../../../../style/scss/CommonLayout';
 
 $margin-bottom: 10px;
 
@@ -7,33 +8,53 @@ $margin-bottom: 10px;
   padding-bottom: 1em;
   padding-top: 1.7em;
   border-bottom: 2px solid $bottom-line-color;
+
+  @media screen and (max-width: $phone-width){
+    padding-bottom: 0.5em;
+    padding-top: 1.2em;
+  }
 }
 
 .title{
   color: $main-theme-color;
-  font-size: 28px;
+  font-size: 1.8em;
   font-weight: 700;
   margin-bottom: $margin-bottom;
   cursor: pointer;
+
+  @media screen and (max-width: $phone-width){
+    font-size: 1.5em;
+  }
 }
 
 .content{
   margin-bottom: $margin-bottom;
   cursor: pointer;
-  font-size: 17px;
+  font-size: 1.1em;
   color: $main-theme-color;
+
+  @media screen and (max-width: $phone-width){
+    font-size: 0.8em;
+  }
 }
 
 .meta{
   color: $side-font-gray-color;
-  font-size: 13px;
+  font-size: 0.8em;
   margin-right: 5px;
+
+  @media screen and (max-width: $phone-width){
+    font-size: 0.6em;
+  }
 }
 
 .separator{
-  font-size: 13px;
+  font-size: 0.8em;
   color: #ebebeb;
   margin-right: 5px;
+  @media screen and (max-width: $phone-width){
+    font-size: 0.6em;
+  }
 }
 
 .categoryLabel{

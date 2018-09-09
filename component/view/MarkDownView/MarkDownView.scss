@@ -1,3 +1,4 @@
+@import '../../../style/scss/CommonLayout';
 
 .markDownView{
   line-height: 1.5em;
@@ -24,6 +25,9 @@
     margin: 0;
     padding-left: 3em;
     border-left: 0.5em #eee solid;
+    @media screen and (max-width: $phone-width){
+      font-size: 0.85em;
+    }
   }
 
   table {
@@ -62,6 +66,12 @@
     list-style-type: circle;
   }
 
+  p, li {
+    @media screen and (max-width: $phone-width){
+      font-size: 0.78em;
+    }
+  }
+
   hr {
     border: 0;
     border-top: 1px solid rgba(0, 0, 0, 0.1);
@@ -95,19 +105,31 @@
   }
 
   h1 {
-    font-size: 2.5em
+    font-size: 2.5em;
+    @media screen and (max-width: $phone-width){
+      font-size: 2em;
+    }
   }
 
   h2 {
-    font-size: 2em
+    font-size: 2em;
+    @media screen and (max-width: $phone-width){
+      font-size: 1.5em;
+    }
   }
 
   h3 {
-    font-size: 1.5em
+    font-size: 1.5em;
+    @media screen and (max-width: $phone-width){
+      font-size: 1em;
+    }
   }
 
   h4 {
-    font-size: 1.15em
+    font-size: 1.15em;
+    @media screen and (max-width: $phone-width){
+      font-size: 0.65em;
+    }
   }
 
 

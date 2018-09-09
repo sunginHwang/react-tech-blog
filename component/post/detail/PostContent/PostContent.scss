@@ -5,9 +5,9 @@
   text-align: left;
   margin-top: 2em;
   @media screen and (max-width: $mobile-width){
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
 
 }
 
@@ -32,6 +32,10 @@
   margin-top: 30px;
   margin-bottom: 10px;
   color: $title-font-color;
+
+  @media screen and (max-width: $phone-width){
+    font-size: 2.5em;
+  }
 }
 
 
