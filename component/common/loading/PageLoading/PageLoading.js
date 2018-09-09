@@ -7,10 +7,9 @@ export default ({loading}) => (
         <div className={style.pageLoadingWrapper}>
             <div className={style.loadingPosition}>
                 <HashLoader
-                    color={"#78ccdd"}
+                    color={"#6e827f"}
                     loading={loading}
                 />
-                <p>페이지 이동중 입니다.</p>
             </div>
         </div>
         : null

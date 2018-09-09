@@ -1,4 +1,5 @@
 import {createAction} from "redux-actions";
+import { togglePageLoading } from '../actions/LayoutAction';
 import {call, put} from "redux-saga/effects";
 
 /*비동기 액션타입 생성자*/
@@ -36,7 +37,6 @@ function delay(ms) {
 export function * asyncSaga(asyncFunction, apiFunction, payload) {
 
     yield put(asyncFunction.request()); // 요청대기
-
     try {
         const result = yield call(apiFunction,payload); // 비동기처리 promise
 
@@ -53,20 +53,24 @@ export function * asyncSaga(asyncFunction, apiFunction, payload) {
 
 export function * asyncSagaCallBack(asyncFunc, apiFunc, payload, successFunc, failureFunc) {
 
+    yield put(togglePageLoading(true));
     yield put(asyncFunc.request()); // 요청대기
 
     try {
         const result = yield call(apiFunc,payload); // 비동기처리 promise
 
         if( result.data.code === 'SUCCESS' ){
+            yield put(togglePageLoading(false));
             yield put(asyncFunc.success(result.data)); // 비동기 처리 성공
             yield successFunc(result.data);
         }else{
+            yield put(togglePageLoading(false));
             yield put(asyncFunc.failure(result)); // 비동기 처리 실패
             yield failureFunc(result.data);
         }
 
     } catch(error) {
+        yield put(togglePageLoading(false));
         yield put(asyncFunc.failure(error)); // 비동기 처리 실패
         yield failureFunc({
             message: error

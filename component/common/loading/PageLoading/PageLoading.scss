@@ -1,4 +1,4 @@
-
+@import '../../../../style/scss/CommonUtil';
 
 $blueColor: #78ccdd;
 
@@ -11,17 +11,24 @@ $blueColor: #78ccdd;
   width: 100%;
   height: 100%;
   vertical-align: middle;
-  background-color: rgba(0,0,0,.80);
+  background-color: rgba(0,0,0,.2);
 
 }
 
 .blueColor{
-  color: $blueColor;
+  color: $main-theme-color;
 }
 
 .loadingPosition{
   z-index: 1001;
+
   position: fixed;
-  top: 40%;
   left: 50%;
+  top: 50%;
+
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
