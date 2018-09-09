@@ -29,12 +29,10 @@ export default ({
 
     return (
         <div className={style.subTitleArea}>
-           <div className={style.leftArea}>
                <span className={style.author}><UserImg img={writerImg}/></span>
                <span>{writerName}</span><span className={style.separator}> | </span>
                <span>{categoryLabel}</span><span className={style.separator}> | </span>
                <span>{createdAt}</span>
-           </div>
             {editPost}
         </div>
     )

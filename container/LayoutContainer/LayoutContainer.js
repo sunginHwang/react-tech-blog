@@ -40,8 +40,7 @@ class LayoutContainer extends React.Component {
 
         window.onscroll = () => {
             if (!sideBar) {
-                let currentScroll = document.documentElement.scrollTop || document.body.scrollTop; // Get Current Scroll Value
-
+                const currentScroll = Math.max(window.pageYOffset, document.documentElement.scrollTop, document.body.scrollTop);
                 let isScrollDown = lastScroll < currentScroll && currentScroll >= 0;
                 lastScroll = currentScroll;
 
@@ -85,6 +84,9 @@ class LayoutContainer extends React.Component {
 
         return (
             <div>
+                <div>
+                    <p>사이드바 테스트</p>
+                </div>
                 <SideBar
                     isOpen={sideBar}
                     authInfo={authInfo}

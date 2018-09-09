@@ -27,6 +27,7 @@ $wrapper-title-height:60px;
 
   .contentArea{
     overflow-y: scroll;
+    -ms-overflow-style: none;
     height: $wrapper-height -$wrapper-title-height;
     cursor: pointer;
   }
