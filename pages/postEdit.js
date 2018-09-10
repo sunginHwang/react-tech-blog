@@ -10,7 +10,6 @@ import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import OriginPreview from '../component/post/write/OriginPreview/OriginPreview';
 import { convertImageToCodeImage } from '../core/util/ImageUtil';
-import {togglePageLoading} from "../core/actions/LayoutAction";
 
 class postEdit extends React.Component {
 
@@ -56,7 +55,7 @@ class postEdit extends React.Component {
         if (validateUpsertPost(title, content, category)) {
 
             const upsertData = {
-                postNo: postNo,
+                id: postNo,
                 title: title,
                 contents: content,
                 categoryNo: category.value
@@ -72,8 +71,8 @@ class postEdit extends React.Component {
             return false;
         }
 
-        if (title.length < 1 || title.length > 20) {
-            alert('제목은 1~20글자 사이로 입력하세요.');
+        if (title.length < 1 || title.length > 30) {
+            alert('제목은 1~30글자 사이로 입력하세요.');
             return false;
         }
 
