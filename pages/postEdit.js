@@ -2,12 +2,15 @@ import React from "react";
 import * as FileApi from '../core/apis/FileApi';
 import WriteView from '../component/post/write/WriteView/WriteView';
 import * as postUpsertAction from "../core/actions/Post/PostUpsertAction";
+import * as LayoutAction from '../core/actions/LayoutAction';
+
 import WithHeader from '../hoc/WithHeader';
 
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import OriginPreview from '../component/post/write/OriginPreview/OriginPreview';
 import { convertImageToCodeImage } from '../core/util/ImageUtil';
+import {togglePageLoading} from "../core/actions/LayoutAction";
 
 class postEdit extends React.Component {
 
@@ -132,11 +135,15 @@ class postEdit extends React.Component {
 
     /*이미지 업로딩*/
     uploadImage = async (file) => {
-        FileApi.saveImageAndGetImageUrl(file)
+        await this.props.LayoutAction.togglePageLoading(true);
+
+        await FileApi.saveImageAndGetImageUrl(file)
             .then(async (imgUrl) => {
                 if (imgUrl === '') return;
                 await this.onChangeContent(this.props.content + convertImageToCodeImage(imgUrl));
             });
+        await this.props.LayoutAction.togglePageLoading(false);
+
     };
 
 
@@ -191,6 +198,7 @@ export default WithHeader(connect(
         previewModal: state.PostWriteReducer.previewModal
     }),
     (dispatch) => ({
-        postUpsertAction: bindActionCreators(postUpsertAction, dispatch)
+        postUpsertAction: bindActionCreators(postUpsertAction, dispatch),
+        LayoutAction: bindActionCreators(LayoutAction, dispatch)
     })
 )(postEdit));
