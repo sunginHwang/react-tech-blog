@@ -73,6 +73,7 @@ class LayoutContainer extends React.Component {
         switch(type){
             case 'login': goLoginPage();break;
             case 'postEdit': goPostEditPage();break;
+            case 'main': goMainPage();break;
             default: break;
         }
 
@@ -94,7 +95,7 @@ class LayoutContainer extends React.Component {
                 />
                 <MainHeader
                     showMobileHeader={mobileHeader}
-                    onClickLogo={goMainPage}
+                    onClickLogo={()=>this.onClickSideBarPage('main')}
                     onClickSideBar={() => this.onToggleSideBar(!sideBar)}
                 />
                 <PageLoading loading={pageLoading}/>

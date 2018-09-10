@@ -8,7 +8,7 @@ export default ({
                 }) => (
         <div className={style.mainHeader + (showMobileHeader ? ' '+style.hideHeaderMobile: '')}>
             <div className={style.headerLeftArea}>
-                <span className={style.headerLogo} onClick={()=>{onClickLogo()}}>woolta</span>
+                <span className={style.headerLogo} onClick={onClickLogo}>woolta</span>
             </div>
             <span className={style.flexAuto}/>
             <div className={style.headerRightArea}>
