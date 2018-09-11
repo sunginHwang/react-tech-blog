@@ -1,15 +1,35 @@
 import React from "react";
-import Highlight from "react-highlight";
+import hljs from '../../../../static/highlight.min';
 
-class CodeBlock extends React.Component {
+export default class CodeBlock extends React.PureComponent {
+    constructor(props) {
+        super(props);
+        this.setRef = this.setRef.bind(this)
+    }
+
+    setRef(el) {
+        this.codeEl = el
+    }
+
+    componentDidMount() {
+        this.highlightCode()
+    }
+
+    componentDidUpdate() {
+        this.highlightCode()
+    }
+
+    highlightCode() {
+        hljs.highlightBlock(this.codeEl)
+    }
 
     render() {
         return (
-                 <Highlight language={this.props.language}>
-                    {this.props.value}
-                 </Highlight>
+            <pre>
+                <code ref={this.setRef} className={`language-${this.props.language}`}>
+                  {this.props.value}
+                </code>
+            </pre>
         )
     }
 }
-
-export default CodeBlock;
