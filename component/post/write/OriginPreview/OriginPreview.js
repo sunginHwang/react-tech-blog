@@ -2,7 +2,7 @@ import React from "react";
 
 import MarkDownView from '../../../../component/view/MarkDownView/MarkDownView';
 import ModalWrapper from '../../../common/Modal/ModalWrapper/ModalWrapper';
-import style from './OriginPreview.scss';
+import cn from './OriginPreview.scss';
 
 const OriginPreview =  ({
                     content,
@@ -11,8 +11,8 @@ const OriginPreview =  ({
                 }) =>{
     return (
         <ModalWrapper visible={visible} modalClick={()=>onToggleView()}>
-            <div className={style.originPreview} >
-                <div className={style.content} onClick={()=>onToggleView()}>
+            <div className={cn.originPreview} >
+                <div className={cn.content} onClick={()=>onToggleView()}>
                     <MarkDownView content={content}
                                   skipHtml={false}
                                   escapeHtml={false}/>

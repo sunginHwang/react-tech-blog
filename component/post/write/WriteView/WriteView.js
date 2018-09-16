@@ -1,9 +1,11 @@
 import React from "react";
-
+import classNames from 'classnames/bind';
 import WriteEditer from '../WriteEditer/WriteEditer';
 import MarkDownView from '../../../view/MarkDownView/MarkDownView';
 
-import style from './WriteView.scss';
+import cn from './WriteView.scss';
+const cx = classNames.bind(cn);
+
 
 
 
@@ -14,8 +16,8 @@ export default class WriteView extends React.PureComponent{
             onChangeContent, onChangeTitle, onChangeCategories, onDndImage, onPasteImage, upsertPost} = this.props;
 
         return (
-            <div className={style.write}>
-                <div className={style.markDownWrapper + ' ' + style.edit}>
+            <div className={cn.write}>
+                <div className={cx(cn.markDownWrapper, cn.edit)}>
                     <WriteEditer
                         title={title}
                         authInfo={authInfo}
@@ -29,14 +31,14 @@ export default class WriteView extends React.PureComponent{
                         onPasteImage={(e) => {onPasteImage(e)}}
                         onClickUploadImage={(e) => {onClickUploadImage(e)}}/>
                 </div>
-                <div className={style.markDownWrapper + ' ' + style.view}>
-                    <div className={style.titleArea}>
-                        <span className={style.previewTitle}>preview</span>
-                        <div className={style.saveBtn} onClick={() => {upsertPost();}}>
+                <div className={cx(cn.markDownWrapper, cn.view)}>
+                    <div className={cn.titleArea}>
+                        <span className={cn.previewTitle}>preview</span>
+                        <div className={cn.saveBtn} onClick={() => {upsertPost();}}>
                             저장하기
                         </div>
                     </div>
-                    <div className={style.contentArea} onClick={() => onClickShowOriginPreview()}>
+                    <div className={cn.contentArea} onClick={() => onClickShowOriginPreview()}>
                         <MarkDownView content={content}
                                       skipHtml={false}
                                       escapeHtml={false}/>

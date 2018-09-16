@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 
@@ -7,7 +7,7 @@ import WithHeader from '../hoc/WithHeader';
 import * as postViewAction from "../core/actions/Post/PostViewAction";
 
 
-class postDetail extends React.Component {
+class postDetail extends Component {
 
     constructor() {
         super();
@@ -80,10 +80,7 @@ class postDetail extends React.Component {
             <div>
                 { post.postNo !== 0 &&
                 <PostContent
-                    title={post.title}
-                    writerName={post.writer.nickName}
-                    writerImg={post.writer.imageUrl}
-                    content={post.content}
+                    post={post}
                     editAuth={isPostingUser}
                     categoryLabel={post.categoryLabel}
                     onClickPostModify={this.onClickPostModify}

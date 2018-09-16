@@ -1,7 +1,7 @@
-import style from './Footer.scss';
+import cn from './Footer.scss';
 
 export default () => (
-    <div className={style.footer}>
+    <div className={cn.footer}>
         Copyright © 2018 woolta.com
     </div>
 

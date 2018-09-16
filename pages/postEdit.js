@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import * as FileApi from '../core/apis/FileApi';
 import WriteView from '../component/post/write/WriteView/WriteView';
 import * as postUpsertAction from "../core/actions/Post/PostUpsertAction";
@@ -11,11 +11,7 @@ import {connect} from "react-redux";
 import OriginPreview from '../component/post/write/OriginPreview/OriginPreview';
 import { convertImageToCodeImage } from '../core/util/ImageUtil';
 
-class postEdit extends React.Component {
-
-    constructor() {
-        super();
-    }
+class postEdit extends Component {
 
     componentDidMount() {
         this.props.withSetHeaderTitle('게시글 작성');

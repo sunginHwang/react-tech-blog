@@ -1,27 +1,24 @@
 import MarkDownView from '../../../../component/view/MarkDownView/MarkDownView';
 import PostSubTitle from '../PostSubTitle/PostSubTitle';
-import style from './PostContent.scss';
+import cn from './PostContent.scss';
 import React from "react";
 
 export default ({
-                    content,
-                    title,
-                    writerName,
-                    writerImg,
+                    post,
                     categoryLabel,
                     editAuth,
                     onClickPostModify,
                     onClickDeletePost,
                     createdAt
                 }) =>
-    <div className={style.contentWrapper}>
-        <div className={style.titleArea}>
-            <h1 className={style.title}>
-                {title}
+    <div className={cn.contentWrapper}>
+        <div className={cn.titleArea}>
+            <h1 className={cn.title}>
+                {post.title}
             </h1>
             <PostSubTitle
-                writerName={writerName}
-                writerImg={writerImg}
+                writerName={post.writer.nickName}
+                writerImg={post.writer.imageUrl}
                 categoryLabel={categoryLabel}
                 createdAt={createdAt}
                 editAuth={editAuth}
@@ -29,8 +26,8 @@ export default ({
                 onClickDeletePost={onClickDeletePost}
             />
         </div>
-        <div className={style.contentArea}>
-            <MarkDownView content={content}
+        <div className={cn.contentArea}>
+            <MarkDownView content={post.content}
                           skipHtml={false}
                           escapeHtml={false}/>
         </div>

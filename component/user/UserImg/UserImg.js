@@ -1,11 +1,11 @@
 import React from "react";
-import * as style from './UserImg.scss';
+import * as cn from './UserImg.scss';
 
 const UserImg = ({img}) => {
 
     return (
             <img
-                className={style.userImage}
+                className={cn.userImage}
                  src={img}
             />
     );

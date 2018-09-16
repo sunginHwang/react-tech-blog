@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Error404 from '../component/common/error/Error404';
 
-export default class Error extends React.Component {
+export default class Error extends Component {
     static getInitialProps({ res, err }) {
         const statusCode = res ? res.statusCode : err ? err.statusCode : null;
         return { statusCode }

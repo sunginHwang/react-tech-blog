@@ -1,11 +1,14 @@
 import { HashLoader } from 'react-spinners';
-import style from './PageLoading.scss';
 import React from "react";
+import classNames from 'classnames/bind';
+import cn from './PageLoading.scss';
+const cx = classNames.bind(cn);
+
 
 export default ({loading}) => (
     loading ?
-        <div className={style.pageLoadingWrapper}>
-            <div className={style.loadingPosition}>
+        <div className={cx(cn.pageLoadingWrapper)}>
+            <div className={cx(cn.loadingPosition)}>
                 <HashLoader
                     color={"#6e827f"}
                     loading={loading}

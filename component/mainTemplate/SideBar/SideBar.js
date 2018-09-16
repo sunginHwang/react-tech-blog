@@ -1,5 +1,10 @@
-import style from './SideBar.scss';
+import * as React from "react";
+import classNames from 'classnames/bind';
 import UserImg from '../../user/UserImg/UserImg';
+
+import cn from './SideBar.scss';
+const cx = classNames.bind(cn);
+
 
 export default ({
                     isOpen,
@@ -22,13 +27,12 @@ export default ({
     const UserMenu = isLogin ?
         <li>
             <a>
-                <div className={style.imageArea}>
+                <div className={cn.imageArea}>
                     <UserImg img={authInfo.imageUrl}/>
                 </div>
                 <span>{authInfo.userId}</span>
-                <div className={style.logoutArea}
-                     onClick={() => onClickLogout()}>
-                    로그아웃
+                <div className={cn.logoutArea}
+                     onClick={() => onClickLogout()}>로그아웃
                 </div>
             </a>
         </li>
@@ -44,13 +48,13 @@ export default ({
         </li>;
 
     return <div>
-                <div className={style.sideBar + ' ' + (isOpen ? style.sideBarOpen : '')}>
+                <div className={cx(cn.sideBar, {sideBarOpen : isOpen})}>
                     <ul>
                         {UserMenu}
                         {PostWriteMenu}
                         {postCategories}
                     </ul>
                 </div>
-                <div className={(isOpen ? style.sideBarWhiteSpace : '')}/>
+                <div className={cx({sideBarWhiteSpace : isOpen})} />
           </div>;
 };

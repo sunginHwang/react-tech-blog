@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import IntroPage from '../component/main/IntroPage/IntroPage';
@@ -8,7 +8,7 @@ import { goPostDetailPage } from '../core/util/RouteUtil';
 import WithHeader from "../hoc/WithHeader";
 
 
-class mainPage extends React.Component {
+class mainPage extends Component {
 
     constructor() {
         super();

@@ -1,5 +1,5 @@
 import React from "react";
-import * as style from './LoginView.scss';
+import * as cn from './LoginView.scss';
 
 const LoginView = ({
                        id,
@@ -9,12 +9,12 @@ const LoginView = ({
                    }) => {
 
     return (
-        <div className={style.loginWrapper}>
-            <div className={style.loginArea}>
-                <div className={style.loginDescription}>
+        <div className={cn.loginWrapper}>
+            <div className={cn.loginArea}>
+                <div className={cn.loginDescription}>
                     로그인 후 포스팅 해봐요!
                 </div>
-                <div className={style.inputArea}>
+                <div className={cn.inputArea}>
                     <input placeholder='Id'
                            value={id}
                            onChange={(e)=>{onChangeLoginInfo('id',e.target.value)}}/>
@@ -23,9 +23,9 @@ const LoginView = ({
                            type='password'
                            onChange={(e)=>{onChangeLoginInfo('password',e.target.value)}}/>
                 </div>
-                <div className={style.loginSubArea}>
+                <div className={cn.loginSubArea}>
                     <button
-                        className={style.loginButton}
+                        className={cn.loginButton}
                         onClick={(e) => onLoginClick()}>Login
                     </button>
                 </div>

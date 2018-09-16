@@ -1,5 +1,5 @@
 import React from 'react';
-import style from'./ModalWrapper.scss';
+import cn from'./ModalWrapper.scss';
 
 const ModalWrapper = ({
     visible,
@@ -8,7 +8,7 @@ const ModalWrapper = ({
 }) => {
   return (
       visible &&
-            <div className={style.ModalWrapper} onClick={()=>modalClick}>
+            <div className={cn.ModalWrapper} onClick={()=>modalClick}>
                     {children}
             </div>
 

@@ -1,5 +1,5 @@
 import UserImg from '../../../../component/user/UserImg/UserImg';
-import style from './PostSubTitle.scss';
+import cn from './PostSubTitle.scss';
 import React from "react";
 
 export default ({
@@ -12,14 +12,14 @@ export default ({
                     createdAt
                 }) => {
     const editPost = editAuth &&
-        <div className={style.rightArea}>
-            <div className={style.eventButton}
+        <div className={cn.rightArea}>
+            <div className={cn.eventButton}
                  onClick={() => {
                      onClickPostModify();
                  }}>
                 수정
             </div>
-            <div className={style.eventButton}
+            <div className={cn.eventButton}
                  onClick={() => {
                      onClickDeletePost();
                  }}>
@@ -28,10 +28,10 @@ export default ({
         </div>;
 
     return (
-        <div className={style.subTitleArea}>
-               <span className={style.author}><UserImg img={writerImg}/></span>
-               <span>{writerName}</span><span className={style.separator}> | </span>
-               <span>{categoryLabel}</span><span className={style.separator}> | </span>
+        <div className={cn.subTitleArea}>
+               <span className={cn.author}><UserImg img={writerImg}/></span>
+               <span>{writerName}</span><span className={cn.separator}> | </span>
+               <span>{categoryLabel}</span><span className={cn.separator}> | </span>
                <span>{createdAt}</span>
             {editPost}
         </div>

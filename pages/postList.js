@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 
@@ -8,11 +8,7 @@ import * as postsAction from "../core/actions/Post/PostsAction";
 import { goPostDetailPage } from '../core/util/RouteUtil';
 
 
-class postList extends React.Component {
-
-    constructor() {
-        super();
-    }
+class postList extends Component {
 
     componentDidMount() {
         this.onLoadPostList();
@@ -50,12 +46,10 @@ class postList extends React.Component {
     }
 
     render() {
-        const {postList} = this.props;
-
         return (
                 <PostLayout
                     onClickDetailPage={goPostDetailPage}
-                    posts={postList}/>
+                    posts={this.props.postList}/>
         )
     }
 }

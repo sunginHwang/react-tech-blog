@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import LoginView from '../component/user/loginView/LoginView';
 import WithHeader from '../hoc/WithHeader';
 
@@ -6,7 +6,7 @@ import {connect} from "react-redux";
 import * as UserAction from "../core/actions/User/UserAction";
 import {bindActionCreators} from "redux";
 
-class login extends React.Component {
+class login extends Component {
 
     constructor() {
         super();

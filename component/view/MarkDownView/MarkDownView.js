@@ -2,14 +2,14 @@ import React from "react";
 import ReactMarkdown from 'react-markdown';
 
 import CodeBlock from '../../common/code/CodeBlock/CodeBlock';
-import * as style from './MarkDownView.scss';
+import * as cn from './MarkDownView.scss';
 
 
 export default class MarkDownView extends React.PureComponent{
 
     render(){
       return (
-          <div className={style.markDownView}>
+          <div className={cn.markDownView}>
               <ReactMarkdown source={this.props.content}
                              skipHtml={this.props.skipHtml}
                              escapeHtml={this.props.escapeHtml}

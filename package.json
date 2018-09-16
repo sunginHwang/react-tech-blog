@@ -15,6 +15,7 @@
     "@zeit/next-sass": "^0.2.0",
     "autoprefixer": "^8.6.4",
     "axios": "^0.18.0",
+    "classnames": "^2.2.6",
     "css-loader": "^0.28.11",
     "glob": "^7.1.2",
     "immutable": "^3.8.2",

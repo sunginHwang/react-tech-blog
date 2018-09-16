@@ -1,11 +1,11 @@
 import React, {Component} from "react";
 import PostItem from '../PostItem/PostItem';
-import style from './PostLayout.scss';
+import cn from './PostLayout.scss';
 
 class PostLayout extends Component {
 
     shouldComponentUpdate(nextProps, nextState){
-        return this.props.posts === nextProps.posts;
+        return this.props.posts !== nextProps.posts;
     }
 
     render() {
@@ -24,7 +24,7 @@ class PostLayout extends Component {
                 date={post.createdAt}/>
         });
         return (
-            <div className={style.contentList}>
+            <div className={cn.contentList}>
                 {list}
             </div>
         );

@@ -2,7 +2,7 @@ import React from "react";
 import { MdAddToPhotos } from 'react-icons/lib/md';
 import Select from 'react-select';
 
-import style from './WriteEditer.scss';
+import cn from './WriteEditer.scss';
 
 export default class WriteEditer extends React.Component {
 
@@ -43,27 +43,27 @@ export default class WriteEditer extends React.Component {
 
         return (
             <div style={{height:'100%'}}>
-                <div className={style.writeTopArea}>
-                    <img className={style.author} src={authInfo.imageUrl}/>
-                    <span className={style.authorName}>{`작성자 : ${authInfo.userId}`}</span>
+                <div className={cn.writeTopArea}>
+                    <img className={cn.author} src={authInfo.imageUrl}/>
+                    <span className={cn.authorName}>{`작성자 : ${authInfo.userId}`}</span>
                 </div>
-                <div className={style.writeTopArea}>
+                <div className={cn.writeTopArea}>
                     <Select
                         value={selectedCategory}
                         onChange={onChangeCategories}
                         options={categories}/>
                 </div>
-                <div className={style.writeTitleArea} >
-                    <input className={style.writeTitle}
+                <div className={cn.writeTitleArea} >
+                    <input className={cn.writeTitle}
                            type='text'
                            placeholder='제목을 입력해 주세요.'
                            onChange={(e) => {onChangeTitle(e.target.value);}}
                            value={title}/>
                     <div
-                        className={style.imageInsertBtn}
+                        className={cn.imageInsertBtn}
                         onClick={onClickUploadImage}><span><MdAddToPhotos/>이미지 업로드</span></div>
                 </div>
-                <textarea className={style.markDownEditer}
+                <textarea className={cn.markDownEditer}
                           placeholder='작성할 내용을 입력해 주세요.'
                           onChange={(e) => {onChangeContent(e.target.value);}}
                           value={content}/>
