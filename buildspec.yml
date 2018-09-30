@@ -1,0 +1,20 @@
+phases:
+  pre_build:
+    commands:
+      - echo start branch
+      - echo Insatlling NPM Packages and wget Enviorment File
+      - echo Build branch is $(git branch -a --contains HEAD | sed -n 2p | awk '{ printf $1 }')
+      - npm install
+      - npm install babel-cli cross-env --global
+  build:
+    commands:
+      - echo npm build start `date`
+      - npm run build
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - chmod +x ./build.sh
+      - ./build.sh
+artifacts:
+  files:
+    - 'build/*'
