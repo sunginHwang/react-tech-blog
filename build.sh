@@ -39,4 +39,4 @@ s3_version_mapping(){
 }
 
 
-s3_version_mapping "TechBlog_20181001104916_4.zip"
+build
