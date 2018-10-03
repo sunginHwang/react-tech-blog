@@ -4,8 +4,9 @@ NOW=$(date +%Y%m%d%H%M%S)
 PROJECT_NAME="TechBlog"
 BEANSTALK_NAME="techBlog"
 
-VERSION=4
-S3_REPO_PATH="s3://elasticbeanstalk-ap-northeast-2-674632797140/"
+VERSION=5
+S3_BUCKET="elasticbeanstalk-ap-northeast-2-674632797140"
+S3_REPO_PATH="s3://${S3_BUCKET}/"
 
 build(){
     BUILD_VERSION_NAME=${PROJECT_NAME}_${NOW}_${VERSION}
@@ -32,8 +33,10 @@ s3_version_mapping(){
  aws elasticbeanstalk create-application-version \
      --application-name "${BEANSTALK_NAME}" \
      --version-label "${PROJECT_NAME}-${NOW}" \
-     --description "${VERSION} build" \
-     --source-bundle S3Bucket="${S3_REPO_PATH}",S3Key="${S3_KEY}" \
+     --description "${VERSION} build success" \
+     --source-bundle S3Bucket="${S3_BUCKET}",S3Key="${S3_KEY}" \
      --auto-create-application
 }
-build
+
+
+s3_version_mapping "TechBlog_20181001104916_4.zip"
