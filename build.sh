@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 NOW=$(date +%Y%m%d%H%M%S)
-PROJECT_NAME="TechBlog"
+PROJECT_NAME="techblog"
 BEANSTALK_NAME="techBlog"
 
-VERSION=5
+VERSION=6
 S3_BUCKET="elasticbeanstalk-ap-northeast-2-674632797140"
 S3_REPO_PATH="s3://${S3_BUCKET}/"
 
@@ -33,7 +33,7 @@ s3_version_mapping(){
  aws elasticbeanstalk create-application-version \
      --application-name "${BEANSTALK_NAME}" \
      --version-label "${PROJECT_NAME}-${NOW}" \
-     --description "${VERSION} build success" \
+     --description "${VERSION}-build-success" \
      --source-bundle S3Bucket="${S3_BUCKET}",S3Key="${S3_KEY}" \
      --auto-create-application
 }
