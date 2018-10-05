@@ -9,7 +9,7 @@ S3_BUCKET="elasticbeanstalk-ap-northeast-2-674632797140"
 S3_REPO_PATH="s3://${S3_BUCKET}/"
 
 build(){
-    BUILD_VERSION_NAME=${PROJECT_NAME}_${NOW}_${VERSION}
+    BUILD_VERSION_NAME=${PROJECT_NAME}-${NOW}-${VERSION}
     echo "build start...."
     mkdir build
     cd ./build
