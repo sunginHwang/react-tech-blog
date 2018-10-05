@@ -4,7 +4,7 @@ NOW=$(date +%Y%m%d%H%M%S)
 PROJECT_NAME="techblog"
 BEANSTALK_NAME="techBlog"
 
-VERSION=9
+VERSION=10
 S3_BUCKET="elasticbeanstalk-ap-northeast-2-674632797140"
 S3_REPO_PATH="s3://${S3_BUCKET}/"
 
