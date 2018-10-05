@@ -14,9 +14,8 @@ build(){
     mkdir build
     cd ./build
     BUILD_FILE="${BUILD_VERSION_NAME}.zip"
-    zip -r "${BUILD_FILE}" ../.ebextensions ../.npmrc ../next.config.js ../package.json ../postcss.config.js ../routes.js ../server.js ../static ../style ../.next
+    zip -r "${BUILD_FILE}" ../.ebextensions ../.npmrc ../next.config.js ../package.json ../package-lock.json ../postcss.config.js ../routes.js ../server.js ../static ../style ../.next
 
-    s3_upload ${BUILD_FILE}
 }
 
 s3_upload(){
