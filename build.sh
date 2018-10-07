@@ -15,14 +15,14 @@ build(){
     BUILD_FILE="${BUILD_VERSION_NAME}.zip"
     zip -r "${BUILD_FILE}" .ebextensions .npmrc next.config.js package.json postcss.config.js routes.js server.js static .next
     mv "${BUILD_FILE}" ./build/
-    s3_upload "${BUILD_FILE}"
+    s3_upload "./build/${BUILD_FILE}"
 }
 
 s3_upload(){
 
  FILE_NAME="$1"
  OPTION=""
- aws s3 cp "${FILE_NAME}" "${S3_REPO_PATH}" ${OPTION}
+ aws s3 cp "./build${FILE_NAME}" "${S3_REPO_PATH}" ${OPTION}
  s3_version_mapping ${FILE_NAME}
 }
 
