@@ -12,10 +12,10 @@ build(){
     BUILD_VERSION_NAME=${PROJECT_NAME}-${NOW}-${VERSION}
     echo "build start...."
     mkdir build
-    cd ./build
     BUILD_FILE="${BUILD_VERSION_NAME}.zip"
     zip -r "${BUILD_FILE}" .ebextensions .npmrc next.config.js package.json postcss.config.js routes.js server.js static .next
-    s3_upload ${BUILD_FILE}
+    mv "${BUILD_FILE}" ./build/
+    s3_upload "${BUILD_FILE}"
 }
 
 s3_upload(){
