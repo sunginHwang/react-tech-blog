@@ -22,7 +22,7 @@ s3_upload(){
 
  FILE_NAME="$1"
  OPTION=""
- aws s3 cp "./build${FILE_NAME}" "${S3_REPO_PATH}" ${OPTION}
+ aws s3 cp "./build/${FILE_NAME}" "${S3_REPO_PATH}" ${OPTION}
  s3_version_mapping ${FILE_NAME}
 }
 
