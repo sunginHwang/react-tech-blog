@@ -1,4 +1,4 @@
-import {asyncActionTypeCreator, asyncActionCreator} from "../../util/reduxUtil";
+import {asyncActionTypeCreator, asyncActionCreator} from "../../util/ReduxUtil";
 import {createAction} from "redux-actions";
 
 export const POST_UPSERT = asyncActionTypeCreator('Post_upsert_postUpsert','ASYNC');

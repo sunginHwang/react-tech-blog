@@ -1,6 +1,6 @@
 import {call, all, takeLatest, put} from "redux-saga/effects";
 import * as UserAction from "../actions/User/UserAction";
-import { asyncSagaCallBack } from '../util/reduxUtil';
+import { asyncSagaCallBack } from '../util/ReduxSagaUtil';
 
 import { goMainPage } from '../util/RouteUtil';
 import { ACCESS_TOKEN, ACCESS_HEADER_TOKEN } from '../lib/constants';
@@ -9,18 +9,16 @@ import axiosAuth from '../lib/axiosAuth';
 
 
 
-
-
 function * loginSaga(info) {
     yield call(asyncSagaCallBack, UserAction.login, AuthApi.userLogin, info.payload,
-        async (success) =>{
-            const { authToken } = await success.data;
-            await localStorage.setItem(ACCESS_TOKEN, authToken);
-            axiosAuth.defaults.headers.common[ACCESS_HEADER_TOKEN] = await authToken;
-            await goMainPage();
+        function* success(success) {
+            const { authToken } = yield success.data;
+            yield localStorage.setItem(ACCESS_TOKEN, authToken);
+            axiosAuth.defaults.headers.common[ACCESS_HEADER_TOKEN] = yield authToken;
+            yield goMainPage();
         },
-        async (error) => {
-            await alert('로그인 정보가 맞지 않습니다.');
+        function* failure(error) {
+            yield alert('로그인 정보가 맞지 않습니다.');
         });
 }
 
@@ -31,10 +29,9 @@ function * logoutSaga() {
 
 function * loadAuthInfoSaga() {
     yield call(asyncSagaCallBack, UserAction.loadAuthInfo, AuthApi.getAuthInfo, null,
-        async (success) =>{
-        },
-        async (error) => {
-            await localStorage.removeItem(ACCESS_TOKEN);
+        function* success(success) {},
+        function* failure(error) {
+            yield localStorage.removeItem(ACCESS_TOKEN);
         });
 }
 

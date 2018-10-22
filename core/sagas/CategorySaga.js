@@ -1,6 +1,6 @@
 import {call, all, takeLatest } from "redux-saga/effects";
 import * as CategoryAction from "../actions/CategoryAction";
-import { asyncSaga } from '../util/reduxUtil';
+import { asyncSaga } from '../util/ReduxSagaUtil';
 import * as BlogApi  from '../apis/BlogApi';
 
 function * getCategoryListSaga(info) {

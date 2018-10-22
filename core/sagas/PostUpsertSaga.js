@@ -4,19 +4,19 @@ import * as PostsAction from "../actions/Post/PostsAction";
 
 import * as BlogApi from '../apis/BlogApi';
 import {goPostDetailPage} from '../util/RouteUtil';
-import {asyncSagaCallBack} from '../util/reduxUtil';
+import {asyncSagaCallBack } from '../util/ReduxSagaUtil';
 
 
 function* postUpsertSaga(info) {
     yield call(asyncSagaCallBack, PostUpsertAction.upsertPost, BlogApi.upsertPost, info.payload,
-        async (success) => {
-            const {postNo, categoryNo} = await success.data;
-            await put(PostsAction.getPosts(categoryNo));
-            await goPostDetailPage(categoryNo, postNo);
+        function* success(success) {
+            const {postNo, categoryNo} = yield success.data;
+            yield put(PostsAction.getPosts(categoryNo));
+            yield goPostDetailPage(categoryNo, postNo);
         },
-        async (error) => {
-            const { message } = error;
-            await alert(message !== undefined ? message : '게시글 편집 실패.');
+        function* failure(error) {
+            const { message } = yield error;
+            yield alert(message !== undefined ? message : '게시글 편집 실패.');
         });
 
 }

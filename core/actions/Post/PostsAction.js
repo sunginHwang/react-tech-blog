@@ -1,4 +1,4 @@
-import { asyncActionTypeCreator, asyncActionCreator } from '../../util/reduxUtil';
+import { asyncActionTypeCreator, asyncActionCreator } from '../../util/ReduxUtil';
 
 
 // 해당 카테고리 게시글 리스트 GET
