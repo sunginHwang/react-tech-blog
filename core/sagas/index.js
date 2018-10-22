@@ -1,17 +1,16 @@
 import { fork, all } from 'redux-saga/effects';
-import PostListSaga from './PostListSaga';
-import PostInfoSaga from './PostInfoSaga';
-import PostUpsertSaga from './PostUpsertSaga';
-import CategorySaga from './CategorySaga';
-import AuthSaga from './AuthSaga';
 
+// imports all file except index.js
+const req = require.context('.', true, /^(?!.\/index).*.js$/);
+
+const sagas = [];
+
+req.keys().forEach((key) => {
+    sagas.push(req(key).default);
+});
 
 export default function* rootSaga() {
-    yield all([
-        fork(PostListSaga),
-        fork(PostInfoSaga),
-        fork(PostUpsertSaga),
-        fork(CategorySaga),
-        fork(AuthSaga)
-    ])
+    yield all(
+        sagas.map(saga=>fork(saga))
+    )
 }
