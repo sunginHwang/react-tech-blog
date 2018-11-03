@@ -1,4 +1,6 @@
 @import '../../../style/scss/CommonLayout';
+@import '~open-color/open-color';
+
 
 .markDownView{
   line-height: 1.5em;
@@ -22,6 +24,11 @@
 
   iframe, img, embed, object, video {
     max-width: 100%;
+    display: block;
+    margin: 0 auto;
+    margin-top: 3em;
+    margin-bottom: 3em;
+    pointer-events: none;
   }
 
   blockquote {
@@ -47,15 +54,19 @@
   p,
   ol,
   ul,
-  dl
-   {
-    line-height: 1.5;
+  dl {
+    line-height: 1.75;
     margin-bottom: 1em;
   }
 
+p + p {
+  margin-top: 1.5em;
+}
 
   li p {
-    display: inline
+    display: inline;
+    line-height: 1.75;
+    font-weight: 400;
   }
 
   ul>li,
@@ -65,9 +76,19 @@
     margin-left: 1em
   }
 
-  ol, ul {
+  ul {
     list-style-position: inside;
     list-style-type: disc;
+  }
+
+  ol {
+    display: block;
+    list-style-type: decimal;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
   }
 
   p, li {
@@ -84,8 +105,13 @@
   }
 
   a {
-    color: #507492;
+    color: $oc-gray-6;
     text-decoration: none
+  }
+
+  strong{
+    color: $oc-gray-8;
+    font-weight: bolder;
   }
 
 
@@ -108,34 +134,36 @@
     color: #383838
   }
 
-  h1 {
-    font-size: 2.5em;
-    @media screen and (max-width: $phone-width){
-      font-size: 2em;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: 700;
+    margin-top: 2em;
+    margin-bottom: 1em;
+    & code {
+      font-weight: 600;
     }
   }
-
-  h2 {
-    font-size: 2em;
-    @media screen and (max-width: $phone-width){
-      font-size: 1.5em;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
+    code {
+      padding-left: 0.3em;
+      padding-right: 0.3em;
+      padding-top: 0.1em;
+      padding-bottom: 0.1em;
+      border-radius: 3px;
+      margin-left: 0.3em;
+      margin-right: 0.3em;
     }
   }
-
-  h3 {
-    font-size: 1.5em;
-    @media screen and (max-width: $phone-width){
-      font-size: 1em;
-    }
-  }
-
-  h4 {
-    font-size: 1.15em;
-    @media screen and (max-width: $phone-width){
-      font-size: 0.65em;
-    }
-  }
-
 
   tr {
     border-top: 1px solid #c6cbd1;
