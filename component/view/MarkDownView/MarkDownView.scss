@@ -33,8 +33,9 @@
 
   blockquote {
     color: #666;
-    margin: 0;
-    padding-left: 3em;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    padding: 1rem 15px 1rem 15px;
     border-left: 0.5em #eee solid;
     @media screen and (max-width: $phone-width){
       font-size: 1rem;
@@ -111,7 +112,6 @@ p + p {
 
   strong{
     color: $oc-gray-8;
-    font-weight: bolder;
   }
 
 
