@@ -7,6 +7,9 @@ const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handler = routes.getRequestHandler(app)
 
+console.log('serverJs start');
+console.log(handler);
+console.log('serverJs end');
 
 app.prepare()
     .then(() => {
@@ -15,4 +18,4 @@ app.prepare()
                 if (err) throw err
                 console.log(`> Ready on http://localhost:${port}`);
             })
-    })
+    });

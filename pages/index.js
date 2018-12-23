@@ -6,6 +6,8 @@ import PostLayout from '../component/post/list/PostLayout/PostLayout';
 import * as postsAction from "../core/actions/Post/PostsAction";
 import { goPostDetailPage } from '../core/util/RouteUtil';
 import WithHeader from "../hoc/WithHeader";
+import * as config from '../core/conf';
+import getConfig from 'next/config'
 
 
 class mainPage extends Component {
@@ -15,6 +17,10 @@ class mainPage extends Component {
     }
 
     componentDidMount() {
+        console.log('---config-start-');
+        console.log(getConfig.NODE_ENV);
+        console.log(config);
+        console.log('---config-end--');
         this.onLoadRecentPostList();
     }
 

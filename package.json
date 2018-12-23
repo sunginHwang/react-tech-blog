@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "node server.js",
-    "build": "next build",
+    "dev": "NODE_ENV=dev node server.js",
+    "qa": "NODE_ENV=qa node server.js",
+    "qa-build": "NODE_ENV=qa next build && NODE_ENV=qa node server.js",
     "start": "NODE_ENV=production node server.js"
   },
   "author": "sunginHwang",
