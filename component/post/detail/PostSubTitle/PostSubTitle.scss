@@ -9,6 +9,10 @@
 
   margin-bottom: 20px;
 
+  @media screen and (max-width: $phone-width){
+    padding-bottom: 25px;
+  }
+
   span {
     color: $side-font-gray-color;
     margin-right: 5px;
