@@ -11,12 +11,12 @@ module.exports = withSass({
         config.plugins.push(
             new webpack.DefinePlugin({
                 'process.env.PROCESS': JSON.stringify(process.env.NODE_ENV),
-                'process.env.ENV': JSON.stringify(process.env.ENV)
+                'process.env.DEPLOY_ENV': JSON.stringify(process.env.DEPLOY_ENV)
             })
         );
         return config
     },
     publicRuntimeConfig: {
-        'DEPLOY_ENV': process.env.ENV
+        'DEPLOY_ENV': process.env.DEPLOY_ENV
     }
 });

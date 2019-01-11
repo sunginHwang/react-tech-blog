@@ -6,10 +6,7 @@ import PostLayout from '../component/post/list/PostLayout/PostLayout';
 import * as postsAction from "../core/actions/Post/PostsAction";
 import { goPostDetailPage } from '../core/util/RouteUtil';
 import WithHeader from "../hoc/WithHeader";
-import * as TestConf from '../core/testConf/TestConf';
-
-import getConfig from 'next/config'
-const { publicRuntimeConfig} = getConfig();
+import {configs} from '../core/config';
 
 class mainPage extends Component {
 
@@ -19,8 +16,7 @@ class mainPage extends Component {
 
     componentDidMount() {
         console.log('---config-start-');
-        console.log(publicRuntimeConfig.DEPLOY_ENV);
-        console.log(TestConf);
+        console.log(configs);
         console.log('---config-end--');
         this.onLoadRecentPostList();
     }

@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:dev": "NODE_ENV=production ENV=development node server.js",
-    "start:qa": "NODE_ENV=production ENV=qa node server.js",
-    "start:staging": "NODE_ENV=production ENV=staging node server.js",
-    "start:production": "NODE_ENV=production ENV=production node server.js",
+    "dev": "NODE_ENV=production DEPLOY_ENV=development node server.js",
+    "qa": "NODE_ENV=production DEPLOY_ENV=qa node server.js",
+    "staging": "NODE_ENV=production DEPLOY_ENV=staging node server.js",
+    "production": "NODE_ENV=production DEPLOY_ENV=production node server.js",
     "build": "next build",
     "local": "NODE_ENV=dev ENV=local node server.js"
   },
