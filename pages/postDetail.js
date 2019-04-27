@@ -9,8 +9,11 @@ import * as postViewAction from "../core/actions/Post/PostViewAction";
 
 class postDetail extends Component {
 
-    constructor() {
-        super();
+
+    static async getInitialProps ({req}) {
+        return req
+            ? { from: 'server' } // 서버에서 실행 할 시
+            : { from: 'client '} // 클라이언트에서 실행 할 시
     }
 
     componentDidMount() {
