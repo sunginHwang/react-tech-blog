@@ -15,3 +15,6 @@ export const postInfoInitialize = createAction(POST_INFO_INITIALIZE);
 
 export const MODIFY_POST= 'POST_VIEW_MODIFY_POST';
 export const modifyPost = createAction(MODIFY_POST);
+
+export const TEST_GET= 'TEST_GET';
+export const TestGet = createAction(TEST_GET);

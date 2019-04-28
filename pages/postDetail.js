@@ -5,29 +5,34 @@ import {connect} from "react-redux";
 import PostContent from '../component/post/detail/PostContent/PostContent';
 import WithHeader from '../hoc/WithHeader';
 import * as postViewAction from "../core/actions/Post/PostViewAction";
+import * as BlogApi from '../core/apis/BlogApi';
 
 
 class postDetail extends Component {
 
 
-    static async getInitialProps ({req}) {
-        return req
-            ? { from: 'server' } // 서버에서 실행 할 시
-            : { from: 'client '} // 클라이언트에서 실행 할 시
-    }
+
 
     componentDidMount() {
-        this.handleScrollTop();
+        console.log('update');
+     /*   this.handleScrollTop();
         const { postNo, postViewAction, categoryNo } = this.props;
-        postViewAction.getPostInfo({postNo, categoryNo});
+        postViewAction.getPostInfo({postNo, categoryNo});*/
 
+    }
+
+    static async getInitialProps({query: {categoryNo, postNo}, store}) {
+    //    await store.dispatch(await postViewAction.TestGet({postNo, categoryNo}));
+    //    await console.log(store.getState());
+        const res = await BlogApi.getPostInfo({categoryNo, postNo});
+        const postTest = res.data.data;
+        return {categoryNo, postNo, postTest}
     }
 
     componentDidUpdate(prevProps, prevState) {
         this.handleScrollTop();
-
         if(prevProps.post.title !== this.props.post.title){
-            this.props.withSetHeaderTitle(this.props.post.title);
+         //   this.props.withSetHeaderTitle(this.props.post.title);
         }
     }
 
@@ -72,30 +77,32 @@ class postDetail extends Component {
         postViewAction.deletePost(deleteData);
     };
 
-    static getInitialProps({query: {categoryNo, postNo}}) {
-        return {categoryNo, postNo}
-    }
+
 
     render() {
-        const { post, authInfo } = this.props;
-        const isPostingUser = authInfo.no === post.writer.no;
+        const { post, authInfo, postTest } = this.props;
+        
+        const isPostingUser = authInfo.no === postTest.writer.no;
         return (
             <div>
-                { post.postNo !== 0 &&
+                <h2>
+                    POST_DETAIL
+                </h2>
+                { postTest.postNo !== 0 &&
                 <PostContent
-                    post={post}
+                    post={postTest}
                     editAuth={isPostingUser}
-                    categoryLabel={post.categoryLabel}
+                    categoryLabel={postTest.categoryLabel}
                     onClickPostModify={this.onClickPostModify}
                     onClickDeletePost={this.onClickDeletePost}
-                    createdAt={post.createdAt}/>
+                    createdAt={postTest.createdAt}/>
                 }
             </div>
         )
     }
 }
 
-export default WithHeader(connect(
+export default connect(
     (state) => ({
         authInfo: state.AuthReducer.authInfo,
         post: state.PostInfoReducer.post,
@@ -104,4 +111,4 @@ export default WithHeader(connect(
     (dispatch) => ({
         postViewAction: bindActionCreators(postViewAction, dispatch),
     })
-)(postDetail));
+)(postDetail);

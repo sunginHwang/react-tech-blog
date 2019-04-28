@@ -24,12 +24,15 @@ export function * asyncSagaCallBack(asyncFunc, apiFunc, payload, successFunc, fa
 
     yield put(togglePageLoading(true));
     yield put(asyncFunc.request()); // 요청대기
-
+    yield console.log('asyncCallbackIn');
     try {
-        const result = yield call(apiFunc,payload); // 비동기처리 promise
+        yield console.log('asyncApiCallStart');
 
+        const result = yield call(apiFunc,payload); // 비동기처리 promise
+        yield console.log('asyncApiCallEnd');
         if( result.data.code === 'SUCCESS' ){
             yield put(togglePageLoading(false));
+            yield console.log('asyncAPISUCCESS');
             yield put(asyncFunc.success(result.data)); // 비동기 처리 성공
             yield call(successFunc, result.data);
         }else{

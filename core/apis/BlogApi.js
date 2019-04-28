@@ -5,8 +5,9 @@ export const getPostList =  (categoryNo) => {
     return axiosAuth.get(`${BLOG_API}/post/categories/${categoryNo}/posts`);
 };
 
-export const getPostInfo =  (post) => {
-    return axiosAuth.get(`${BLOG_API}/post/categories/${post.categoryNo}/posts/${post.postNo}`);
+export const getPostInfo =  async (post) => {
+    const res = await axiosAuth.get(`${BLOG_API}/post/categories/${post.categoryNo}/posts/${post.postNo}`);
+    return res;
 };
 
 export const getRecentPostList = () => {
