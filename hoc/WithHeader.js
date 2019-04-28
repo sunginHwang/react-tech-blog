@@ -15,8 +15,10 @@ export default function WithHeader(WrappedComponent) {
             this.setState({headerTitle: title});
         }
 
-        static getInitialProps({query: {...props}}) {
-            return {...props}
+        static async getInitialProps({query: {...props}, req}) {
+          await console.log({...props});
+          await console.log('headerProps');
+          return {...props}
         }
 
         render() {

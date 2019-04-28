@@ -1,31 +1,40 @@
 import React, { Component } from "react";
-import {bindActionCreators} from "redux";
+import {bindActionCreators } from "redux";
 import {connect} from "react-redux";
 
 import PostContent from '../component/post/detail/PostContent/PostContent';
 import WithHeader from '../hoc/WithHeader';
 import * as postViewAction from "../core/actions/Post/PostViewAction";
+import * as BlogApi from '../core/apis/BlogApi';
 
 
 class postDetail extends Component {
 
 
-    static async getInitialProps ({req}) {
-        return req
-            ? { from: 'server' } // 서버에서 실행 할 시
-            : { from: 'client '} // 클라이언트에서 실행 할 시
-    }
+
 
     componentDidMount() {
+        console.log('componentDidMount');
         this.handleScrollTop();
+        console.log(this.props.reduxStore);
         const { postNo, postViewAction, categoryNo } = this.props;
-        postViewAction.getPostInfo({postNo, categoryNo});
+        postViewAction.getPostInfo({postNo, categoryNo});*/
 
+    }
+
+    static async getInitialProps({query: {categoryNo, postNo}, store}) {
+        await console.log("============================getInitialProps_START============================");
+        const res = await BlogApi.getPostInfo({categoryNo, postNo});
+        const reduxStore = await store.dispatch(postViewAction.TestGet(res.data.data));
+        await console.log("============================getInitialProps_END==============================");
+
+    //    const res = await BlogApi.getPostInfo({categoryNo, postNo});
+    //    const postTest = res.data.data;
+        return {categoryNo, postNo, reduxStore }
     }
 
     componentDidUpdate(prevProps, prevState) {
         this.handleScrollTop();
-
         if(prevProps.post.title !== this.props.post.title){
             this.props.withSetHeaderTitle(this.props.post.title);
         }
@@ -72,12 +81,12 @@ class postDetail extends Component {
         postViewAction.deletePost(deleteData);
     };
 
-    static getInitialProps({query: {categoryNo, postNo}}) {
-        return {categoryNo, postNo}
-    }
+
 
     render() {
-        const { post, authInfo } = this.props;
+        const { post, authInfo, postTest } = this.props;
+        console.log("!!!!!!!!!!!!!!!!!!!!");
+        console.log(post.postNo);
         const isPostingUser = authInfo.no === post.writer.no;
         return (
             <div>
@@ -95,7 +104,7 @@ class postDetail extends Component {
     }
 }
 
-export default WithHeader(connect(
+export default connect(
     (state) => ({
         authInfo: state.AuthReducer.authInfo,
         post: state.PostInfoReducer.post,
@@ -104,4 +113,4 @@ export default WithHeader(connect(
     (dispatch) => ({
         postViewAction: bindActionCreators(postViewAction, dispatch),
     })
-)(postDetail));
+)(postDetail);

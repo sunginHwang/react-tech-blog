@@ -22,10 +22,16 @@ export const PostInfoReducer =  handleActions({
         return { ...state, post: initialState.post };
     },
     [action.getPostInfo.success]: (state, action) => {
+        console.log(`api success in ${action.payload.data.categoryLabel}`);
         return { ...state, post: action.payload.data};
     },
     [action.getPostInfo.failure]: (state, action) => {
         return { ...state, post: initialState.post };
+    },
+    [action.TestGet]: (state, action) => {
+        console.log('===============REDUCER-IN=====================')
+        console.log('===============REDUCER-OUT=====================');
+        return { ...state, post: action.payload};
     },
     [action.deletePost.request]: (state, action) => {
         return { ...state };
