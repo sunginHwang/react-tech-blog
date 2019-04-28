@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {bindActionCreators} from "redux";
+import {bindActionCreators } from "redux";
 import {connect} from "react-redux";
 
 import PostContent from '../component/post/detail/PostContent/PostContent';
@@ -14,25 +14,29 @@ class postDetail extends Component {
 
 
     componentDidMount() {
-        console.log('update');
-     /*   this.handleScrollTop();
+        console.log('componentDidMount');
+        this.handleScrollTop();
+        console.log(this.props.reduxStore);
         const { postNo, postViewAction, categoryNo } = this.props;
         postViewAction.getPostInfo({postNo, categoryNo});*/
 
     }
 
     static async getInitialProps({query: {categoryNo, postNo}, store}) {
-    //    await store.dispatch(await postViewAction.TestGet({postNo, categoryNo}));
-    //    await console.log(store.getState());
+        await console.log("============================getInitialProps_START============================");
         const res = await BlogApi.getPostInfo({categoryNo, postNo});
-        const postTest = res.data.data;
-        return {categoryNo, postNo, postTest}
+        const reduxStore = await store.dispatch(postViewAction.TestGet(res.data.data));
+        await console.log("============================getInitialProps_END==============================");
+
+    //    const res = await BlogApi.getPostInfo({categoryNo, postNo});
+    //    const postTest = res.data.data;
+        return {categoryNo, postNo, reduxStore }
     }
 
     componentDidUpdate(prevProps, prevState) {
         this.handleScrollTop();
         if(prevProps.post.title !== this.props.post.title){
-         //   this.props.withSetHeaderTitle(this.props.post.title);
+            this.props.withSetHeaderTitle(this.props.post.title);
         }
     }
 
@@ -81,21 +85,19 @@ class postDetail extends Component {
 
     render() {
         const { post, authInfo, postTest } = this.props;
-        
-        const isPostingUser = authInfo.no === postTest.writer.no;
+        console.log("!!!!!!!!!!!!!!!!!!!!");
+        console.log(post.postNo);
+        const isPostingUser = authInfo.no === post.writer.no;
         return (
             <div>
-                <h2>
-                    POST_DETAIL
-                </h2>
-                { postTest.postNo !== 0 &&
+                { post.postNo !== 0 &&
                 <PostContent
-                    post={postTest}
+                    post={post}
                     editAuth={isPostingUser}
-                    categoryLabel={postTest.categoryLabel}
+                    categoryLabel={post.categoryLabel}
                     onClickPostModify={this.onClickPostModify}
                     onClickDeletePost={this.onClickDeletePost}
-                    createdAt={postTest.createdAt}/>
+                    createdAt={post.createdAt}/>
                 }
             </div>
         )
