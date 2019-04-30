@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import {bindActionCreators } from "redux";
+import React, {Component} from "react";
+import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 
 import PostContent from '../component/post/detail/PostContent/PostContent';
@@ -10,38 +10,41 @@ import * as BlogApi from '../core/apis/BlogApi';
 
 class postDetail extends Component {
 
-
-
+    constructor(props) {
+        super(props)
+    }
 
     componentDidMount() {
         console.log('componentDidMount');
         this.handleScrollTop();
         console.log(this.props.reduxStore);
-        const { postNo, postViewAction, categoryNo } = this.props;
-        postViewAction.getPostInfo({postNo, categoryNo});*/
-
+        const {postNo, postViewAction, categoryNo} = this.props;
+        //   postViewAction.getPostInfo({postNo, categoryNo});
     }
 
-    static async getInitialProps({query: {categoryNo, postNo}, store}) {
-        await console.log("============================getInitialProps_START============================");
-        const res = await BlogApi.getPostInfo({categoryNo, postNo});
-        const reduxStore = await store.dispatch(postViewAction.TestGet(res.data.data));
-        await console.log("============================getInitialProps_END==============================");
+    static async getInitialProps({query: {categoryNo, postNo}, store, isServer}) {
+        if (isServer) {
+            await console.log("============================getInitialProps_START============================");
+            const res = await BlogApi.getPostInfo({categoryNo, postNo});
+            await store.dispatch(postViewAction.TestGet(res.data.data));
+            await console.log("============================getInitialProps_END==============================");
 
-    //    const res = await BlogApi.getPostInfo({categoryNo, postNo});
-    //    const postTest = res.data.data;
-        return {categoryNo, postNo, reduxStore }
+        }
+
+        //    const res = await BlogApi.getPostInfo({categoryNo, postNo});
+        //    const postTest = res.data.data;
+        //     return {categoryNo, postNo }
     }
 
     componentDidUpdate(prevProps, prevState) {
         this.handleScrollTop();
-        if(prevProps.post.title !== this.props.post.title){
-            this.props.withSetHeaderTitle(this.props.post.title);
+        if (prevProps.post.title !== this.props.post.title) {
+            //       this.props.withSetHeaderTitle(this.props.post.title);
         }
     }
 
     componentWillUnmount() {
-        this.props.postViewAction.postInfoInitialize();
+        //    this.props.postViewAction.postInfoInitialize();
     }
 
     /*스크롤 초기화*/
@@ -51,8 +54,8 @@ class postDetail extends Component {
 
     /*게시글 수정*/
     onClickPostModify = () => {
-        const { postViewAction, post, categories } = this.props;
-        const { postNo, title, content, categoryLabel } = post;
+        const {postViewAction, post, categories} = this.props;
+        const {postNo, title, content, categoryLabel} = post;
 
         const category = categories.find((c) => c.label === categoryLabel);
 
@@ -68,8 +71,8 @@ class postDetail extends Component {
     /*게시글 삭제*/
     onClickDeletePost = () => {
 
-        const { postViewAction, post, categories } = this.props;
-        const { postNo, categoryLabel } = post;
+        const {postViewAction, post, categories} = this.props;
+        const {postNo, categoryLabel} = post;
 
         const category = categories.find((c) => c.label === categoryLabel);
 
@@ -82,15 +85,14 @@ class postDetail extends Component {
     };
 
 
-
     render() {
-        const { post, authInfo, postTest } = this.props;
+        const {post, authInfo, postTest} = this.props;
         console.log("!!!!!!!!!!!!!!!!!!!!");
         console.log(post.postNo);
         const isPostingUser = authInfo.no === post.writer.no;
         return (
             <div>
-                { post.postNo !== 0 &&
+                {post.postNo !== 0 &&
                 <PostContent
                     post={post}
                     editAuth={isPostingUser}
