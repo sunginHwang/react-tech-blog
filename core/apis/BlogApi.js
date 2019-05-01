@@ -6,9 +6,9 @@ export const getPostList =  (categoryNo) => {
 };
 
 export const getPostInfo =  async (post) => {
-    console.log("==============API-CALL-START===========");
+    console.log("=======API-CALL-START=======");
     const res = await axiosAuth.get(`${BLOG_API}/post/categories/${post.categoryNo}/posts/${post.postNo}`);
-    console.log("==============API-CALL-END===========");
+    console.log("=======API-CALL-END=======");
     return res;
 };
 

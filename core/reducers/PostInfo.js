@@ -19,7 +19,7 @@ const initialState = {
 
 export const PostInfoReducer =  handleActions({
     [action.getPostInfo.request]: (state, action) => {
-        return { ...state, post: initialState.post };
+        return { ...state };
     },
     [action.getPostInfo.success]: (state, action) => {
         console.log(`api success in ${action.payload.data.categoryLabel}`);

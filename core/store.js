@@ -12,7 +12,6 @@ export function initializeStore(initialState) {
 
 const initStore = initialState => {
     console.log("=======INIT_STORE_IN=====");
-    console.log(initialState);
     console.log("=======INIT_STORE_OUT=====");
     const sagaMiddleware = createSagaMiddleware();
 

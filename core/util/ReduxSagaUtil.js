@@ -1,5 +1,6 @@
 import { togglePageLoading } from '../actions/LayoutAction';
 import { call, put } from "redux-saga/effects";
+import { delay } from "redux-saga";
 
 
 /*비동기 통신 자동화*/
@@ -24,15 +25,15 @@ export function * asyncSagaCallBack(asyncFunc, apiFunc, payload, successFunc, fa
 
     yield put(togglePageLoading(true));
     yield put(asyncFunc.request()); // 요청대기
-    yield console.log('asyncCallbackIn');
+    yield console.log('=======COMMON_ASYNC_CALL_BACK_IN=======');
     try {
-        yield console.log('asyncApiCallStart');
+
+        yield console.log('=======COMMON_ASYNC_CALL_BACK_START=======');
 
         const result = yield call(apiFunc,payload); // 비동기처리 promise
-        yield console.log('asyncApiCallEnd');
+        yield console.log('=======COMMON_ASYNC_CALL_BACK_END=======');
         if( result.data.code === 'SUCCESS' ){
             yield put(togglePageLoading(false));
-            yield console.log('asyncAPISUCCESS');
             yield put(asyncFunc.success(result.data)); // 비동기 처리 성공
             yield call(successFunc, result.data);
         }else{
@@ -50,3 +51,5 @@ export function * asyncSagaCallBack(asyncFunc, apiFunc, payload, successFunc, fa
 
     }
 }
+
+

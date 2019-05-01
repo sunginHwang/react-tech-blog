@@ -24,10 +24,10 @@ class postDetail extends Component {
 
     static async getInitialProps({query: {categoryNo, postNo}, store, isServer}) {
         if (isServer) {
-            await console.log("============================getInitialProps_START============================");
-            const res = await BlogApi.getPostInfo({categoryNo, postNo});
-            await store.dispatch(postViewAction.TestGet(res.data.data));
-            await console.log("============================getInitialProps_END==============================");
+            await console.log("=======GET_INITIAL_PROPS_IN=======");
+            //  const res = await BlogApi.getPostInfo({categoryNo, postNo});
+            await store.dispatch(postViewAction.getPostInfo({postNo, categoryNo}));
+            await console.log("=======GET_INITIAL_PROPS_OUT=======");
 
         }
 
