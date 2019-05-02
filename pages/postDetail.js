@@ -5,7 +5,6 @@ import {connect} from "react-redux";
 import PostContent from '../component/post/detail/PostContent/PostContent';
 import WithHeader from '../hoc/WithHeader';
 import * as postViewAction from "../core/actions/Post/PostViewAction";
-import * as BlogApi from '../core/apis/BlogApi';
 
 
 class postDetail extends Component {
@@ -18,38 +17,29 @@ class postDetail extends Component {
         this.handleScrollTop();
         const {postNo, postViewAction, categoryNo, post} = this.props;
         console.log('componentDidUpdate');
-        if(post.postNo === 0){
+        if (post.postNo === 0) {
             postViewAction.getPostInfo({postNo, categoryNo});
         }
 
     }
 
     static async getInitialProps({query: {categoryNo, postNo}, store, isServer}) {
-        console.log('getInitialProps');
-            await console.log("=======GET_INITIAL_PROPS_IN=======");
-            //  const res = await BlogApi.getPostInfo({categoryNo, postNo});
-
-            await store.execSagaTasks(isServer, dispatch => {
-                dispatch(postViewAction.getPostInfo({postNo, categoryNo}))
-            });
-
-            await console.log("=======GET_INITIAL_PROPS_OUT=======");
-
-
-        //    const res = await BlogApi.getPostInfo({categoryNo, postNo});
-        //    const postTest = res.data.data;
-        //     return {categoryNo, postNo }
+        await console.log("=======GET_INITIAL_PROPS_IN=======");
+        await store.execSagaTasks(isServer, dispatch => {
+            dispatch(postViewAction.getPostInfo({postNo, categoryNo}))
+        });
+        await console.log("=======GET_INITIAL_PROPS_OUT=======");
     }
 
     componentDidUpdate(prevProps, prevState) {
         this.handleScrollTop();
         if (prevProps.post.title !== this.props.post.title) {
-                   this.props.withSetHeaderTitle(this.props.post.title);
+            this.props.withSetHeaderTitle(this.props.post.title);
         }
     }
 
     componentWillUnmount() {
-            this.props.postViewAction.postInfoInitialize();
+        this.props.postViewAction.postInfoInitialize();
     }
 
     /*스크롤 초기화*/
