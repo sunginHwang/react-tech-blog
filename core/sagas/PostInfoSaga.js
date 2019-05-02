@@ -8,12 +8,10 @@ import { asyncSagaCallBack } from '../util/ReduxSagaUtil';
 import {goPostEditPage, goPostListPage, goBack} from '../util/RouteUtil';
 
 import * as BlogApi from '../apis/BlogApi';
-import {delay} from "redux-saga";
 
 
 function* getPostInfoSaga(info) {
 
-    yield delay(1400);
     yield console.log('=======WAIT_DELAY_END=======');
     yield call(asyncSagaCallBack, PostViewAction.getPostInfo, BlogApi.getPostInfo, info.payload,
         function* success(success) {

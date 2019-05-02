@@ -15,21 +15,26 @@ class postDetail extends Component {
     }
 
     componentDidMount() {
-        console.log('componentDidMount');
         this.handleScrollTop();
-        console.log(this.props.reduxStore);
-        const {postNo, postViewAction, categoryNo} = this.props;
-        //   postViewAction.getPostInfo({postNo, categoryNo});
+        const {postNo, postViewAction, categoryNo, post} = this.props;
+        console.log('componentDidUpdate');
+        if(post.postNo === 0){
+            postViewAction.getPostInfo({postNo, categoryNo});
+        }
+
     }
 
     static async getInitialProps({query: {categoryNo, postNo}, store, isServer}) {
-        if (isServer) {
+        console.log('getInitialProps');
             await console.log("=======GET_INITIAL_PROPS_IN=======");
             //  const res = await BlogApi.getPostInfo({categoryNo, postNo});
-            await store.dispatch(postViewAction.getPostInfo({postNo, categoryNo}));
+
+            await store.execSagaTasks(isServer, dispatch => {
+                dispatch(postViewAction.getPostInfo({postNo, categoryNo}))
+            });
+
             await console.log("=======GET_INITIAL_PROPS_OUT=======");
 
-        }
 
         //    const res = await BlogApi.getPostInfo({categoryNo, postNo});
         //    const postTest = res.data.data;
@@ -39,12 +44,12 @@ class postDetail extends Component {
     componentDidUpdate(prevProps, prevState) {
         this.handleScrollTop();
         if (prevProps.post.title !== this.props.post.title) {
-            //       this.props.withSetHeaderTitle(this.props.post.title);
+                   this.props.withSetHeaderTitle(this.props.post.title);
         }
     }
 
     componentWillUnmount() {
-        //    this.props.postViewAction.postInfoInitialize();
+            this.props.postViewAction.postInfoInitialize();
     }
 
     /*스크롤 초기화*/
