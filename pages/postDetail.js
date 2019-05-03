@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import PostContent from '../component/post/detail/PostContent/PostContent';
 import WithHeader from '../hoc/WithHeader';
 import * as postViewAction from "../core/actions/Post/PostViewAction";
-
+import { goPostDetailPage } from '../core/util/RouteUtil';
 
 class postDetail extends Component {
 
@@ -16,7 +16,7 @@ class postDetail extends Component {
     componentDidMount() {
         this.handleScrollTop();
         const {postNo, postViewAction, categoryNo, post} = this.props;
-        console.log('componentDidUpdate');
+        console.log('componentDidMount');
         if (post.postNo === 0) {
             postViewAction.getPostInfo({postNo, categoryNo});
         }
@@ -24,22 +24,28 @@ class postDetail extends Component {
     }
 
     static async getInitialProps({query: {categoryNo, postNo}, store, isServer}) {
-        await console.log("=======GET_INITIAL_PROPS_IN=======");
+        await console.log(`getInitialProps. isServer: ${isServer}`);
         await store.execSagaTasks(isServer, dispatch => {
             dispatch(postViewAction.getPostInfo({postNo, categoryNo}))
         });
-        await console.log("=======GET_INITIAL_PROPS_OUT=======");
+
+        return {categoryNo, postNo}
     }
 
+
     componentDidUpdate(prevProps, prevState) {
-        this.handleScrollTop();
-        if (prevProps.post.title !== this.props.post.title) {
-            this.props.withSetHeaderTitle(this.props.post.title);
+        const { postNo, postViewAction, categoryNo, post } = this.props;
+
+        const isUpdatePostInfo = post.postNo !== prevProps.post.postNo;
+
+        if (isUpdatePostInfo) {
+            // this.props.withSetHeaderTitle(this.props.post.title);
+            postViewAction.getPostInfo({postNo, categoryNo});
         }
+
     }
 
     componentWillUnmount() {
-        this.props.postViewAction.postInfoInitialize();
     }
 
     /*스크롤 초기화*/
@@ -81,12 +87,13 @@ class postDetail extends Component {
 
 
     render() {
-        const {post, authInfo, postTest} = this.props;
-        console.log("!!!!!!!!!!!!!!!!!!!!");
-        console.log(post.postNo);
+        const {post, authInfo} = this.props;
         const isPostingUser = authInfo.no === post.writer.no;
         return (
             <div>
+                <div>
+                    <button onClick={()=>goPostDetailPage(1,128)}>업데이트 버튼</button>
+                </div>
                 {post.postNo !== 0 &&
                 <PostContent
                     post={post}

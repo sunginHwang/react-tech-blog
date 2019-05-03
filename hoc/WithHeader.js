@@ -17,7 +17,6 @@ export default function WithHeader(WrappedComponent) {
 
         static async getInitialProps({query: {...props}, req}) {
           await console.log({...props});
-          await console.log('headerProps');
           return {...props}
         }
 
