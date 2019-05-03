@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import PostContent from '../component/post/detail/PostContent/PostContent';
 import WithHeader from '../hoc/WithHeader';
 import * as postViewAction from "../core/actions/Post/PostViewAction";
-import { goPostDetailPage } from '../core/util/RouteUtil';
+import {goPostDetailPage} from '../core/util/RouteUtil';
 
 class postDetail extends Component {
 
@@ -34,18 +34,19 @@ class postDetail extends Component {
 
 
     componentDidUpdate(prevProps, prevState) {
-        const { postNo, postViewAction, categoryNo, post } = this.props;
-
-        const isUpdatePostInfo = post.postNo !== prevProps.post.postNo;
+        const {postNo, postViewAction, categoryNo, post} = this.props;
+        const isUpdatePostInfo = categoryNo !== prevProps.categoryNo && postNo !== prevProps.postNo;
 
         if (isUpdatePostInfo) {
-            // this.props.withSetHeaderTitle(this.props.post.title);
+            this.props.withSetHeaderTitle(this.props.post.title);
             postViewAction.getPostInfo({postNo, categoryNo});
         }
 
     }
 
     componentWillUnmount() {
+        console.log('componentWillUnmount');
+        this.props.postViewAction.postInfoInitialize();
     }
 
     /*스크롤 초기화*/
@@ -92,7 +93,7 @@ class postDetail extends Component {
         return (
             <div>
                 <div>
-                    <button onClick={()=>goPostDetailPage(1,128)}>업데이트 버튼</button>
+                    <button onClick={() => goPostDetailPage(1, 128)}>업데이트 버튼</button>
                 </div>
                 {post.postNo !== 0 &&
                 <PostContent
@@ -108,7 +109,7 @@ class postDetail extends Component {
     }
 }
 
-export default connect(
+export default WithHeader(connect(
     (state) => ({
         authInfo: state.AuthReducer.authInfo,
         post: state.PostInfoReducer.post,
@@ -117,4 +118,4 @@ export default connect(
     (dispatch) => ({
         postViewAction: bindActionCreators(postViewAction, dispatch),
     })
-)(postDetail);
+)(postDetail));
