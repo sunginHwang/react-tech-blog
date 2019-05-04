@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
+import Helmet from 'react-helmet';
 
 import PostContent from '../component/post/detail/PostContent/PostContent';
 import WithHeader from '../hoc/WithHeader';
@@ -13,16 +14,6 @@ class postDetail extends Component {
         super(props)
     }
 
-    componentDidMount() {
-        this.handleScrollTop();
-        const {postNo, postViewAction, categoryNo, post} = this.props;
-        console.log('componentDidMount');
-        if (post.postNo === 0) {
-            postViewAction.getPostInfo({postNo, categoryNo});
-        }
-
-    }
-
     static async getInitialProps({query: {categoryNo, postNo}, store, isServer}) {
         await console.log(`getInitialProps. isServer: ${isServer}`);
         await store.execSagaTasks(isServer, dispatch => {
@@ -32,6 +23,15 @@ class postDetail extends Component {
         return {categoryNo, postNo}
     }
 
+    componentDidMount() {
+        this.handleScrollTop();
+        const {postNo, postViewAction, categoryNo, post} = this.props;
+        console.log('componentDidMount');
+        if (post.postNo === 0) {
+            postViewAction.getPostInfo({postNo, categoryNo});
+        }
+
+    }
 
     componentDidUpdate(prevProps, prevState) {
         const {postNo, postViewAction, categoryNo, post} = this.props;
@@ -89,12 +89,33 @@ class postDetail extends Component {
         postViewAction.deletePost(deleteData);
     };
 
+    convertToPlainText = markdown => {
+        if (!markdown) return '';
+        return markdown.replace(/\n/g, ' ').replace(/```(.*)```/g, '').replace('#','');
+    }
+
 
     render() {
-        const {post, authInfo} = this.props;
+        const {post, authInfo, categoryNo, postNo} = this.props;
         const isPostingUser = authInfo.no === post.writer.no;
+        const url = `https://blog.woolta.com/categories/${categoryNo}/posts/${postNo}`;
+        const thumbnail = `https://image.woolta.com/3fed2d102ca753c6.png`;
         return (
             <div>
+                <Helmet>
+                    <title>{post.title}</title>
+                    <meta name="description" content={this.convertToPlainText(post.content)} />
+                    <link rel="canonical" href={url} />
+                    <meta property="og:url" content={url} />
+                    <meta property="og:type" content="article" />
+                    <meta property="og:title" content={post.title} />
+                    <meta property="og:description" content={this.convertToPlainText(post.content)} />
+                    {thumbnail && <meta property="og:image" content={thumbnail} />}
+                    <meta name="twitter:card" content="summary_large_image" />
+                    <meta name="twitter:title" content={post.title} />
+                    <meta name="twitter:description" content={this.convertToPlainText(post.content)} />
+                    {thumbnail && <meta name="twitter:image" content={thumbnail} />}
+                </Helmet>
                 <div>
                     <button onClick={() => goPostDetailPage(1, 128)}>업데이트 버튼</button>
                 </div>
