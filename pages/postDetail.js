@@ -38,8 +38,11 @@ class postDetail extends Component {
         const isUpdatePostInfo = categoryNo !== prevProps.categoryNo && postNo !== prevProps.postNo;
 
         if (isUpdatePostInfo) {
-            this.props.withSetHeaderTitle(this.props.post.title);
             postViewAction.getPostInfo({postNo, categoryNo});
+        }
+
+        if(post.title !== prevProps.post.title){
+            this.props.withSetHeaderTitle(post.title);
         }
 
     }
