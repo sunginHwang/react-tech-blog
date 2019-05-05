@@ -24,6 +24,7 @@
     "glob": "^7.1.2",
     "immutable": "^3.8.2",
     "install": "^0.12.1",
+    "nanobar": "^0.4.2",
     "next": "6.1.2",
     "next-redux-wrapper": "^3.0.0-alpha.1",
     "next-routes": "^1.4.2",

@@ -5,6 +5,11 @@ export default class MyDocument extends Document {
     render() {
         return (
             <html>
+            <Head>
+                <link rel="stylesheet" href="/_next/static/style.css" />
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atelier-cave-dark.min.css"/>
+                <link href="https://fonts.googleapis.com/css?family=Roboto:400,700,900&amp;subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese" rel="stylesheet"/>
+            </Head>
             <Helmet>
                 <title>woolta</title>
                 <meta charSet='utf-8' />
@@ -24,9 +29,6 @@ export default class MyDocument extends Document {
                 <link rel="icon" type="icon" href="/static/woolta.ico" sizes="128x128" />
                 <link rel="apple-touch-icon" href="/static/woolta.ico"/>
                 <link rel="shortcut icon" href="/static/woolta.ico"/>
-                <link rel="stylesheet" href="/_next/static/style.css" />
-                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atelier-cave-dark.min.css"/>
-                <link href="https://fonts.googleapis.com/css?family=Roboto:400,700,900&amp;subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese" rel="stylesheet"/>
             </Helmet>
 
           {/*  <Head>

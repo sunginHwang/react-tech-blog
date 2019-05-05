@@ -6,6 +6,7 @@ import UserInfoLoadContainer from '../container/UserInfoLoadContainer/UserInfoLo
 import store from '../core/store'
 import { Provider } from 'react-redux'
 import '../style/scss/DefaultSetting.scss';
+import '../style/css/extraStyle.css';
 
 
 class MyApp extends App {
