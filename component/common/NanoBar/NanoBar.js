@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import Nano from 'nanobar';
-import cn from './Nanobar.scss';
+import cn from './NanoBar.scss';
 
 class NanoBar extends Component {
 

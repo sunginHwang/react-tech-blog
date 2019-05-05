@@ -3,7 +3,7 @@ import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 
 import PageLoading from '../../component/common/loading/PageLoading/PageLoading';
-import Nanobar from '../../component/common/NanoBar/Nanobar';
+import NanoBar from '../../component/common/NanoBar/NanoBar';
 import MainHeader from '../../component/mainTemplate/MainHeader/MainHeader';
 import Footer from '../../component/mainTemplate/Footer/Footer';
 import SideBar from '../../component/mainTemplate/SideBar/SideBar';
@@ -13,16 +13,18 @@ import * as layoutAction from "../../core/actions/LayoutAction";
 import * as userAction from "../../core/actions/User/UserAction";
 
 import { goPostListPage, goLoginPage, goPostEditPage, goMainPage } from '../../core/util/RouteUtil';
+import { nanoBarSetup } from '../../core/lib/NanoBarSetting';
 
 import style from './LayoutContainer.scss';
 
 class LayoutContainer extends React.Component {
 
 
-    componentDidMount() {
-        this.loadingComplete();
-        this.loadCategories();
-        this.onDetectMobileScrollUpAndDown();
+    async componentDidMount() {
+        await nanoBarSetup();
+        await this.loadingComplete();
+        await this.loadCategories();
+        await this.onDetectMobileScrollUpAndDown();
     }
 
     loadCategories() {
@@ -100,7 +102,7 @@ class LayoutContainer extends React.Component {
                     onClickSideBar={() => this.onToggleSideBar(!sideBar)}
                 />
                 <PageLoading loading={pageLoading}/>
-                <Nanobar/>
+                <NanoBar/>
                 <div className={style.contentWrapper}>
                     {
                         this.props.children
