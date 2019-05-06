@@ -12,7 +12,7 @@ import * as layoutAction from "../../core/actions/LayoutAction";
 import * as userAction from "../../core/actions/User/UserAction";
 
 import {goPostListPage, goLoginPage, goPostEditPage, goMainPage} from '../../core/util/RouteUtil';
-import { nanoBarSetup } from '../../core/lib/NanoBarSetting';
+import { nanoBarLoadingSetup } from '../../core/lib/apiCall';
 
 import style from './LayoutContainer.scss';
 
@@ -20,7 +20,7 @@ class LayoutContainer extends React.Component {
 
 
     async componentDidMount() {
-        await nanoBarSetup();
+        await nanoBarLoadingSetup();
         await this.onDetectMobileScrollUpAndDown();
     }
 
@@ -35,9 +35,7 @@ class LayoutContainer extends React.Component {
                 const currentScroll = Math.max(window.pageYOffset, document.documentElement.scrollTop, document.body.scrollTop);
                 let isScrollDown = lastScroll < currentScroll && currentScroll >= 0;
                 lastScroll = currentScroll;
-
                 layoutAction.showMobileHeader(isScrollDown);
-
             }
         }
     };

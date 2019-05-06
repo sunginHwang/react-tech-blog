@@ -1,4 +1,4 @@
-import axiosAuth from '../lib/axiosAuth';
+import apiCall from '../lib/apiCall';
 import { IMAGE_API, BLOG_API } from '../../core/lib/constants';
 
 export const saveImageAndGetImageUrl = async (imageFile) => {
@@ -6,7 +6,7 @@ export const saveImageAndGetImageUrl = async (imageFile) => {
     await data.append("imageFile", imageFile);
 
     try{
-        const result = await axiosAuth.post(`${BLOG_API}/file/upload/image`,data);
+        const result = await apiCall.post(`${BLOG_API}/file/upload/image`,data);
 
         if(result.status === 200 && result.data.code === 'SUCCESS'){
             return await `${IMAGE_API}/${result.data.data.originFileName}`;

@@ -1,4 +1,4 @@
-import axiosAuth from '../lib/axiosAuth';
+import apiCall from '../lib/apiCall';
 import { BLOG_API } from '../lib/constants';
 
 export const userLogin =  (loginInfo) => {
@@ -6,9 +6,9 @@ export const userLogin =  (loginInfo) => {
     data.append('id',loginInfo.id);
     data.append('password',loginInfo.password);
 
-    return axiosAuth.post(`${BLOG_API}/user/login`,data);
+    return apiCall.post(`${BLOG_API}/user/login`,data);
 };
 
 export const getAuthInfo =  () => {
-    return axiosAuth.get(`${BLOG_API}/user/check/jwt`);
+    return apiCall.get(`${BLOG_API}/user/check/jwt`);
 };

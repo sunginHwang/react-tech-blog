@@ -1,4 +1,19 @@
-import axiosAuth from './axiosAuth';
+import axios from "axios";
+import { ACCESS_HEADER_TOKEN, ACCESS_TOKEN } from './constants';
+
+let apiCall = axios.create();
+
+if(typeof(Storage) !== "undefined"){
+    apiCall.defaults.headers.common[ACCESS_HEADER_TOKEN] = localStorage.getItem(ACCESS_TOKEN);
+}
+
+apiCall.defaults.headers.common['Access-Control-Allow-Headers'] = '*';
+apiCall.defaults.headers.common['Access-Control-Allow-Methods'] = '*';
+apiCall.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+apiCall.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+
+export default apiCall;
+
 
 const requests = [];
 
@@ -21,8 +36,8 @@ function timer() {
     timerId = setTimeout(timer, 50);
 }
 
-export function nanoBarSetup() {
-    axiosAuth.interceptors.request.use((req) => {
+export function nanoBarLoadingSetup() {
+    apiCall.interceptors.request.use((req) => {
         if (requests.length === 0) {
             setProgress(25);
             timer();
@@ -30,6 +45,7 @@ export function nanoBarSetup() {
         requests.push(req);
         return req;
     });
+
     const responseHandler = (res) => {
         setTimeout(() => {
             requests.pop();
@@ -43,6 +59,7 @@ export function nanoBarSetup() {
         }, 150);
         return res;
     };
+
     const errorHandler = (response) => {
         setTimeout(() => {
             requests.pop();
@@ -57,6 +74,9 @@ export function nanoBarSetup() {
         return Promise.reject(response);
     };
 
-    axiosAuth.interceptors.response.use(responseHandler, errorHandler);
+    apiCall.interceptors.response.use(responseHandler, errorHandler);
+}
 
+export function settingAccessHeaderToken(accessToken) {
+    apiCall.defaults.headers.common[ACCESS_HEADER_TOKEN] = accessToken;
 }

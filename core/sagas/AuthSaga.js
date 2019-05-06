@@ -3,9 +3,9 @@ import * as UserAction from "../actions/User/UserAction";
 import { asyncSagaCallBack } from '../util/ReduxSagaUtil';
 
 import { goMainPage } from '../util/RouteUtil';
-import { ACCESS_TOKEN, ACCESS_HEADER_TOKEN } from '../lib/constants';
+import { ACCESS_TOKEN } from '../lib/constants';
 import * as AuthApi  from '../apis/AuthApi';
-import axiosAuth from '../lib/axiosAuth';
+import {settingAccessHeaderToken} from '../lib/apiCall';
 
 
 
@@ -14,7 +14,7 @@ function * loginSaga(info) {
         function* success(success) {
             const { authToken } = yield success.data;
             yield localStorage.setItem(ACCESS_TOKEN, authToken);
-            axiosAuth.defaults.headers.common[ACCESS_HEADER_TOKEN] = yield authToken;
+            yield settingAccessHeaderToken(authToken) ;
             yield goMainPage();
         },
         function* failure(error) {
@@ -23,7 +23,7 @@ function * loginSaga(info) {
 }
 
 function * logoutSaga() {
-    yield axiosAuth.defaults.headers.common[ACCESS_HEADER_TOKEN] = '';
+    yield settingAccessHeaderToken('');
     yield localStorage.removeItem(ACCESS_TOKEN);
 }
 
