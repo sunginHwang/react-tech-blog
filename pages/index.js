@@ -6,7 +6,6 @@ import PostLayout from '../component/post/list/PostLayout/PostLayout';
 import * as postsAction from "../core/actions/Post/PostsAction";
 import { goPostDetailPage } from '../core/util/RouteUtil';
 import WithHeader from "../hoc/WithHeader";
-import {configs} from '../core/config';
 
 class mainPage extends Component {
 
@@ -14,11 +13,11 @@ class mainPage extends Component {
         super();
     }
 
+    static async getInitialProps({isServer}) {
+    }
+
     componentDidMount() {
-        console.log('---config-start-');
-        console.log(configs);
-        console.log('---config-end--');
-        this.onLoadRecentPostList();
+        this.onLoadRecentPostList()
     }
 
     onLoadRecentPostList =  () => {

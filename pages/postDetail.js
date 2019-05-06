@@ -10,12 +10,9 @@ import {goPostDetailPage} from '../core/util/RouteUtil';
 
 class postDetail extends Component {
 
-    constructor(props) {
-        super(props)
-    }
 
     static async getInitialProps({query: {categoryNo, postNo}, store, isServer}) {
-        await console.log(`getInitialProps. isServer: ${isServer}`);
+        await console.log('detail');
         await store.execSagaTasks(isServer, dispatch => {
             dispatch(postViewAction.getPostInfo({postNo, categoryNo}))
         });
@@ -26,11 +23,8 @@ class postDetail extends Component {
     componentDidMount() {
         this.handleScrollTop();
         const {postNo, postViewAction, categoryNo, post} = this.props;
-        console.log('componentDidMount');
-        if (post.postNo === 0) {
-            postViewAction.getPostInfo({postNo, categoryNo});
-        }
-
+        const isExistPost = post.postNo === 0;
+        isExistPost && postViewAction.getPostInfo({postNo, categoryNo});
     }
 
     componentDidUpdate(prevProps, prevState) {

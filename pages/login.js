@@ -8,15 +8,11 @@ import {bindActionCreators} from "redux";
 
 class login extends Component {
 
-    constructor() {
-        super();
-    }
-
     componentDidMount() {
         this.props.withSetHeaderTitle('로그인');
-
     }
 
+    // 로그인 인풋 double 바인딩
     onChangeLoginInfo = (inputType, value) => {
         const {UserAction} = this.props;
 
@@ -26,7 +22,8 @@ class login extends Component {
         });
     };
 
-    onLogin = async () => {
+    // 로그인 클릭
+    onLoginClick = async () => {
         const {UserAction, id, password } = this.props;
 
         const loginInfo = {
@@ -43,7 +40,7 @@ class login extends Component {
             <LoginView
                 id={id}
                 password={password}
-                onLoginClick={this.onLogin}
+                onLoginClick={this.onLoginClick}
                 onChangeLoginInfo={this.onChangeLoginInfo}
             />
         )

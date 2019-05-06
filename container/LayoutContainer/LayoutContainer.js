@@ -2,17 +2,16 @@ import React from "react";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 
+import NanoBarLoading from '../../component/common/loading/NanoBarLoading/NanoBarLoading';
 import PageLoading from '../../component/common/loading/PageLoading/PageLoading';
-import NanoBar from '../../component/common/NanoBar/NanoBar';
 import MainHeader from '../../component/mainTemplate/MainHeader/MainHeader';
 import Footer from '../../component/mainTemplate/Footer/Footer';
 import SideBar from '../../component/mainTemplate/SideBar/SideBar';
 
-import * as categoryAction from "../../core/actions/CategoryAction";
 import * as layoutAction from "../../core/actions/LayoutAction";
 import * as userAction from "../../core/actions/User/UserAction";
 
-import { goPostListPage, goLoginPage, goPostEditPage, goMainPage } from '../../core/util/RouteUtil';
+import {goPostListPage, goLoginPage, goPostEditPage, goMainPage} from '../../core/util/RouteUtil';
 import { nanoBarSetup } from '../../core/lib/NanoBarSetting';
 
 import style from './LayoutContainer.scss';
@@ -22,20 +21,10 @@ class LayoutContainer extends React.Component {
 
     async componentDidMount() {
         await nanoBarSetup();
-        await this.loadingComplete();
-        await this.loadCategories();
         await this.onDetectMobileScrollUpAndDown();
     }
 
-    loadCategories() {
-        const {categoryAction, categories} = this.props;
-
-        if (categories.length === 0) {
-                categoryAction.getCategories();
-        }
-
-    }
-
+    // 모바일 스크롤 헤더 이벤트
     onDetectMobileScrollUpAndDown = () => {
         let lastScroll = 0;
 
@@ -53,31 +42,37 @@ class LayoutContainer extends React.Component {
         }
     };
 
-    loadingComplete() {
-        /*this.props.layoutAction.togglePageLoading(true);
-        setTimeout(()=>{this.props.layoutAction.togglePageLoading(false);}, 500);*/
-    }
-
-    onToggleSideBar = ( toggleValue ) => {
+    // 사이드 메뉴 토글
+    onToggleSideBar = (toggleValue) => {
         this.props.layoutAction.toggleSideBar(toggleValue);
     };
 
+    // 카테고리 페이지 이동
     onClickCategoryPage = (categoryNo) => {
         goPostListPage(categoryNo);
         this.onToggleSideBar(false);
     };
 
+    // 로그아웃
     onClickLogout = () => {
         this.props.userAction.logout();
     };
 
+    //
     onClickSideBarPage = (type) => {
 
-        switch(type){
-            case 'login': goLoginPage();break;
-            case 'postEdit': goPostEditPage();break;
-            case 'main': goMainPage();break;
-            default: break;
+        switch (type) {
+            case 'login':
+                goLoginPage();
+                break;
+            case 'postEdit':
+                goPostEditPage();
+                break;
+            case 'main':
+                goMainPage();
+                break;
+            default:
+                break;
         }
 
         this.onToggleSideBar(false);
@@ -98,11 +93,12 @@ class LayoutContainer extends React.Component {
                 />
                 <MainHeader
                     showMobileHeader={mobileHeader}
-                    onClickLogo={()=>this.onClickSideBarPage('main')}
+                    onClickLogo={() => this.onClickSideBarPage('main')}
                     onClickSideBar={() => this.onToggleSideBar(!sideBar)}
                 />
+                <NanoBarLoading/>
                 <PageLoading loading={pageLoading}/>
-                <NanoBar/>
+                <NanoBarLoading/>
                 <div className={style.contentWrapper}>
                     {
                         this.props.children
@@ -123,7 +119,6 @@ export default connect(
         mobileHeader: state.LayoutReducer.mobileHeader,
     }),
     (dispatch) => ({
-        categoryAction: bindActionCreators(categoryAction, dispatch),
         layoutAction: bindActionCreators(layoutAction, dispatch),
         userAction: bindActionCreators(userAction, dispatch)
 

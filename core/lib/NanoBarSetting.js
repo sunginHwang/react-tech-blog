@@ -7,8 +7,8 @@ let timerId = null;
 
 function setProgress(value) {
     progress = value;
-    if (typeof window !== 'undefined' && window.nanoBar) {
-        window.nanoBar.go(progress);
+    if (typeof window !== 'undefined' && window.nanoBarLoading) {
+        window.nanoBarLoading.go(progress);
     }
 }
 
@@ -22,7 +22,6 @@ function timer() {
 }
 
 export function nanoBarSetup() {
-    console.log(33433);
     axiosAuth.interceptors.request.use((req) => {
         if (requests.length === 0) {
             setProgress(25);
@@ -58,8 +57,6 @@ export function nanoBarSetup() {
         return Promise.reject(response);
     };
 
-    console.log(responseHandler);
-    console.log(12);
     axiosAuth.interceptors.response.use(responseHandler, errorHandler);
 
 }
