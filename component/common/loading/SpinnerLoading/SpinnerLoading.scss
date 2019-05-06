@@ -1,8 +1,4 @@
-@import '../../../../style/scss/CommonUtil';
-
-$blueColor: #78ccdd;
-
-.pageLoadingWrapper{
+.SpinnerLoadingWrapper{
   background-color: #e8e8e8;
   z-index: 1000;
   position: fixed;
@@ -13,10 +9,6 @@ $blueColor: #78ccdd;
   vertical-align: middle;
   background-color: rgba(0,0,0,.2);
 
-}
-
-.blueColor{
-  color: $main-theme-color;
 }
 
 .loadingPosition{

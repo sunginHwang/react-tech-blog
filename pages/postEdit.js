@@ -28,22 +28,25 @@ class postEdit extends Component {
         }
     };
 
-
+    // 본문내용 변경 작성
     onChangeContent = (content) => {
         const { postUpsertAction } = this.props;
         postUpsertAction.setContent(content);
     };
 
+    // 제목 변경
     onChangeTitle = (title) => {
         const { postUpsertAction } = this.props;
         postUpsertAction.setTitle(title);
     };
 
+    // 카테고리 변경 시
     onChangeCategories = (selectedCategory) => {
         const { postUpsertAction } = this.props;
         postUpsertAction.setCategory(selectedCategory);
     };
 
+    // 글 생성 or 업데이트
     upsertPost = () => {
         const { title, content, category, postNo, postUpsertAction } = this.props;
         const { validateUpsertPost } = this;
@@ -60,6 +63,7 @@ class postEdit extends Component {
         }
     };
 
+    // 글 작성 유효성 검사
     validateUpsertPost = (title, content, category) => {
 
         if(this.props.authInfo.no === 0 ){
@@ -128,7 +132,7 @@ class postEdit extends Component {
         fileInput.click();
     };
 
-    /*이미지 업로딩*/
+    // 이미지 업로드
     uploadImage = async (file) => {
         await this.props.LayoutAction.togglePageLoading(true);
 
@@ -142,7 +146,7 @@ class postEdit extends Component {
     };
 
 
-
+    // 프리뷰 클릭
     onClickShowOriginPreview = () => {
         const { postUpsertAction, previewModal } = this.props;
         postUpsertAction.toggleOriginPreview(!previewModal);

@@ -3,7 +3,6 @@ import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 
 import NanoBarLoading from '../../component/common/loading/NanoBarLoading/NanoBarLoading';
-import PageLoading from '../../component/common/loading/PageLoading/PageLoading';
 import MainHeader from '../../component/mainTemplate/MainHeader/MainHeader';
 import Footer from '../../component/mainTemplate/Footer/Footer';
 import SideBar from '../../component/mainTemplate/SideBar/SideBar';
@@ -95,7 +94,6 @@ class LayoutContainer extends React.Component {
                     onClickSideBar={() => this.onToggleSideBar(!sideBar)}
                 />
                 <NanoBarLoading/>
-                <PageLoading loading={pageLoading}/>
                 <NanoBarLoading/>
                 <div className={style.contentWrapper}>
                     {
