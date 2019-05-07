@@ -18,8 +18,8 @@ class MyApp extends App {
 
         // 초기값 세팅 -> 게시글 카테고리 load (ssr)
         const loadCategories = async (store) => {
-            await store.execSagaTasks(true, dispatch => {
-                dispatch(categoryAction.getCategories());
+            await store.execSagaTasks(ctx.isServer, dispatch => {
+                ctx.isServer && dispatch(categoryAction.getCategories());
             });
         }
 

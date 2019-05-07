@@ -1,40 +1,42 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 
 import WithHeader from '../hoc/WithHeader';
 import PostLayout from '../component/post/list/PostLayout/PostLayout';
 import * as postsAction from "../core/actions/Post/PostsAction";
-import { goPostDetailPage } from '../core/util/RouteUtil';
-
+import {goPostDetailPage} from '../core/util/RouteUtil';
 
 class postList extends Component {
 
-    componentDidMount() {
-        console.log('what');
-        this.onLoadPostList();
+    static async getInitialProps({query: {categoryNo}, store, isServer}) {
+        await store.execSagaTasks(isServer, dispatch => {
+            isServer && dispatch(postsAction.getPosts(categoryNo))
+        });
+
+        return {categoryNo}
     }
 
-    componentDidUpdate(prevProps, prevState) {
+    async componentDidMount() {
+        const {postsAction, categoryNo, posts} = this.props;
+        const isClientRendering = await posts.length === 0;
 
-        this.changeHeaderTitle();
-        console.log(prevProps.categoryNo);
-        console.log(this.props.categoryNo);
-        if(prevProps.categoryNo !== this.props.categoryNo){
-            this.onLoadPostList();
-        }
-
-    }
-
-    onLoadPostList = async () => {
-        const { postsAction , categoryNo } = this.props;
-        await this.props.postsAction.getPosts(categoryNo);
+        isClientRendering && await postsAction.getPosts(categoryNo);
         await this.changeHeaderTitle();
-    };
+    }
 
-    changeHeaderTitle= () => {
-        const { categoryNo, withSetHeaderTitle} = this.props;
-        const headerTitle =  this.getCategoryNameByCategoryNo(categoryNo);
+    async componentDidUpdate(prevProps, prevState) {
+
+        if (prevProps.categoryNo !== this.props.categoryNo) {
+            const {postsAction, categoryNo} = this.props;
+            await postsAction.getPosts(categoryNo);
+            await this.changeHeaderTitle();
+        }
+    }
+
+    changeHeaderTitle = () => {
+        const {categoryNo, withSetHeaderTitle} = this.props;
+        const headerTitle = this.getCategoryNameByCategoryNo(categoryNo);
         withSetHeaderTitle(headerTitle);
     };
 
@@ -43,22 +45,20 @@ class postList extends Component {
         return category !== undefined ? category.label : '';
     };
 
-    static getInitialProps({query: {categoryNo}}) {
-        return {categoryNo}
-    }
 
     render() {
+        const { posts } = this.props;
         return (
-                <PostLayout
-                    onClickDetailPage={goPostDetailPage}
-                    posts={this.props.postList}/>
+            <PostLayout
+                onClickDetailPage={goPostDetailPage}
+                posts={posts}/>
         )
     }
 }
 
 export default WithHeader(connect(
     (state) => ({
-        postList: state.PostListReducer.postList,
+        posts: state.PostListReducer.postList,
         categories: state.CategoryReducer.categories
     }),
     (dispatch) => ({

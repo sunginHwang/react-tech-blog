@@ -12,9 +12,8 @@ class postDetail extends Component {
 
 
     static async getInitialProps({query: {categoryNo, postNo}, store, isServer}) {
-        await console.log('detail');
         await store.execSagaTasks(isServer, dispatch => {
-            dispatch(postViewAction.getPostInfo({postNo, categoryNo}))
+            isServer && dispatch(postViewAction.getPostInfo({postNo, categoryNo}))
         });
 
         return {categoryNo, postNo}
@@ -23,22 +22,17 @@ class postDetail extends Component {
     componentDidMount() {
         this.handleScrollTop();
         const {postNo, postViewAction, categoryNo, post} = this.props;
-        const isExistPost = post.postNo === 0;
-        isExistPost && postViewAction.getPostInfo({postNo, categoryNo});
+        const isClientRendering = post.postNo === 0;
+        isClientRendering && postViewAction.getPostInfo({postNo, categoryNo});
     }
 
     componentDidUpdate(prevProps, prevState) {
-        const {postNo, postViewAction, categoryNo, post} = this.props;
+        const {postNo, postViewAction, categoryNo, post, withSetHeaderTitle} = this.props;
         const isUpdatePostInfo = categoryNo !== prevProps.categoryNo && postNo !== prevProps.postNo;
+        const isChangePostTitle = post.title !== prevProps.post.title;
 
-        if (isUpdatePostInfo) {
-            postViewAction.getPostInfo({postNo, categoryNo});
-        }
-
-        if(post.title !== prevProps.post.title){
-            this.props.withSetHeaderTitle(post.title);
-        }
-
+        isUpdatePostInfo && postViewAction.getPostInfo({postNo, categoryNo});
+        isChangePostTitle && withSetHeaderTitle(post.title);
     }
 
     componentWillUnmount() {
@@ -85,7 +79,7 @@ class postDetail extends Component {
 
     convertToPlainText = markdown => {
         if (!markdown) return '';
-        return markdown.replace(/\n/g, ' ').replace(/```(.*)```/g, '').replace('#','');
+        return markdown.replace(/\n/g, ' ').replace(/```(.*)```/g, '').replace('#', '');
     }
 
 
@@ -98,17 +92,17 @@ class postDetail extends Component {
             <div>
                 <Helmet>
                     <title>{post.title}</title>
-                    <meta name="description" content={this.convertToPlainText(post.content)} />
-                    <link rel="canonical" href={url} />
-                    <meta property="og:url" content={url} />
-                    <meta property="og:type" content="article" />
-                    <meta property="og:title" content={post.title} />
-                    <meta property="og:description" content={this.convertToPlainText(post.content)} />
-                    {thumbnail && <meta property="og:image" content={thumbnail} />}
-                    <meta name="twitter:card" content="summary_large_image" />
-                    <meta name="twitter:title" content={post.title} />
-                    <meta name="twitter:description" content={this.convertToPlainText(post.content)} />
-                    {thumbnail && <meta name="twitter:image" content={thumbnail} />}
+                    <meta name="description" content={this.convertToPlainText(post.content)}/>
+                    <link rel="canonical" href={url}/>
+                    <meta property="og:url" content={url}/>
+                    <meta property="og:type" content="article"/>
+                    <meta property="og:title" content={post.title}/>
+                    <meta property="og:description" content={this.convertToPlainText(post.content)}/>
+                    {thumbnail && <meta property="og:image" content={thumbnail}/>}
+                    <meta name="twitter:card" content="summary_large_image"/>
+                    <meta name="twitter:title" content={post.title}/>
+                    <meta name="twitter:description" content={this.convertToPlainText(post.content)}/>
+                    {thumbnail && <meta name="twitter:image" content={thumbnail}/>}
                 </Helmet>
                 <div>
                     <button onClick={() => goPostDetailPage(1, 128)}>업데이트 버튼</button>

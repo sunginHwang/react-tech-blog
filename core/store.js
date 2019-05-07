@@ -6,13 +6,7 @@ import rootSaga from './sagas';
 
 const isProd = process.env.NODE_ENV === 'production';
 
-export function initializeStore(initialState) {
-
-};
-
 const initStore = initialState => {
-    console.log("=======INIT_STORE_IN=====");
-    console.log("=======INIT_STORE_OUT=====");
     const sagaMiddleware = createSagaMiddleware();
 
     const middleware = isProd ? applyMiddleware(sagaMiddleware)
