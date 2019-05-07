@@ -11,13 +11,15 @@ import { goPostDetailPage } from '../core/util/RouteUtil';
 class postList extends Component {
 
     componentDidMount() {
+        console.log('what');
         this.onLoadPostList();
     }
 
     componentDidUpdate(prevProps, prevState) {
 
         this.changeHeaderTitle();
-
+        console.log(prevProps.categoryNo);
+        console.log(this.props.categoryNo);
         if(prevProps.categoryNo !== this.props.categoryNo){
             this.onLoadPostList();
         }
@@ -26,7 +28,7 @@ class postList extends Component {
 
     onLoadPostList = async () => {
         const { postsAction , categoryNo } = this.props;
-        await postsAction.getPosts(categoryNo);
+        await this.props.postsAction.getPosts(categoryNo);
         await this.changeHeaderTitle();
     };
 

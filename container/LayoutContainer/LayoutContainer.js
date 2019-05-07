@@ -3,6 +3,8 @@ import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 
 import NanoBarLoading from '../../component/common/loading/NanoBarLoading/NanoBarLoading';
+import SpinnerLoading from '../../component/common/loading/SpinnerLoading/SpinnerLoading';
+
 import MainHeader from '../../component/mainTemplate/MainHeader/MainHeader';
 import Footer from '../../component/mainTemplate/Footer/Footer';
 import SideBar from '../../component/mainTemplate/SideBar/SideBar';
@@ -76,7 +78,7 @@ class LayoutContainer extends React.Component {
     };
 
     render() {
-        const {categories, sideBar, mobileHeader, authInfo, pageLoading} = this.props;
+        const {categories, sideBar, mobileHeader, authInfo, spinnerLoading} = this.props;
 
         return (
             <div>
@@ -93,7 +95,7 @@ class LayoutContainer extends React.Component {
                     onClickLogo={() => this.onClickSideBarPage('main')}
                     onClickSideBar={() => this.onToggleSideBar(!sideBar)}
                 />
-                <NanoBarLoading/>
+                <SpinnerLoading loading={spinnerLoading}/>
                 <NanoBarLoading/>
                 <div className={style.contentWrapper}>
                     {
@@ -110,7 +112,7 @@ export default connect(
     (state) => ({
         categories: state.CategoryReducer.categories,
         authInfo: state.AuthReducer.authInfo,
-        pageLoading: state.LayoutReducer.pageLoading,
+        spinnerLoading: state.LayoutReducer.spinnerLoading,
         sideBar: state.LayoutReducer.sideBar,
         mobileHeader: state.LayoutReducer.mobileHeader,
     }),

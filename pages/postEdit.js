@@ -134,14 +134,14 @@ class postEdit extends Component {
 
     // 이미지 업로드
     uploadImage = async (file) => {
-        await this.props.LayoutAction.togglePageLoading(true);
+        await this.props.LayoutAction.toggleSpinnerLoading(true);
 
         await FileApi.saveImageAndGetImageUrl(file)
             .then(async (imgUrl) => {
                 if (imgUrl === '') return;
                 await this.onChangeContent(this.props.content + convertImageToCodeImage(imgUrl));
             });
-        await this.props.LayoutAction.togglePageLoading(false);
+        await this.props.LayoutAction.toggleSpinnerLoading(false);
 
     };
 
