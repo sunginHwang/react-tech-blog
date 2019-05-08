@@ -17,7 +17,9 @@ export default function WithHeader(WrappedComponent) {
 
 
         static getInitialProps(ctx) {
-            return WrappedComponent.getInitialProps(ctx)
+            if(WrappedComponent.getInitialProps){
+                return WrappedComponent.getInitialProps(ctx);
+            }
         }
 
         render() {

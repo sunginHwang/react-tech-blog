@@ -10,9 +10,8 @@ import WithHeader from "../hoc/WithHeader";
 class mainPage extends Component {
 
     static async getInitialProps({store, isServer}) {
-        await console.log('mainPage');
         await store.execSagaTasks(isServer, dispatch => {
-            dispatch(postsAction.getRecentPosts());
+            isServer && dispatch(postsAction.getRecentPosts());
         });
     }
 
@@ -21,14 +20,12 @@ class mainPage extends Component {
         this.onLoadRecentPostList()
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        console.log(this.props.postList);
-        console.log(prevProps.postList);
-        console.log(this.props.postList == prevProps.postList);
+    shouldComponentUpdate(nextProps, nextState) {
+        const isChangePosts = JSON.stringify(this.props.postList) !== JSON.stringify(nextProps.postList);
+        return isChangePosts;
     }
 
     onLoadRecentPostList = () => {
-        this.props.postList.length === 0 &&
         this.props.postsAction.getRecentPosts();
     };
 
