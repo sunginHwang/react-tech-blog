@@ -7,7 +7,7 @@ const initialState = {
     mobileHeader: false
 };
 
-export const LayoutReducer =  handleActions({
+export default handleActions({
     [layout.toggleSideBar]: (state, action) => {
         return { ...state, sideBar: action.payload };
     },

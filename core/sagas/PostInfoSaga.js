@@ -11,12 +11,8 @@ import * as BlogApi from '../apis/BlogApi';
 
 
 function* getPostInfoSaga(info) {
-
-    yield console.log('=======WAIT_DELAY_END=======');
     yield call(asyncSagaCallBack, PostViewAction.getPostInfo, BlogApi.getPostInfo, info.payload,
         function* success(success) {
-            yield console.log("=======SAGA_SUCCESS_IN=======");
-            yield console.log("=======SAGA_SUCCESS_OUT=======");
         },
         function* failure(error) {
             const { message } = yield error;

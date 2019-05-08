@@ -5,7 +5,7 @@ const initialState = {
     postList: []
 };
 
-export const PostListReducer =  handleActions({
+export default handleActions({
     [action.getPosts.request]: (state, action) => {
         return { ...state };
     },

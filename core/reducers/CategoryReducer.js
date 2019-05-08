@@ -5,7 +5,7 @@ const initialState = {
     categories: []
 };
 
-export const CategoryReducer =  handleActions({
+export default handleActions({
     [action.getCategories.request]: (state, action) => {
         return { ...state };
     },

@@ -11,7 +11,7 @@ const initialState = {
     previewModal : false
 };
 
-export const PostWriteReducer =  handleActions({
+export default handleActions({
     [action.setCategory]: (state, action) => {
         return { ...state, category:action.payload };
     },

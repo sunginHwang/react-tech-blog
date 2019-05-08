@@ -1,17 +1,12 @@
 import { combineReducers } from 'redux';
-import { PostListReducer } from './PostList';
-import { PostInfoReducer } from './PostInfo';
-import { PostWriteReducer } from './PostWrite';
-import { CategoryReducer} from "./Category";
-import { LayoutReducer } from './Layout';
-import { AuthReducer } from './Auth';
 
+const requireModule = require.context('.', true, /^(?!.\/index).*Reducer.js$/);
 
-export default combineReducers({
-    PostListReducer,
-    PostInfoReducer,
-    PostWriteReducer,
-    CategoryReducer,
-    LayoutReducer,
-    AuthReducer
+const modules = {};
+
+requireModule.keys().forEach(filename => {
+    const moduleName = filename.replace(/(\.\/|\.js)/g, '');
+    modules[moduleName] = requireModule(filename).default;
 });
+
+export default combineReducers(modules);

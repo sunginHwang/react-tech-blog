@@ -14,7 +14,7 @@ const initialState = {
 
 };
 
-export const AuthReducer = handleActions({
+export default handleActions({
     [action.changeLoginInputInfo]: (state, action) => {
         const {type, value} = action.payload;
         if (type === 'id') {
