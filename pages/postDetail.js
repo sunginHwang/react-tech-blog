@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
-import Helmet from 'react-helmet';
 
 import PostContent from '../component/post/detail/PostContent/PostContent';
 import WithHeader from '../hoc/WithHeader';
@@ -90,7 +89,7 @@ class postDetail extends Component {
         const thumbnail = `https://image.woolta.com/3fed2d102ca753c6.png`;
         return (
             <div>
-                <Helmet>
+               {/* <Helmet>
                     <title>{post.title}</title>
                     <meta name="description" content={this.convertToPlainText(post.content)}/>
                     <link rel="canonical" href={url}/>
@@ -103,7 +102,7 @@ class postDetail extends Component {
                     <meta name="twitter:title" content={post.title}/>
                     <meta name="twitter:description" content={this.convertToPlainText(post.content)}/>
                     {thumbnail && <meta name="twitter:image" content={thumbnail}/>}
-                </Helmet>
+                </Helmet>*/}
                 <div>
                     <button onClick={() => goPostDetailPage(1, 128)}>업데이트 버튼</button>
                 </div>

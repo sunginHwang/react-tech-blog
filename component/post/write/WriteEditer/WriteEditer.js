@@ -1,5 +1,5 @@
 import React from "react";
-import { MdAddToPhotos } from 'react-icons/lib/md';
+import { MdAddToPhotos } from 'react-icons/md';
 import Select from 'react-select';
 
 import cn from './WriteEditer.scss';

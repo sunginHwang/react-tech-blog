@@ -1,6 +1,6 @@
 import * as React from "react";
 import classNames from 'classnames/bind';
-import {MdList} from 'react-icons/lib/md';
+import {MdList} from 'react-icons/md';
 import cn from './MainHeader.scss';
 
 const cx = classNames.bind(cn);
