@@ -25,7 +25,7 @@ class mainPage extends Component {
     shouldComponentUpdate(nextProps, nextState) {
         const isChangePosts = JSON.stringify(this.props.posts) !== JSON.stringify(nextProps.posts);
         return isChangePosts;
-    }/**/
+    }
 
     onLoadRecentPostList = () => {
         this.props.postsAction.getRecentPosts();
