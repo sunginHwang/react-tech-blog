@@ -3,9 +3,9 @@ import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 
 import PostContent from '../component/post/detail/PostContent/PostContent';
-import WithHeader from '../hoc/WithHeader';
+import PostSeoHeader from '../component/post/detail/PostSeoHeader/PostSeoHeader';
+
 import * as postViewAction from "../core/actions/Post/PostViewAction";
-import {goPostDetailPage} from '../core/util/RouteUtil';
 
 class postDetail extends Component {
 
@@ -76,37 +76,22 @@ class postDetail extends Component {
         postViewAction.deletePost(deleteData);
     };
 
-    convertToPlainText = markdown => {
-        if (!markdown) return '';
-        return markdown.replace(/\n/g, ' ').replace(/```(.*)```/g, '').replace('#', '');
-    }
+
 
 
     render() {
         const {post, authInfo, categoryNo, postNo} = this.props;
         const isPostingUser = authInfo.no === post.writer.no;
-        const url = `https://blog.woolta.com/categories/${categoryNo}/posts/${postNo}`;
-        const thumbnail = `https://image.woolta.com/3fed2d102ca753c6.png`;
+
+        if(post.postNo === 0) return  null;
+
         return (
             <div>
-               {/* <Helmet>
-                    <title>{post.title}</title>
-                    <meta name="description" content={this.convertToPlainText(post.content)}/>
-                    <link rel="canonical" href={url}/>
-                    <meta property="og:url" content={url}/>
-                    <meta property="og:type" content="article"/>
-                    <meta property="og:title" content={post.title}/>
-                    <meta property="og:description" content={this.convertToPlainText(post.content)}/>
-                    {thumbnail && <meta property="og:image" content={thumbnail}/>}
-                    <meta name="twitter:card" content="summary_large_image"/>
-                    <meta name="twitter:title" content={post.title}/>
-                    <meta name="twitter:description" content={this.convertToPlainText(post.content)}/>
-                    {thumbnail && <meta name="twitter:image" content={thumbnail}/>}
-                </Helmet>*/}
-                <div>
-                    <button onClick={() => goPostDetailPage(1, 128)}>업데이트 버튼</button>
-                </div>
-                {post.postNo !== 0 &&
+                <PostSeoHeader
+                    title={post.title}
+                    content={post.content}
+                    postNo={postNo}
+                    categoryNo={categoryNo}/>
                 <PostContent
                     post={post}
                     editAuth={isPostingUser}
@@ -114,13 +99,12 @@ class postDetail extends Component {
                     onClickPostModify={this.onClickPostModify}
                     onClickDeletePost={this.onClickDeletePost}
                     createdAt={post.createdAt}/>
-                }
             </div>
         )
     }
 }
 
-export default WithHeader(connect(
+export default connect(
     (state) => ({
         authInfo: state.AuthReducer.authInfo,
         post: state.PostInfoReducer.post,
@@ -129,4 +113,4 @@ export default WithHeader(connect(
     (dispatch) => ({
         postViewAction: bindActionCreators(postViewAction, dispatch),
     })
-)(postDetail));
+)(postDetail);
