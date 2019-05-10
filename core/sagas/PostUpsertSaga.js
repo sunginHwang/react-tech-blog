@@ -1,6 +1,6 @@
 import {call, all, takeLatest, put} from "redux-saga/effects";
-import * as PostUpsertAction from "../actions/Post/PostUpsertAction";
-import * as PostsAction from "../actions/Post/PostsAction";
+import * as PostUpsertAction from "../actions/post/PostUpsertAction";
+import * as PostsAction from "../actions/post/PostsAction";
 
 import * as BlogApi from '../apis/BlogApi';
 import {goPostDetailPage} from '../util/RouteUtil';

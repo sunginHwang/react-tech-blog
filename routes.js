@@ -3,6 +3,6 @@ const routes = require('next-routes');
 module.exports = routes()
     .add('/test','/test','main')
     .add('postEdit','/edit','postEdit')
-    .add('postDetail', '/categories/:categoryNo/posts/:postNo','postDetail')
-    .add('postList', '/categories/:categoryNo','postList')
+    .add('post', '/categories/:categoryNo/posts/:postNo','post')
+    .add('posts', '/categories/:categoryNo','posts')
     .add('custom', '/custom/routes/:name','routeCustom');

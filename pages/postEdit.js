@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import * as FileApi from '../core/apis/FileApi';
 import WriteView from '../component/post/write/WriteView/WriteView';
-import * as postUpsertAction from "../core/actions/Post/PostUpsertAction";
+import * as postUpsertAction from "../core/actions/post/PostUpsertAction";
 import * as LayoutAction from '../core/actions/LayoutAction';
 
 import WithHeader from '../hoc/WithHeader';

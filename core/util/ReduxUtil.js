@@ -2,7 +2,7 @@ import {createAction} from "redux-actions";
 
 
 /*비동기 액션타입 생성자*/
-export const asyncActionTypeCreator = ( prefix, actionName ) => {
+export const asyncActionTypeCreator = ( prefix, actionName ='ASYNC') => {
     const asyncTypeAction = ['_INDEX','_REQUEST','_SUCCESS','_FAILURE'];
 
     const actionNameIndex = actionName+asyncTypeAction[0];

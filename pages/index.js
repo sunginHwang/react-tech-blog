@@ -3,7 +3,7 @@ import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import IntroPage from '../component/main/IntroPage/IntroPage';
 import PostLayout from '../component/post/list/PostLayout/PostLayout';
-import * as postsAction from "../core/actions/Post/PostsAction";
+import * as postsAction from "../core/actions/post/PostsAction";
 import {goPostDetailPage} from '../core/util/RouteUtil';
 import WithHeader from "../hoc/WithHeader";
 
@@ -13,31 +13,33 @@ class mainPage extends Component {
         await store.execSagaTasks(isServer, dispatch => {
             isServer && dispatch(postsAction.getRecentPosts());
         });
+
+        return {isServer}
     }
 
 
     componentDidMount() {
-        this.onLoadRecentPostList()
+        !this.props.isServer && this.onLoadRecentPostList()
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        const isChangePosts = JSON.stringify(this.props.postList) !== JSON.stringify(nextProps.postList);
+        const isChangePosts = JSON.stringify(this.props.posts) !== JSON.stringify(nextProps.posts);
         return isChangePosts;
-    }
+    }/**/
 
     onLoadRecentPostList = () => {
         this.props.postsAction.getRecentPosts();
     };
 
     render() {
-        const {postList} = this.props;
+        const {posts} = this.props;
 
         return (
             <div>
                 <IntroPage/>
                 <PostLayout
                     onClickDetailPage={goPostDetailPage}
-                    posts={postList}/>
+                    posts={posts}/>
             </div>
 
         )
@@ -46,7 +48,7 @@ class mainPage extends Component {
 
 export default WithHeader(connect(
     (state) => ({
-        postList: state.PostListReducer.postList
+        posts: state.PostsReducer.posts
     }),
     (dispatch) => ({
         postsAction: bindActionCreators(postsAction, dispatch)

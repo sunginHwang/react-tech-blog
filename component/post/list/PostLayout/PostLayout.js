@@ -11,7 +11,7 @@ class PostLayout extends Component {
     render() {
         const { posts, onClickDetailPage } = this.props;
 
-        const list = posts.map((post) => {
+        const postItems = posts.map((post) => {
             return <PostItem
                 clickDetailPage={onClickDetailPage}
                 postNo={post.postNo}
@@ -25,7 +25,7 @@ class PostLayout extends Component {
         });
         return (
             <div className={cn.contentList}>
-                {list}
+                {postItems}
             </div>
         );
 

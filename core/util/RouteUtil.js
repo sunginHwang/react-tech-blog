@@ -2,12 +2,12 @@ import Router from "next/router";
 
 export const goPostListPage = (categoryNo) => {
     window.scrollTo(0, 0);
-    Router.push(`/postList?categoryNo=${categoryNo}`, `/categories/${categoryNo}`);
+    Router.push(`/posts?categoryNo=${categoryNo}`, `/categories/${categoryNo}`);
 };
 
 export const goPostDetailPage = (categoryNo, postNo) => {
     window.scrollTo(0, 0);
-    Router.push(`/postDetail?postNo=${postNo}&categoryNo=${categoryNo}`, `/categories/${categoryNo}/posts/${postNo}`);
+    Router.push(`/post?postNo=${postNo}&categoryNo=${categoryNo}`, `/categories/${categoryNo}/posts/${postNo}`);
 };
 
 export const goPostEditPage = () => {

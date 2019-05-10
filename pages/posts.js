@@ -4,29 +4,28 @@ import {connect} from "react-redux";
 
 import WithHeader from '../hoc/WithHeader';
 import PostLayout from '../component/post/list/PostLayout/PostLayout';
-import * as postsAction from "../core/actions/Post/PostsAction";
+import * as postsAction from "../core/actions/post/PostsAction";
 import {goPostDetailPage} from '../core/util/RouteUtil';
 
-class postList extends Component {
+class posts extends Component {
 
     static async getInitialProps({query: {categoryNo}, store, isServer}) {
         await store.execSagaTasks(isServer, dispatch => {
             isServer && dispatch(postsAction.getPosts(categoryNo))
         });
 
-        return {categoryNo}
+        return {categoryNo, isServer}
     }
 
     async componentDidMount() {
-        const {postsAction, categoryNo, posts} = this.props;
-        const isClientRendering = await posts.length === 0;
-
-        isClientRendering && await postsAction.getPosts(categoryNo);
-        await this.changeHeaderTitle();
+        const {postsAction, categoryNo, isServer} = this.props;
+        !isServer && await postsAction.getPosts(categoryNo);
+         await this.changeHeaderTitle();
     }
 
     async componentDidUpdate(prevProps, prevState) {
-
+        console.log(prevProps.categoryNo);
+        console.log(this.props.categoryNo);
         if (prevProps.categoryNo !== this.props.categoryNo) {
             const {postsAction, categoryNo} = this.props;
             await postsAction.getPosts(categoryNo);
@@ -58,10 +57,10 @@ class postList extends Component {
 
 export default WithHeader(connect(
     (state) => ({
-        posts: state.PostListReducer.postList,
+        posts: state.PostsReducer.posts,
         categories: state.CategoryReducer.categories
     }),
     (dispatch) => ({
         postsAction: bindActionCreators(postsAction, dispatch)
     })
-)(postList));
+)(posts));

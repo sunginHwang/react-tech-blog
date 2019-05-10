@@ -1,5 +1,5 @@
 import { handleActions } from 'redux-actions';
-import * as action from '../actions/Post/PostViewAction';
+import * as action from '../actions/post/PostAction';
 
 const initialState = {
     post:{
@@ -18,17 +18,14 @@ const initialState = {
 };
 
 export default handleActions({
-    [action.getPostInfo.request]: (state, action) => {
+    [action.getPost.request]: (state, action) => {
         return { ...state };
     },
-    [action.getPostInfo.success]: (state, action) => {
+    [action.getPost.success]: (state, action) => {
         return { ...state, post: action.payload.data};
     },
-    [action.getPostInfo.failure]: (state, action) => {
+    [action.getPost.failure]: (state, action) => {
         return { ...state, post: initialState.post };
-    },
-    [action.TestGet]: (state, action) => {
-        return { ...state, post: action.payload};
     },
     [action.deletePost.request]: (state, action) => {
         return { ...state };

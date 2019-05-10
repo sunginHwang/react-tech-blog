@@ -1,8 +1,8 @@
 import { handleActions } from 'redux-actions';
-import * as action from '../actions/Post/PostsAction';
+import * as action from '../actions/post/PostsAction';
 
 const initialState = {
-    postList: []
+    posts: []
 };
 
 export default handleActions({
@@ -10,19 +10,19 @@ export default handleActions({
         return { ...state };
     },
     [action.getPosts.success]: (state, action) => {
-        return { ...state, postList: action.payload.data };
+        return { ...state, posts: action.payload.data };
     },
     [action.getPosts.failure]: (state, action) => {
-        return { ...state, postList:initialState.postList };
+        return { ...state, posts:initialState.posts };
     },
     [action.getRecentPosts.request]: (state, action) => {
         return { ...state };
     },
     [action.getRecentPosts.success]: (state, action) => {
-        return { ...state, postList: action.payload.data };
+        return { ...state, posts: action.payload.data };
     },
     [action.getRecentPosts.failure]: (state, action) => {
-        return { ...state, postList:initialState.postList };
+        return { ...state, posts:initialState.posts };
     },
 }, initialState);
 

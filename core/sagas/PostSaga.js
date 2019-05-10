@@ -1,8 +1,8 @@
 import {call, all, takeLatest, put} from "redux-saga/effects";
 
-import * as PostViewAction from "../actions/Post/PostViewAction";
-import * as postUpsertAction from "../actions/Post/PostUpsertAction";
-import * as PostsAction from "../actions/Post/PostsAction";
+import * as PostViewAction from "../actions/post/PostAction";
+import * as postUpsertAction from "../actions/post/PostUpsertAction";
+import * as PostsAction from "../actions/post/PostsAction";
 
 import { asyncSagaCallBack } from '../util/ReduxSagaUtil';
 import {goPostEditPage, goPostListPage, goBack} from '../util/RouteUtil';
@@ -10,8 +10,8 @@ import {goPostEditPage, goPostListPage, goBack} from '../util/RouteUtil';
 import * as BlogApi from '../apis/BlogApi';
 
 
-function* getPostInfoSaga(info) {
-    yield call(asyncSagaCallBack, PostViewAction.getPostInfo, BlogApi.getPostInfo, info.payload,
+function* getPostSaga(info) {
+    yield call(asyncSagaCallBack, PostViewAction.getPost, BlogApi.getPostInfo, info.payload,
         function* success(success) {
         },
         function* failure(error) {
@@ -41,7 +41,7 @@ function* modifyPostSaga(info) {
 
 export default function* root() {
     yield all([
-        takeLatest(PostViewAction.POST_INFO.INDEX, getPostInfoSaga),
+        takeLatest(PostViewAction.GET_POST.INDEX, getPostSaga),
         takeLatest(PostViewAction.DELETE_POST.INDEX, removePostSaga),
         takeLatest(PostViewAction.MODIFY_POST, modifyPostSaga)
     ]);

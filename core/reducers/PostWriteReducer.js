@@ -1,5 +1,5 @@
 import { handleActions } from 'redux-actions';
-import * as action from '../actions/Post/PostUpsertAction';
+import * as action from '../actions/post/PostUpsertAction';
 
 const initialState = {
     postNo: 0,

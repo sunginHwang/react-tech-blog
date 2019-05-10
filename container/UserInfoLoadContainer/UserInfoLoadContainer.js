@@ -2,17 +2,13 @@ import React, { Component} from 'react';
 import { connect } from 'react-redux';
 import {bindActionCreators} from 'redux';
 import { ACCESS_TOKEN } from '../../core/lib/constants';
-import * as userAction from "../../core/actions/User/UserAction";
+import * as userAction from "../../core/actions/UserAction";
 
 class UserInfoLoadContainer extends Component {
 
     checkUserInfo = async () => {
-        const { userAction } = this.props;
         const accessToken = localStorage.getItem(ACCESS_TOKEN);
-
-        if(accessToken) {
-            userAction.loadAuthInfo();
-        }
+        accessToken && this.props.userAction.loadAuthInfo();
     };
 
     componentDidUpdate(prevProps, prevState) {

@@ -3,7 +3,7 @@ import LoginView from '../component/user/loginView/LoginView';
 import WithHeader from '../hoc/WithHeader';
 
 import {connect} from "react-redux";
-import * as UserAction from "../core/actions/User/UserAction";
+import * as UserAction from "../core/actions/UserAction";
 import {bindActionCreators} from "redux";
 
 class login extends Component {

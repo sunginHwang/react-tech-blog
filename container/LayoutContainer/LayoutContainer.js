@@ -10,7 +10,7 @@ import Footer from '../../component/mainTemplate/Footer/Footer';
 import SideBar from '../../component/mainTemplate/SideBar/SideBar';
 
 import * as layoutAction from "../../core/actions/LayoutAction";
-import * as userAction from "../../core/actions/User/UserAction";
+import * as userAction from "../../core/actions/UserAction";
 
 import {goPostListPage, goLoginPage, goPostEditPage, goMainPage} from '../../core/util/RouteUtil';
 import { nanoBarLoadingSetup } from '../../core/lib/apiCall';

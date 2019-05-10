@@ -1,10 +1,10 @@
 import { asyncActionTypeCreator, asyncActionCreator } from '../../util/ReduxUtil';
 
-const prefix = 'posts_';
+const prefix = 'POSTS_';
 // 해당 카테고리 게시글 리스트 GET
-export const POSTS = asyncActionTypeCreator(`${prefix}posts_`,'ASYNC');
+export const POSTS = asyncActionTypeCreator(`${prefix}FETCH_POSTS`);
 export const getPosts = asyncActionCreator(POSTS);
 
 // 해당 카테고리 게시글 리스트 GET
-export const RECENT_POSTS = asyncActionTypeCreator(`${prefix}recent_posts_`,'ASYNC');
+export const RECENT_POSTS = asyncActionTypeCreator(`${prefix}FETCH_RECENT_POSTS`);
 export const getRecentPosts = asyncActionCreator(RECENT_POSTS);
