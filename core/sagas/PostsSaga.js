@@ -15,10 +15,9 @@ function* getPostsSaga(info) {
         });
 }
 
-function* getRecentPostListSaga(info) {
+function* getRecentPostsSaga(info) {
     yield call(asyncSagaCallBack, PostsAction.getPosts, BlogApi.getRecentPostList, info.payload,
-        function* success(success) {
-        },
+        function* success(success) {},
         function* failure(error) {
             const {message} = yield error;
             yield alert(message !== undefined ? message : '조회 실패.');
@@ -28,6 +27,6 @@ function* getRecentPostListSaga(info) {
 export default function* root() {
     yield all([
         takeLatest(PostsAction.POSTS.INDEX, getPostsSaga),
-        takeLatest(PostsAction.RECENT_POSTS.INDEX, getRecentPostListSaga)
+        takeLatest(PostsAction.RECENT_POSTS.INDEX, getRecentPostsSaga)
     ]);
 }
