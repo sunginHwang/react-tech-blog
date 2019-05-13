@@ -1,3 +1,5 @@
+const { makeCategoriesSiteMap, makePostsSiteMap} = require('./sitemapGenerator');
+
 const { createServer } = require('http')
 const express = require('express')
 const next = require('next')
@@ -22,6 +24,21 @@ app.prepare().then(() => {
     server.get('/robots.txt', (req, res) => (
         res.status(200).sendFile('robots.txt', options)
     ));
+
+    server.get('/site-map/posts.xml', (req, res)  => {
+        makePostsSiteMap().then(postsXml => {
+            res.set('Content-Type', 'text/xml');
+            res.send(postsXml);
+        });
+    });
+
+    server.get('/site-map/categories.xml', (req, res) => {
+
+        makeCategoriesSiteMap().then(categoriesXml => {
+            res.set('Content-Type', 'text/xml');
+            res.send(categoriesXml);
+        });
+    });
 
     server.get('*', (req, res) => {
         return handler(req, res)
