@@ -4,6 +4,9 @@ import {connect} from "react-redux";
 
 import WithHeader from '../hoc/WithHeader';
 import PostLayout from '../component/post/list/PostLayout/PostLayout';
+import PostsPlaceHolder from '../component/post/list/PostsPlaceHolder/PostsPlaceHolder';
+
+import PlaceHolderBar from '../component/common/placeHolder/PlaceHolderBar/PlaceHolderBar';
 import * as postsAction from "../core/actions/post/PostsAction";
 import {goPostDetailPage} from '../core/util/RouteUtil';
 
@@ -47,11 +50,13 @@ class posts extends Component {
 
     render() {
         const { posts } = this.props;
-        return (
+
+        return <PostsPlaceHolder/>
+       /* return (
             <PostLayout
                 onClickDetailPage={goPostDetailPage}
                 posts={posts}/>
-        )
+        )*/
     }
 }
 

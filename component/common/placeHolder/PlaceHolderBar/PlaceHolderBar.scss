@@ -1,15 +1,16 @@
 .placeHolderBar{
   animation: pulse 1.3s infinite ease-in-out;
+  border-radius: 3px;
 }
 
 @keyframes pulse {
   0% {
-    background-color: rgba(165, 165, 165, 0.2)
+    background-color: rgba(110, 130, 127, 0.2);
   }
   50% {
-    background-color: rgba(165, 165, 165, 0.4)
+    background-color: rgba(110, 130, 127, 0.3);
   }
   100% {
-    background-color: rgba(165, 165, 165, 0.2)
+    background-color: rgba(110, 130, 127, 0.2);
   }
 }

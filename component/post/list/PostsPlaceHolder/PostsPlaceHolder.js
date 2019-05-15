@@ -1,27 +1,20 @@
+import React from "react";
+import PostItemPlaceHolder from '../../../post/list/PostItemPlaceHolder/PostItemPlaceHolder';
 
 import cn from './PostsPlaceHolder.scss';
-import React from "react";
 
-export default () =>
-    <div className={cn.contentWrapper}>
-        <div className={cn.titleArea}>
-            <h1 className={cn.title}>
-                {post.title}
-            </h1>
-            <PostSubTitle
-                writerName={post.writer.nickName}
-                writerImg={post.writer.imageUrl}
-                categoryLabel={categoryLabel}
-                createdAt={createdAt}
-                editAuth={editAuth}
-                onClickPostModify={onClickPostModify}
-                onClickDeletePost={onClickDeletePost}
-            />
+export default () => {
+
+    const postsPlaceHolder = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(index => {
+        return <PostItemPlaceHolder key={index}/>
+    });
+
+    return (
+        <div className={cn.postItemPlaceHolder}>
+            {
+                postsPlaceHolder
+            }
         </div>
-        <div className={cn.contentArea}>
-            <MarkDownView content={post.content}
-                          skipHtml={false}
-                          escapeHtml={false}/>
-        </div>
-    </div>
+    )
+}
 
