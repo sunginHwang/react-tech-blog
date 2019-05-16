@@ -16,7 +16,7 @@ function* getPostSaga(info) {
         },
         function* failure(error) {
             const { message } = yield error;
-            yield alert(message !== undefined ? message : '다시 조회해 주세요.');
+            alert(message !== undefined ? message : '다시 조회해 주세요.');
             yield goBack();
         })
 }
@@ -30,7 +30,7 @@ function* removePostSaga(info) {
         },
         function* failure(error) {
             const { message } = yield error;
-            yield alert(message !== undefined ? message : '삭제 실패.');
+            alert(message !== undefined ? message : '삭제 실패.');
         });
 }
 

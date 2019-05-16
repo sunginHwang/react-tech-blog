@@ -17,7 +17,7 @@ function* loginSaga(info) {
             yield goMainPage();
         },
         function* failure(error) {
-            yield alert('로그인 정보가 맞지 않습니다.');
+            alert('로그인 정보가 맞지 않습니다.');
         });
 }
 

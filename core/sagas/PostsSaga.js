@@ -10,7 +10,7 @@ function* getPostsSaga(info) {
         },
         function* failure(error) {
             const {message} = yield error;
-            yield alert(message !== undefined ? message : '조회 실패.');
+            alert(message !== undefined ? message : '조회 실패.');
             yield goBack();
         });
 }
@@ -20,7 +20,7 @@ function* getRecentPostsSaga(info) {
         function* success(success) {},
         function* failure(error) {
             const {message} = yield error;
-            yield alert(message !== undefined ? message : '조회 실패.');
+            alert(message !== undefined ? message : '조회 실패.');
         });
 }
 

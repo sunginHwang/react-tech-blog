@@ -31,14 +31,13 @@ export function* asyncSagaCallBack(asyncFunc, apiFunc, payload, successFunc, fai
             yield call(successFunc, result.data);
         } else {
             yield put(asyncFunc.failure(result)); // 비동기 처리 실패
-            yield call(failureFunc(result.data));
+            yield call(failureFunc, result.data);
         }
 
     } catch (error) {
         yield put(asyncFunc.failure(error)); // 비동기 처리 실패
-        yield call(failureFunc({
-            message: error
-        }));
+        const message = yield error.response.data.code ? error.response.data.code : 'fail to api call';
+        yield call(failureFunc, {message});
 
     }
 }

@@ -16,7 +16,7 @@ function* postUpsertSaga(info) {
         },
         function* failure(error) {
             const { message } = yield error;
-            yield alert(message !== undefined ? message : '게시글 편집 실패.');
+            alert(message !== undefined ? message : '게시글 편집 실패.');
         });
 
 }
