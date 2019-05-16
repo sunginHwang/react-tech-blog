@@ -6,7 +6,6 @@ import WithHeader from '../hoc/WithHeader';
 import PostLayout from '../component/post/list/PostLayout/PostLayout';
 import PostsPlaceHolder from '../component/post/list/PostsPlaceHolder/PostsPlaceHolder';
 
-import PlaceHolderBar from '../component/common/placeHolder/PlaceHolderBar/PlaceHolderBar';
 import * as postsAction from "../core/actions/post/PostsAction";
 import {goPostDetailPage} from '../core/util/RouteUtil';
 
@@ -27,8 +26,6 @@ class posts extends Component {
     }
 
     async componentDidUpdate(prevProps, prevState) {
-        console.log(prevProps.categoryNo);
-        console.log(this.props.categoryNo);
         if (prevProps.categoryNo !== this.props.categoryNo) {
             const {postsAction, categoryNo} = this.props;
             await postsAction.getPosts(categoryNo);
@@ -49,20 +46,22 @@ class posts extends Component {
 
 
     render() {
-        const { posts } = this.props;
+        const { posts, loading } = this.props;
 
-        return <PostsPlaceHolder/>
-       /* return (
+        if(loading) return <PostsPlaceHolder/>
+
+        return (
             <PostLayout
                 onClickDetailPage={goPostDetailPage}
                 posts={posts}/>
-        )*/
+        )
     }
 }
 
 export default WithHeader(connect(
     (state) => ({
         posts: state.PostsReducer.posts,
+        loading: state.PostsReducer.loading,
         categories: state.CategoryReducer.categories
     }),
     (dispatch) => ({

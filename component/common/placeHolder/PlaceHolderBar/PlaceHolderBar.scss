@@ -1,16 +1,16 @@
 .placeHolderBar{
-  animation: pulse 1.3s infinite ease-in-out;
+  animation: loading-animation 1.3s infinite ease-in-out;
   border-radius: 3px;
 }
 
-@keyframes pulse {
+@keyframes loading-animation {
   0% {
-    background-color: rgba(110, 130, 127, 0.2);
+    background-color: hsl(0,0%,89%);
   }
   50% {
-    background-color: rgba(110, 130, 127, 0.3);
+    background-color: hsl(0,0%,85%);
   }
   100% {
-    background-color: rgba(110, 130, 127, 0.2);
+    background-color: hsl(0,0%,89%);
   }
 }

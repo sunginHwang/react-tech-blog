@@ -6,6 +6,7 @@ import PostLayout from '../component/post/list/PostLayout/PostLayout';
 import * as postsAction from "../core/actions/post/PostsAction";
 import {goPostDetailPage} from '../core/util/RouteUtil';
 import WithHeader from "../hoc/WithHeader";
+import PostsPlaceHolder from "../component/post/list/PostsPlaceHolder/PostsPlaceHolder";
 
 class mainPage extends Component {
 
@@ -32,14 +33,18 @@ class mainPage extends Component {
     };
 
     render() {
-        const {posts} = this.props;
+        const { posts, loading } = this.props;
+
+        const newPosts = loading
+            ? <PostsPlaceHolder/>
+            : <PostLayout
+                onClickDetailPage={goPostDetailPage}
+                posts={posts}/>;
 
         return (
             <div>
                 <IntroPage/>
-                <PostLayout
-                    onClickDetailPage={goPostDetailPage}
-                    posts={posts}/>
+                {newPosts}
             </div>
 
         )
@@ -48,7 +53,8 @@ class mainPage extends Component {
 
 export default WithHeader(connect(
     (state) => ({
-        posts: state.PostsReducer.posts
+        posts: state.PostsReducer.posts,
+        loading: state.PostsReducer.loading,
     }),
     (dispatch) => ({
         postsAction: bindActionCreators(postsAction, dispatch)
