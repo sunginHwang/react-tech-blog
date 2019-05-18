@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 
 import PostContent from '../component/post/detail/PostContent/PostContent';
 import PostSeoHeader from '../component/post/detail/PostSeoHeader/PostSeoHeader';
-
+import PostPlaceHolder from '../component/post/detail/PostPlaceHolder/PostPlaceHolder';
 import * as PostAction from "../core/actions/post/PostAction";
 
 class post extends Component {
@@ -69,10 +69,11 @@ class post extends Component {
 
 
     render() {
-        const {post, authInfo, categoryNo, postNo} = this.props;
+        const {post, authInfo, categoryNo, postNo, loading} = this.props;
         const { onClickPostModify, onClickDeletePost } = this;
         const isPostingUser = authInfo.no === post.writer.no;
 
+        if (loading) return <PostPlaceHolder/>;
         if (post.postNo === 0) return null;
 
         return (
@@ -98,6 +99,7 @@ export default connect(
     (state) => ({
         authInfo: state.AuthReducer.authInfo,
         post: state.PostReducer.post,
+        loading: state.PostReducer.loading,
         categories: state.CategoryReducer.categories
     }),
     (dispatch) => ({

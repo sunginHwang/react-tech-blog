@@ -14,15 +14,16 @@ const initialState = {
         authorNo: '',
         categoryLabel:'',
         createdAt:''
-    }
+    },
+    loading: false
 };
 
 export default handleActions({
     [action.getPost.request]: (state, action) => {
-        return { ...state };
+        return { ...state, loading: true };
     },
     [action.getPost.success]: (state, action) => {
-        return { ...state, post: action.payload.data};
+        return { ...state, post: action.payload.data, loading: false};
     },
     [action.getPost.failure]: (state, action) => {
         return { ...state, post: initialState.post };
