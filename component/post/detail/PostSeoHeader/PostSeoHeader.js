@@ -1,6 +1,6 @@
 import React from "react";
 import Head from "next/head";
-
+import {BLOG_URL, BLOG_THUMBNAIL_IMAGE_URL} from '../../../../core/lib/constants';
 
 export default ({
                     title,
@@ -8,8 +8,7 @@ export default ({
                     content,
                     categoryNo,
                 }) => {
-    const thumbnail = `https://image.woolta.com/3fed2d102ca753c6.png`;
-    const URL = `https://blog.woolta.com`;
+
     const isAllowUrl = categoryNo !== undefined && postNo !== undefined;
 
     const convertToPlainText = markdown => {
@@ -30,9 +29,9 @@ export default ({
             {content && <meta name="description" content={convertToPlainText(content)}/>}
             {content && <meta property="og:description" content={convertToPlainText(content)}/>}
             {content && <meta name="twitter:description" content={convertToPlainText(content)}/>}
-            {isAllowUrl && <meta property="og:url" content={`${URL}/categories/${categoryNo}/posts/${postNo}`}/>}
-            <meta property="og:image" content={thumbnail}/>
-            <meta name="twitter:image" content={thumbnail}/>
+            {isAllowUrl && <meta property="og:url" content={`${BLOG_URL}/categories/${categoryNo}/posts/${postNo}`}/>}
+            <meta property="og:image" content={BLOG_THUMBNAIL_IMAGE_URL}/>
+            <meta name="twitter:image" content={BLOG_THUMBNAIL_IMAGE_URL}/>
             <meta name="twitter:card" content="summary_large_image"/>
             <meta property="og:type" content="article"/>
         </Head>
