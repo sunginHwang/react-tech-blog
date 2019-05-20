@@ -6,6 +6,7 @@ export default ({
                     title,
                     postNo,
                     content,
+                    createdAt,
                     categoryNo,
                 }) => {
 
@@ -30,10 +31,15 @@ export default ({
             {content && <meta property="og:description" content={convertToPlainText(content)}/>}
             {content && <meta name="twitter:description" content={convertToPlainText(content)}/>}
             {isAllowUrl && <meta property="og:url" content={`${BLOG_URL}/categories/${categoryNo}/posts/${postNo}`}/>}
+            {isAllowUrl && <meta property="twitter:url" content={`${BLOG_URL}/categories/${categoryNo}/posts/${postNo}`}/>}
+            {isAllowUrl && <meta property="twitter:url" content={`${BLOG_URL}/categories/${categoryNo}/posts/${postNo}`}/>}
+            {isAllowUrl && <link rel="canonical" href={`${BLOG_URL}/categories/${categoryNo}/posts/${postNo}`}/>}
             <meta property="og:image" content={BLOG_THUMBNAIL_IMAGE_URL}/>
             <meta name="twitter:image" content={BLOG_THUMBNAIL_IMAGE_URL}/>
             <meta name="twitter:card" content="summary_large_image"/>
+            <meta name="twitter:creator" content="@Hwang Sungin"/>
             <meta property="og:type" content="article"/>
+            <meta property="article:published_time" content={createdAt}/>
         </Head>
     )
 };

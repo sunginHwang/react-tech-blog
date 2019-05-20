@@ -82,6 +82,7 @@ class post extends Component {
                     title={post.title}
                     content={post.content}
                     postNo={postNo}
+                    createdAt={post.createdAt}
                     categoryNo={categoryNo}/>
                 <PostContent
                     post={post}

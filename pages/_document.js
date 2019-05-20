@@ -20,6 +20,7 @@ export default class MyDocument extends Document {
                 <meta name="apple-mobile-web-app-capable" content="yes"/>
                 <meta name='description' content='woolta 블로그 ver2.0 기술 개발 블로그'/>
                 <meta property="og:description" content="woolta 블로그 ver2.0 기술 개발 블로그"/>
+                <meta property="og:site_name" content="woolta Blog"/>
                 <meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0, viewport-fit=cover'/>
                 <meta name="google-site-verification" content="zskhf8kVpb_u2sF1hCCcL4ETy6V7ZHYnsr2JNoaV5cA" />
                 <link rel="stylesheet" href="/_next/static/style.css" />
