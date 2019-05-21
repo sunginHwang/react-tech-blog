@@ -1,4 +1,4 @@
-import { fork, all } from 'redux-saga/effects';
+import { fork, all } from 'redux-saga/es/effects';
 
 // imports all file except index.js
 const req = require.context('.', true, /^(?!.\/index).*.js$/);

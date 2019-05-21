@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import PostContent from '../component/post/detail/PostContent/PostContent';
 import PostSeoHeader from '../component/post/detail/PostSeoHeader/PostSeoHeader';
 import PostPlaceHolder from '../component/post/detail/PostPlaceHolder/PostPlaceHolder';
-import * as PostAction from "../core/actions/post/PostAction";
+import * as PostAction from "../store/actions/post/PostAction";
 
 class post extends Component {
 

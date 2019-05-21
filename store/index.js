@@ -1,6 +1,6 @@
-import {createStore, applyMiddleware} from 'redux';
+import {createStore, applyMiddleware} from 'redux/index';
 // import {composeWithDevTools} from 'redux-devtools-extension/logOnlyInProduction';
-import createSagaMiddleware,  { END }  from 'redux-saga';
+import createSagaMiddleware,  { END }  from 'redux-saga/index';
 import reducers from './reducers';
 import rootSaga from './sagas';
 

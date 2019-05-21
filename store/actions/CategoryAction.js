@@ -1,4 +1,4 @@
-import {asyncActionCreator, asyncActionTypeCreator} from "../util/ReduxUtil";
+import {asyncActionCreator, asyncActionTypeCreator} from "../../core/util/ReduxUtil";
 
 const prefix = 'CATEGORY_';
 

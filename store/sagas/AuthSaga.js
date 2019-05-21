@@ -1,11 +1,11 @@
-import {call, all, takeLatest} from "redux-saga/effects";
+import {call, all, takeLatest} from "redux-saga/es/effects";
 import * as UserAction from "../actions/UserAction";
-import {asyncSagaCallBack} from '../util/ReduxSagaUtil';
+import {asyncSagaCallBack} from '../../core/util/ReduxSagaUtil';
 
-import {goMainPage} from '../util/RouteUtil';
-import {ACCESS_TOKEN} from '../lib/constants';
-import * as AuthApi from '../apis/AuthApi';
-import {settingAccessHeaderToken} from '../lib/apiCall';
+import {goMainPage} from '../../core/util/RouteUtil';
+import {ACCESS_TOKEN} from '../../core/lib/constants';
+import * as AuthApi from '../../core/apis/AuthApi';
+import {settingAccessHeaderToken} from '../../core/lib/apiCall';
 
 
 function* loginSaga(info) {

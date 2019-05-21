@@ -1,4 +1,4 @@
-import {asyncActionTypeCreator, asyncActionCreator} from "../../util/ReduxUtil";
+import {asyncActionTypeCreator, asyncActionCreator} from "../../../core/util/ReduxUtil";
 import {createAction} from "redux-actions";
 
 const prefix = 'POSTS_UPSERTS_';

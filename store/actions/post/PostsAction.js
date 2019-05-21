@@ -1,4 +1,4 @@
-import { asyncActionTypeCreator, asyncActionCreator } from '../../util/ReduxUtil';
+import { asyncActionTypeCreator, asyncActionCreator } from '../../../core/util/ReduxUtil';
 
 const prefix = 'POSTS_';
 // 해당 카테고리 게시글 리스트 GET

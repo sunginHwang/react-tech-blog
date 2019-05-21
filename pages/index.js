@@ -3,7 +3,7 @@ import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import IntroPage from '../component/main/IntroPage/IntroPage';
 import PostLayout from '../component/post/list/PostLayout/PostLayout';
-import * as postsAction from "../core/actions/post/PostsAction";
+import * as postsAction from "../store/actions/post/PostsAction";
 import {goPostDetailPage} from '../core/util/RouteUtil';
 import WithHeader from "../hoc/WithHeader";
 import PostsPlaceHolder from "../component/post/list/PostsPlaceHolder/PostsPlaceHolder";

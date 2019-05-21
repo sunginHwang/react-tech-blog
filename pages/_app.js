@@ -3,11 +3,11 @@ import React from 'react'
 import { Provider } from 'react-redux'
 import withRedux from 'next-redux-wrapper';
 
-import * as categoryAction from "../core/actions/CategoryAction";
+import * as categoryAction from "../store/actions/CategoryAction";
 import LayoutContainer from '../container/LayoutContainer/LayoutContainer';
 import UserInfoLoadContainer from '../container/UserInfoLoadContainer/UserInfoLoadContainer';
 
-import store from '../core/store'
+import store from '../store'
 import '../style/scss/DefaultSetting.scss';
 
 
@@ -23,7 +23,7 @@ class MyApp extends App {
             });
         }
 
-        await loadCategories(ctx.store);
+        await loadCategories(ctx.index);
 
         return { pageProps }
     }

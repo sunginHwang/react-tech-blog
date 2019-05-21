@@ -9,8 +9,8 @@ import MainHeader from '../../component/mainTemplate/MainHeader/MainHeader';
 import Footer from '../../component/mainTemplate/Footer/Footer';
 import SideBar from '../../component/mainTemplate/SideBar/SideBar';
 
-import * as layoutAction from "../../core/actions/LayoutAction";
-import * as userAction from "../../core/actions/UserAction";
+import * as layoutAction from "../../store/actions/LayoutAction";
+import * as userAction from "../../store/actions/UserAction";
 
 import {goPostListPage, goLoginPage, goPostEditPage, goMainPage} from '../../core/util/RouteUtil';
 import { nanoBarLoadingSetup } from '../../core/lib/apiCall';

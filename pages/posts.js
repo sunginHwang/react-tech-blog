@@ -6,7 +6,7 @@ import WithHeader from '../hoc/WithHeader';
 import PostLayout from '../component/post/list/PostLayout/PostLayout';
 import PostsPlaceHolder from '../component/post/list/PostsPlaceHolder/PostsPlaceHolder';
 
-import * as postsAction from "../core/actions/post/PostsAction";
+import * as postsAction from "../store/actions/post/PostsAction";
 import {goPostDetailPage} from '../core/util/RouteUtil';
 
 class posts extends Component {

@@ -2,7 +2,7 @@ import React, { Component} from 'react';
 import { connect } from 'react-redux';
 import {bindActionCreators} from 'redux';
 import { ACCESS_TOKEN } from '../../core/lib/constants';
-import * as userAction from "../../core/actions/UserAction";
+import * as userAction from "../../store/actions/UserAction";
 
 class UserInfoLoadContainer extends Component {
 

@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import * as FileApi from '../core/apis/FileApi';
 import WriteView from '../component/post/write/WriteView/WriteView';
-import * as postUpsertAction from "../core/actions/post/PostUpsertAction";
-import * as LayoutAction from '../core/actions/LayoutAction';
+import * as postUpsertAction from "../store/actions/post/PostUpsertAction";
+import * as LayoutAction from '../store/actions/LayoutAction';
 
 import WithHeader from '../hoc/WithHeader';
 
