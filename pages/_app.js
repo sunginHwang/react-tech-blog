@@ -23,7 +23,7 @@ class MyApp extends App {
             });
         }
 
-        await loadCategories(ctx.index);
+        await loadCategories(ctx.store);
 
         return { pageProps }
     }

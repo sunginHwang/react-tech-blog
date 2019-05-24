@@ -1,4 +1,4 @@
-import {call, all, takeLatest, put} from "redux-saga/es/effects";
+import {call, all, takeLatest, put} from "redux-saga/effects";
 import * as PostUpsertAction from "../actions/post/PostUpsertAction";
 import * as PostsAction from "../actions/post/PostsAction";
 

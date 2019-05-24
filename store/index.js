@@ -1,6 +1,6 @@
-import {createStore, applyMiddleware} from 'redux/index';
+import {createStore, applyMiddleware} from 'redux';
 // import {composeWithDevTools} from 'redux-devtools-extension/logOnlyInProduction';
-import createSagaMiddleware,  { END }  from 'redux-saga/index';
+import createSagaMiddleware, {END} from 'redux-saga';
 import reducers from './reducers';
 import rootSaga from './sagas';
 
@@ -8,12 +8,12 @@ const isProd = process.env.NODE_ENV === 'production';
 
 const initStore = initialState => {
     const sagaMiddleware = createSagaMiddleware();
-    const middleware =  applyMiddleware(sagaMiddleware);
+    const middleware = applyMiddleware(sagaMiddleware);
 
-   /* const middleware = isProd ? applyMiddleware(sagaMiddleware)
-        : composeWithDevTools(applyMiddleware(sagaMiddleware));*/
+    /* const middleware = isProd ? applyMiddleware(sagaMiddleware)
+         : composeWithDevTools(applyMiddleware(sagaMiddleware));*/
 
-    const store = createStore(reducers, initialState ,middleware);
+    const store = createStore(reducers, initialState, middleware);
 
     store.runSaga = () => {
         // Avoid running twice

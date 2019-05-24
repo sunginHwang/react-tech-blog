@@ -1,4 +1,4 @@
-import {call, all, takeLatest} from "redux-saga/es/effects";
+import {call, all, takeLatest} from "redux-saga/effects";
 import * as UserAction from "../actions/UserAction";
 import {asyncSagaCallBack} from '../../core/util/ReduxSagaUtil';
 

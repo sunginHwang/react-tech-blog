@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux/index';
+import { combineReducers } from 'redux';
 
 const requireModule = require.context('.', true, /^(?!.\/index).*Reducer.js$/);
 
