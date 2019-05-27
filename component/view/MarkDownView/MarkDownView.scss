@@ -5,7 +5,7 @@
 .markDownView{
   line-height: 1.5em;
   p, ol, ul, dl {
-    margin-bottom: 1em !important;;
+    margin-bottom: 1em;
   }
 
   li{
@@ -40,11 +40,18 @@
     @media screen and (max-width: $phone-width){
       font-size: 1rem;
     }
+    :first-child{
+      margin: 0;
+    }
+    :last-child{
+      margin: 0;
+    }
   }
 
   table {
     border-collapse: collapse;
-    border-spacing: 0
+    border-spacing: 0;
+    margin: 1em 0;
   }
 
   td,
@@ -155,10 +162,7 @@ p + p {
   h6,
   p {
     code {
-      padding-left: 0.3em;
-      padding-right: 0.3em;
-      padding-top: 0.1em;
-      padding-bottom: 0.1em;
+      padding: 0.1em 0.3em 0.1em 0.3em;
       border-radius: 3px;
       margin-left: 0.3em;
       margin-right: 0.3em;
