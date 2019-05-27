@@ -4,7 +4,8 @@ import * as layout from '../actions/LayoutAction';
 const initialState = {
     spinnerLoading: false,
     sideBar: false,
-    mobileHeader: false
+    mobileHeader: false,
+    editMode: false,
 };
 
 export default handleActions({
@@ -16,6 +17,9 @@ export default handleActions({
     },
     [layout.showMobileHeader]: (state, action) => {
         return { ...state, mobileHeader: action.payload };
+    },
+    [layout.toggleEditMode]: (state, action) => {
+        return { ...state, editMode: action.payload };
     },
 }, initialState);
 

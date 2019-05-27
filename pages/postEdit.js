@@ -14,11 +14,16 @@ import { convertImageToCodeImage } from '../core/util/ImageUtil';
 class postEdit extends Component {
 
     componentDidMount() {
+        this.props.LayoutAction.toggleEditMode(true);
         this.props.withSetHeaderTitle('게시글 작성');
     }
 
     componentDidUpdate(prevProps, prevState) {
         this.onDetectError();
+    }
+
+    componentWillUnmount() {
+        this.props.LayoutAction.toggleEditMode(false);
     }
 
     onDetectError = () =>{

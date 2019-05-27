@@ -1,6 +1,7 @@
 import React from "react";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
+import classNames from 'classnames';
 
 import NanoBarLoading from '../../component/common/loading/NanoBarLoading/NanoBarLoading';
 import SpinnerLoading from '../../component/common/loading/SpinnerLoading/SpinnerLoading';
@@ -15,7 +16,8 @@ import * as userAction from "../../store/actions/UserAction";
 import {goPostListPage, goLoginPage, goPostEditPage, goMainPage} from '../../core/util/RouteUtil';
 import { nanoBarLoadingSetup } from '../../core/lib/apiCall';
 
-import style from './LayoutContainer.scss';
+import cn from './LayoutContainer.scss';
+const cx = classNames.bind(cn);
 
 class LayoutContainer extends React.Component {
 
@@ -78,7 +80,7 @@ class LayoutContainer extends React.Component {
     };
 
     render() {
-        const {categories, sideBar, mobileHeader, authInfo, spinnerLoading} = this.props;
+        const {categories, sideBar, mobileHeader, authInfo, spinnerLoading, editMode} = this.props;
 
         return (
             <div>
@@ -97,7 +99,7 @@ class LayoutContainer extends React.Component {
                 />
                 <SpinnerLoading loading={spinnerLoading}/>
                 <NanoBarLoading/>
-                <div className={style.contentWrapper}>
+                <div className={cx(cn.contentWrapper, !editMode && cn.contentWidth)} >
                     {
                         this.props.children
                     }
@@ -115,6 +117,7 @@ export default connect(
         spinnerLoading: state.LayoutReducer.spinnerLoading,
         sideBar: state.LayoutReducer.sideBar,
         mobileHeader: state.LayoutReducer.mobileHeader,
+        editMode: state.LayoutReducer.editMode,
     }),
     (dispatch) => ({
         layoutAction: bindActionCreators(layoutAction, dispatch),
