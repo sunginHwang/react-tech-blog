@@ -24,6 +24,7 @@
     "css-loader": "^0.28.11",
     "glob": "^7.1.2",
     "immutable": "^3.8.2",
+    "lodash": "^4.17.11",
     "nanobar": "^0.4.2",
     "next": "6.1.2",
     "next-compose": "0.0.2",

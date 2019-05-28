@@ -2,6 +2,7 @@ import React from "react";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import classNames from 'classnames';
+import * as _ from 'lodash';
 
 import NanoBarLoading from '../../component/common/loading/NanoBarLoading/NanoBarLoading';
 import SpinnerLoading from '../../component/common/loading/SpinnerLoading/SpinnerLoading';
@@ -33,14 +34,14 @@ class LayoutContainer extends React.Component {
 
         const {layoutAction, sideBar} = this.props;
 
-        window.onscroll = () => {
+        window.onscroll = _.throttle(() => {
             if (!sideBar) {
                 const currentScroll = Math.max(window.pageYOffset, document.documentElement.scrollTop, document.body.scrollTop);
                 let isScrollDown = lastScroll < currentScroll && currentScroll >= 0;
                 lastScroll = currentScroll;
                 layoutAction.showMobileHeader(isScrollDown);
             }
-        }
+        },100);
     };
 
     // 사이드 메뉴 토글
