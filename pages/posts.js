@@ -7,7 +7,6 @@ import PostLayout from '../component/post/list/PostLayout/PostLayout';
 import PostsPlaceHolder from '../component/post/list/PostsPlaceHolder/PostsPlaceHolder';
 
 import * as postsAction from "../store/actions/post/PostsAction";
-import {goPostDetailPage} from '../core/util/RouteUtil';
 
 class posts extends Component {
 
@@ -51,9 +50,7 @@ class posts extends Component {
         if(loading) return <PostsPlaceHolder/>
 
         return (
-            <PostLayout
-                onClickDetailPage={goPostDetailPage}
-                posts={posts}/>
+            <PostLayout posts={posts}/>
         )
     }
 }

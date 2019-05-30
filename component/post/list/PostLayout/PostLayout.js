@@ -9,11 +9,10 @@ class PostLayout extends Component {
     }
 
     render() {
-        const { posts, onClickDetailPage } = this.props;
+        const { posts } = this.props;
 
         const postItems = posts.map((post) => {
             return <PostItem
-                clickDetailPage={onClickDetailPage}
                 postNo={post.postNo}
                 key={post.postNo}
                 title={post.title}
