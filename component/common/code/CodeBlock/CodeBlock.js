@@ -1,5 +1,5 @@
 import React from "react";
-import hljs from '../../../../static/highlight.min';
+import hljs from 'highlight.js';
 
 export default class CodeBlock extends React.PureComponent {
     constructor(props) {
