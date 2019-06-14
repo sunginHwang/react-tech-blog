@@ -76,8 +76,8 @@ class postEdit extends Component {
             return false;
         }
 
-        if (title.length < 1 || title.length > 30) {
-            alert('제목은 1~30글자 사이로 입력하세요.');
+        if (title.length < 1 || title.length > 100) {
+            alert('제목은 1~100글자 사이로 입력하세요.');
             return false;
         }
 
