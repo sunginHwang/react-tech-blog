@@ -1,5 +1,20 @@
 # tech blog for next.js
 
+## use
+```
+react
+redux
+redux-saga
+react-icons
+redux-thunk
+react-markdown
+next
+classnames
+highlight.js
+immutable
+nanobar
+lodash
+```
 
 ## Project setup
 ```
