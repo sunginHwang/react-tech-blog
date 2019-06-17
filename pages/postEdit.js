@@ -13,6 +13,11 @@ import { convertImageToCodeImage } from '../core/util/ImageUtil';
 
 class postEdit extends Component {
 
+    constructor(props) {
+        super(props);
+        this.interval = setInterval(() => {console.log('on auto save interval');}, 1000);
+    }
+
     componentDidMount() {
         this.props.LayoutAction.toggleEditMode(true);
         this.props.withSetHeaderTitle('게시글 작성');
@@ -24,6 +29,7 @@ class postEdit extends Component {
 
     componentWillUnmount() {
         this.props.LayoutAction.toggleEditMode(false);
+       this.stopAutoSave();
     }
 
     onDetectError = () =>{
@@ -32,6 +38,10 @@ class postEdit extends Component {
             this.props.postUpsertAction.toggleError(false);
         }
     };
+
+    stopAutoSave = () => {
+        clearInterval(this.interval);
+    }
 
     // 본문내용 변경 작성
     onChangeContent = (content) => {
