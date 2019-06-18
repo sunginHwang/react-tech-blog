@@ -10,17 +10,19 @@ import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import OriginPreview from '../component/post/write/OriginPreview/OriginPreview';
 import { convertImageToCodeImage } from '../core/util/ImageUtil';
+import {TEMP_POST_AUTO_SAVE} from '../core/lib/constants';
 
 class postEdit extends Component {
 
     constructor(props) {
         super(props);
-        this.interval = setInterval(() => {console.log('on auto save interval');}, 1000);
+        this.interval = null;
     }
 
     componentDidMount() {
         this.props.LayoutAction.toggleEditMode(true);
         this.props.withSetHeaderTitle('게시글 작성');
+        this.startAutoSave();
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -39,8 +41,20 @@ class postEdit extends Component {
         }
     };
 
+    startAutoSave = () => {
+        const fiveMin = 1000 * 60 * 5;
+        this.interval = setInterval(this.autoSaveTempPost, fiveMin);
+    }
+
     stopAutoSave = () => {
         clearInterval(this.interval);
+    }
+
+    autoSaveTempPost = () => {
+        //todo 임시저장글 꺼내오는 방법 writeReducer 의 PostId 를 통해 구분 가능
+        if(this.props.content !== ''){
+            localStorage.setItem(TEMP_POST_AUTO_SAVE, this.props.content);
+        }
     }
 
     // 본문내용 변경 작성
@@ -186,14 +200,11 @@ class postEdit extends Component {
                     onChangeTitle={onChangeTitle}
                     onChangeCategories={onChangeCategories}
                     onDndImage={onDndImage}
-                    onPasteImage={onPasteImage}
-
-                />
+                    onPasteImage={onPasteImage}/>
                 <OriginPreview
                     content={content}
                     onToggleView={onClickShowOriginPreview}
-                    visible={previewModal}
-                />
+                    visible={previewModal}/>
             </div>
         )
     }
