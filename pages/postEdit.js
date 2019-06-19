@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import * as FileApi from '../core/apis/FileApi';
 import WriteView from '../component/post/write/WriteView/WriteView';
 import * as postUpsertAction from "../store/actions/post/PostUpsertAction";
@@ -9,7 +9,7 @@ import WithHeader from '../hoc/WithHeader';
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import OriginPreview from '../component/post/write/OriginPreview/OriginPreview';
-import { convertImageToCodeImage } from '../core/util/ImageUtil';
+import {convertImageToCodeImage} from '../core/util/ImageUtil';
 import {TEMP_POST_AUTO_SAVE} from '../core/lib/constants';
 
 class postEdit extends Component {
@@ -23,6 +23,10 @@ class postEdit extends Component {
         this.props.LayoutAction.toggleEditMode(true);
         this.props.withSetHeaderTitle('게시글 작성');
         this.startAutoSave();
+
+        if (this.checkTempPost()) {
+            this.loadTempPost();
+        }
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -31,11 +35,11 @@ class postEdit extends Component {
 
     componentWillUnmount() {
         this.props.LayoutAction.toggleEditMode(false);
-       this.stopAutoSave();
+        this.stopAutoSave();
     }
 
-    onDetectError = () =>{
-        if(this.props.error){
+    onDetectError = () => {
+        if (this.props.error) {
             alert(this.props.errorMsg);
             this.props.postUpsertAction.toggleError(false);
         }
@@ -50,35 +54,51 @@ class postEdit extends Component {
         clearInterval(this.interval);
     }
 
+    checkTempPost = () => {
+        const tempPost = localStorage.getItem(TEMP_POST_AUTO_SAVE);
+        return this.props.postNo !== 0 && typeof tempPost === "object" && tempPost.content !== '';
+    }
+
+    loadTempPost = () => {
+        const tempPost = localStorage.getItem(TEMP_POST_AUTO_SAVE);
+        this.props.postUpsertAction.settingPostInfo(tempPost);
+    }
+
     autoSaveTempPost = () => {
         //todo 임시저장글 꺼내오는 방법 writeReducer 의 PostId 를 통해 구분 가능
-        if(this.props.content !== ''){
-            localStorage.setItem(TEMP_POST_AUTO_SAVE, this.props.content);
+        if (this.props.content !== '') {
+            const tempPost = {
+                postNo: this.props.postNo,
+                category: this.props.category,
+                title: this.props.title,
+                content: this.props.content,
+            }
+            localStorage.setItem(TEMP_POST_AUTO_SAVE, tempPost);
         }
     }
 
-    // 본문내용 변경 작성
+// 본문내용 변경 작성
     onChangeContent = (content) => {
-        const { postUpsertAction } = this.props;
+        const {postUpsertAction} = this.props;
         postUpsertAction.setContent(content);
     };
 
-    // 제목 변경
+// 제목 변경
     onChangeTitle = (title) => {
-        const { postUpsertAction } = this.props;
+        const {postUpsertAction} = this.props;
         postUpsertAction.setTitle(title);
     };
 
-    // 카테고리 변경 시
+// 카테고리 변경 시
     onChangeCategories = (selectedCategory) => {
-        const { postUpsertAction } = this.props;
+        const {postUpsertAction} = this.props;
         postUpsertAction.setCategory(selectedCategory);
     };
 
-    // 글 생성 or 업데이트
+// 글 생성 or 업데이트
     upsertPost = () => {
-        const { title, content, category, postNo, postUpsertAction } = this.props;
-        const { validateUpsertPost } = this;
+        const {title, content, category, postNo, postUpsertAction} = this.props;
+        const {validateUpsertPost} = this;
 
         if (validateUpsertPost(title, content, category)) {
 
@@ -92,10 +112,10 @@ class postEdit extends Component {
         }
     };
 
-    // 글 작성 유효성 검사
+// 글 작성 유효성 검사
     validateUpsertPost = (title, content, category) => {
 
-        if(this.props.authInfo.no === 0 ){
+        if (this.props.authInfo.no === 0) {
             alert('로그인이 필요해요 ㅠㅠ.');
             return false;
         }
@@ -161,7 +181,7 @@ class postEdit extends Component {
         fileInput.click();
     };
 
-    // 이미지 업로드
+// 이미지 업로드
     uploadImage = async (file) => {
         await this.props.LayoutAction.toggleSpinnerLoading(true);
 
@@ -175,15 +195,15 @@ class postEdit extends Component {
     };
 
 
-    // 프리뷰 클릭
+// 프리뷰 클릭
     onClickShowOriginPreview = () => {
-        const { postUpsertAction, previewModal } = this.props;
+        const {postUpsertAction, previewModal} = this.props;
         postUpsertAction.toggleOriginPreview(!previewModal);
     };
 
     render() {
-        const { onDndImage, onPasteImage, onChangeContent, onChangeTitle, onClickUploadImage, onChangeCategories, upsertPost, onClickShowOriginPreview} = this;
-        const { title, content, category, categories, previewModal, authInfo } = this.props;
+        const {onDndImage, onPasteImage, onChangeContent, onChangeTitle, onClickUploadImage, onChangeCategories, upsertPost, onClickShowOriginPreview} = this;
+        const {title, content, category, categories, previewModal, authInfo} = this.props;
 
         return (
             <div>
