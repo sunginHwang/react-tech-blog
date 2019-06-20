@@ -10,6 +10,8 @@ import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import OriginPreview from '../component/post/write/OriginPreview/OriginPreview';
 import {convertImageToCodeImage} from '../core/util/ImageUtil';
+import {confirm} from '../core/util/dialog';
+
 import {TEMP_POST_AUTO_SAVE} from '../core/lib/constants';
 
 class postEdit extends Component {
@@ -24,7 +26,7 @@ class postEdit extends Component {
         this.props.withSetHeaderTitle('게시글 작성');
         this.startAutoSave();
 
-        if (this.checkTempPost()) {
+        if (this.isLoadTempPost()) {
             this.loadTempPost();
         }
     }
@@ -54,18 +56,17 @@ class postEdit extends Component {
         clearInterval(this.interval);
     }
 
-    checkTempPost = () => {
-        const tempPost = localStorage.getItem(TEMP_POST_AUTO_SAVE);
-        return this.props.postNo !== 0 && typeof tempPost === "object" && tempPost.content !== '';
+    isLoadTempPost = () => {
+        const tempPost = JSON.parse(localStorage.getItem(TEMP_POST_AUTO_SAVE));
+        return this.props.postNo === 0 && this.props.content === '' && typeof tempPost === "object" && tempPost.content !== '';
     }
 
     loadTempPost = () => {
-        const tempPost = localStorage.getItem(TEMP_POST_AUTO_SAVE);
-        this.props.postUpsertAction.settingPostInfo(tempPost);
+        const tempPost = JSON.parse(localStorage.getItem(TEMP_POST_AUTO_SAVE));
+        confirm('임시저장된 정보를 불러오시겠습니까?').then(result => result && this.props.postUpsertAction.settingPostInfo(tempPost));
     }
 
     autoSaveTempPost = () => {
-        //todo 임시저장글 꺼내오는 방법 writeReducer 의 PostId 를 통해 구분 가능
         if (this.props.content !== '') {
             const tempPost = {
                 postNo: this.props.postNo,
@@ -73,7 +74,7 @@ class postEdit extends Component {
                 title: this.props.title,
                 content: this.props.content,
             }
-            localStorage.setItem(TEMP_POST_AUTO_SAVE, tempPost);
+            localStorage.setItem(TEMP_POST_AUTO_SAVE, JSON.stringify(tempPost));
         }
     }
 
