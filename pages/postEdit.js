@@ -58,7 +58,9 @@ class postEdit extends Component {
 
     isLoadTempPost = () => {
         const tempPost = JSON.parse(localStorage.getItem(TEMP_POST_AUTO_SAVE));
-        return this.props.postNo === 0 && this.props.content === '' && typeof tempPost === "object" && tempPost.content !== '';
+        return this.props.postNo === 0 && this.props.content === ''
+            && typeof tempPost === "object" && tempPost !== null
+            && tempPost.content !== '';
     }
 
     loadTempPost = () => {
