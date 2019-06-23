@@ -18,3 +18,4 @@ export const settingPostInfo = createAction( `${prefix}SETTING_POST_INFO`);
 export const setCategory = createAction(`${prefix}SET_CATEGORY`);
 export const setTitle = createAction(`${prefix}SET_TITLE`);
 export const setContent = createAction(`${prefix}SET_CONTENT`);
+

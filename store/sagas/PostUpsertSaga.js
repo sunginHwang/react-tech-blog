@@ -5,12 +5,16 @@ import * as PostsAction from "../actions/post/PostsAction";
 import * as BlogApi from '../../core/apis/BlogApi';
 import {goPostDetailPage} from '../../core/util/RouteUtil';
 import {asyncSagaCallBack } from '../../core/util/ReduxSagaUtil';
+import {TEMP_POST_AUTO_SAVE } from '../../core/lib/constants';
 
 
 function* postUpsertSaga(info) {
     yield call(asyncSagaCallBack, PostUpsertAction.upsertPost, BlogApi.upsertPost, info.payload,
         function* success(success) {
+            yield localStorage.setItem(TEMP_POST_AUTO_SAVE, ''); // 임시저장 삭제
+
             const {postNo, categoryNo} = yield success.data;
+
             yield put(PostsAction.getPosts(categoryNo));
             yield goPostDetailPage(categoryNo, postNo);
         },
