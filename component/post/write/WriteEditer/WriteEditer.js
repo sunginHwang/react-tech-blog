@@ -1,5 +1,5 @@
 import React from "react";
-import { MdAddToPhotos } from 'react-icons/md';
+import {MdAddToPhotos} from 'react-icons/md';
 import Select from 'react-select';
 
 import cn from './WriteEditer.scss';
@@ -15,34 +15,42 @@ export default class WriteEditer extends React.Component {
     }
 
     createEventListener() {
-        const { onDndImage, onPasteImage } = this.props;
         //dnd Event
-        if (window) {
-            window.addEventListener('drop',onDndImage);
-        }
-
+        if (window)  window.addEventListener('drop', this.onDnd);
         // paste Event
-        if (document && document.body) {
-            document.body.addEventListener('paste', onPasteImage);
-        }
+        if (document && document.body) document.body.addEventListener('paste', this.onPaste);
     }
 
-    removeEventListener() {
-        const { onDndImage, onPasteImage } = this.props;
+    onPaste = (e) => {
+        const {items} = e.clipboardData || e.originalEvent.clipboardData;
+        if (items.length !== 2) return;
+        if (items[1].kind !== 'file') return;
 
-        if (window) {
-            window.removeEventListener('drop', onDndImage);
+        const file = items[1].getAsFile();
+
+        this.props.uploadImage(file);
+        e.preventDefault();
+    };
+
+    onDnd = (e) => {
+        e.preventDefault();
+        const {files} = e.dataTransfer;
+
+        for (let i = 0; i < files.length; i++) {
+            this.props.uploadImage(files[i]);
         }
-        if (document && document.body) {
-            document.body.removeEventListener('paste', onPasteImage);
-        }
+    };
+
+    removeEventListener() {
+        if (window) window.removeEventListener('drop', this.onDnd);
+        if (document && document.body) document.body.removeEventListener('paste', this.onPaste);
     }
 
     render() {
-        const { onChangeContent, onChangeTitle, content, onClickUploadImage, categories, onChangeCategories, selectedCategory, title , authInfo } = this.props;
+        const {onChangeContent, onChangeTitle, content, onClickUploadImage, categories, onChangeCategories, selectedCategory, title, authInfo} = this.props;
 
         return (
-            <div style={{height:'100%'}}>
+            <div style={{height: '100%'}}>
                 <div className={cn.writeTopArea}>
                     <img className={cn.author} src={authInfo.imageUrl}/>
                     <span className={cn.authorName}>{`작성자 : ${authInfo.userId}`}</span>
@@ -53,7 +61,7 @@ export default class WriteEditer extends React.Component {
                         onChange={onChangeCategories}
                         options={categories}/>
                 </div>
-                <div className={cn.writeTitleArea} >
+                <div className={cn.writeTitleArea}>
                     <input className={cn.writeTitle}
                            type='text'
                            placeholder='제목을 입력해 주세요.'

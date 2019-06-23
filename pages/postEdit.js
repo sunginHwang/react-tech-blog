@@ -151,28 +151,6 @@ class postEdit extends Component {
         return true;
     };
 
-    /*이미지 드래그 삽입 ( 복수 드래그 가능 )*/
-    onDndImage = (e) => {
-        e.preventDefault();
-        const {files} = e.dataTransfer;
-
-        for (let i = 0; i < files.length; i++) {
-            this.uploadImage(files[i]);
-        }
-    };
-
-    /*키보드 cv 복사로 이미지 삽입*/
-    onPasteImage = (e) => {
-        const {items} = e.clipboardData || e.originalEvent.clipboardData;
-        if (items.length !== 2) return;
-        if (items[1].kind !== 'file') return;
-        const file = items[1].getAsFile();
-        this.uploadImage(file);
-
-        e.preventDefault();
-
-    };
-
     /*이미지 버튼 삽입*/
     onClickUploadImage = async () => {
         const fileInput = document.createElement('input');
@@ -205,7 +183,7 @@ class postEdit extends Component {
     };
 
     render() {
-        const {onDndImage, onPasteImage, onChangeContent, onChangeTitle, onClickUploadImage, onChangeCategories, upsertPost, onClickShowOriginPreview} = this;
+        const {uploadImage, onChangeContent, onChangeTitle, onClickUploadImage, onChangeCategories, upsertPost, onClickShowOriginPreview} = this;
         const {title, content, category, categories, previewModal, authInfo} = this.props;
 
         return (
@@ -222,8 +200,7 @@ class postEdit extends Component {
                     onChangeContent={onChangeContent}
                     onChangeTitle={onChangeTitle}
                     onChangeCategories={onChangeCategories}
-                    onDndImage={onDndImage}
-                    onPasteImage={onPasteImage}/>
+                    uploadImage={uploadImage}/>
                 <OriginPreview
                     content={content}
                     onToggleView={onClickShowOriginPreview}

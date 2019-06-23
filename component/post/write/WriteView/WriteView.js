@@ -13,7 +13,7 @@ export default class WriteView extends React.PureComponent{
 
     render(){
         const { title, content, authInfo, categories, selectedCategory, onClickShowOriginPreview, onClickUploadImage,
-            onChangeContent, onChangeTitle, onChangeCategories, onDndImage, onPasteImage, upsertPost} = this.props;
+            onChangeContent, onChangeTitle, onChangeCategories, uploadImage, upsertPost} = this.props;
 
         return (
             <div className={cn.write}>
@@ -27,8 +27,7 @@ export default class WriteView extends React.PureComponent{
                         onChangeCategories={onChangeCategories}
                         onChangeContent={(e) => {onChangeContent(e)}}
                         onChangeTitle={(e) => {onChangeTitle(e)}}
-                        onDndImage={(e) => {onDndImage(e);}}
-                        onPasteImage={(e) => {onPasteImage(e)}}
+                        uploadImage={uploadImage}
                         onClickUploadImage={(e) => {onClickUploadImage(e)}}/>
                 </div>
                 <div className={cx(cn.markDownWrapper, cn.view)}>
