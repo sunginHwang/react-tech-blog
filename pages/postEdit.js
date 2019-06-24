@@ -166,13 +166,9 @@ class postEdit extends Component {
     uploadImage = async (file) => {
         await this.props.LayoutAction.toggleSpinnerLoading(true);
 
-        await FileApi.saveImageAndGetImageUrl(file)
-            .then(async (imgUrl) => {
-                if (imgUrl === '') return;
-                await this.onChangeContent(this.props.content + convertImageToCodeImage(imgUrl));
-            });
+        const savedImageUrl = await FileApi.saveImageAndGetImageUrl(file);
         await this.props.LayoutAction.toggleSpinnerLoading(false);
-
+        return convertImageToCodeImage(savedImageUrl);
     };
 
 

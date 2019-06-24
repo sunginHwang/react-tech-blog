@@ -25,7 +25,7 @@ export default class WriteView extends React.PureComponent{
                         categories={categories}
                         selectedCategory={selectedCategory}
                         onChangeCategories={onChangeCategories}
-                        onChangeContent={(e) => {onChangeContent(e)}}
+                        onChangeContent={onChangeContent}
                         onChangeTitle={(e) => {onChangeTitle(e)}}
                         uploadImage={uploadImage}
                         onClickUploadImage={(e) => {onClickUploadImage(e)}}/>

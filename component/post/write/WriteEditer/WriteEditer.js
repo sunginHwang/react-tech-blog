@@ -16,30 +16,41 @@ export default class WriteEditer extends React.Component {
 
     createEventListener() {
         //dnd Event
-        if (window)  window.addEventListener('drop', this.onDnd);
+        if (window) window.addEventListener('drop', this.onDnd);
         // paste Event
         if (document && document.body) document.body.addEventListener('paste', this.onPaste);
     }
 
-    onPaste = (e) => {
+    onPaste = async (e) => {
+        e.preventDefault();
         const {items} = e.clipboardData || e.originalEvent.clipboardData;
         if (items.length !== 2) return;
         if (items[1].kind !== 'file') return;
 
         const file = items[1].getAsFile();
 
-        this.props.uploadImage(file);
-        e.preventDefault();
+        const markdownImg = await this.props.uploadImage(file);
+        this.addImage(markdownImg, e.target.selectionStart);
     };
 
-    onDnd = (e) => {
+    onDnd = async (e) => {
         e.preventDefault();
+
         const {files} = e.dataTransfer;
 
+        const imagePromises = [];
         for (let i = 0; i < files.length; i++) {
-            this.props.uploadImage(files[i]);
+            imagePromises.push(this.props.uploadImage(files[i]));
         }
+
+        const images = await Promise.all(imagePromises);
+        this.addImage(images.flat(), e.target.selectionStart);
     };
+
+    addImage = (image, addIndex) => {
+        const {content, onChangeContent} = this.props;
+        onChangeContent(content.slice(0, addIndex) + image + content.slice(addIndex));
+    }
 
     removeEventListener() {
         if (window) window.removeEventListener('drop', this.onDnd);
