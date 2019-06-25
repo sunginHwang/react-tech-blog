@@ -22,7 +22,7 @@ export default class WriteEditer extends React.Component {
     }
 
     onPaste = async (e) => {
-        e.preventDefault();
+
         const {items} = e.clipboardData || e.originalEvent.clipboardData;
         if (items.length !== 2) return;
         if (items[1].kind !== 'file') return;
@@ -31,6 +31,7 @@ export default class WriteEditer extends React.Component {
 
         const markdownImg = await this.props.uploadImage(file);
         this.addImage(markdownImg, e.target.selectionStart);
+        e.preventDefault();
     };
 
     onDnd = async (e) => {
