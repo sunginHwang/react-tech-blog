@@ -18,6 +18,7 @@ export default class WriteView extends React.PureComponent{
         return (
             <div className={cn.write}>
                 <div className={cx(cn.markDownWrapper, cn.edit)}>
+                    {/*writeEditorContainer*/}
                     <WriteEditer
                         title={title}
                         authInfo={authInfo}
@@ -30,6 +31,7 @@ export default class WriteView extends React.PureComponent{
                         uploadImage={uploadImage}
                         onClickUploadImage={(e) => {onClickUploadImage(e)}}/>
                 </div>
+                {/*writeViewContainer*/}
                 <div className={cx(cn.markDownWrapper, cn.view)}>
                     <div className={cn.titleArea}>
                         <span className={cn.previewTitle}>preview</span>
