@@ -16,8 +16,9 @@ export default class MyDocument extends Document {
                 <link rel="apple-touch-icon" href="/static/woolta.ico"/>
                 <link rel="shortcut icon" href="/static/woolta.ico"/>
                 <meta name="mobile-web-app-capable" content="yes"/>
-                <meta name="theme-color" content="#6e827f"/>
+                <meta name="theme-color" content="#fff"/>
                 <meta name="apple-mobile-web-app-capable" content="yes"/>
+                <meta name="apple-mobile-web-app-status-bar-style" content="white"/>
                 <meta name='description' content='woolta 블로그 ver2.0 기술 개발 블로그'/>
                 <meta property="og:description" content="woolta 블로그 ver2.0 기술 개발 블로그"/>
                 <meta property="og:site_name" content="woolta Blog"/>
@@ -26,6 +27,7 @@ export default class MyDocument extends Document {
                 <link rel="stylesheet" href="/_next/static/style.css" />
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/atom-one-dark.min.css"/>
                 <link href="https://fonts.googleapis.com/css?family=Roboto:400,700,900&amp;subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese" rel="stylesheet"/>
+                <link rel="manifest" href="/static/manifest.json"/>
             </Head>
             <body>
             <Main/>
