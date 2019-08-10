@@ -1,6 +1,6 @@
-import App, { Container } from 'next/app'
+import App, {Container} from 'next/app'
 import React from 'react'
-import { Provider } from 'react-redux'
+import {Provider} from 'react-redux'
 import withRedux from 'next-redux-wrapper';
 
 import * as categoryAction from "../store/actions/CategoryAction";
@@ -13,7 +13,7 @@ import '../style/scss/DefaultSetting.scss';
 
 class MyApp extends App {
 
-    static async getInitialProps({ Component, ctx }) {
+    static async getInitialProps({Component, ctx}) {
         const pageProps = Component.getInitialProps ? await Component.getInitialProps(ctx) : {};
 
         // 초기값 세팅 -> 게시글 카테고리 load (ssr)
@@ -25,11 +25,23 @@ class MyApp extends App {
 
         await loadCategories(ctx.store);
 
-        return { pageProps }
+        return {pageProps}
+    }
+
+    componentDidMount() {
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('service-worker.js')
+                    .then((reg) => {
+                        console.log('Service worker registered.', reg);
+                    })
+                    .catch(e => console.log(e));
+            });
+        }
     }
 
     render() {
-        const { Component, pageProps, store } = this.props
+        const {Component, pageProps, store} = this.props
         return (
             <Container>
                 <Provider store={store}>

@@ -14,6 +14,9 @@ app.prepare().then(() => {
     const server = express();
     siteMapRoutes(server);
 
+    server.use('/service-worker.js', express.static(__dirname + '/service-worker.js'));
+
+
     server.get('*', (req, res) => {
         return handler(req, res)
     });
