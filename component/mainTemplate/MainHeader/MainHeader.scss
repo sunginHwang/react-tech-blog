@@ -29,6 +29,7 @@
 .hideHeaderMobile{
   @media screen and (max-width: $mobile-width){
     top:-$main-header-height;
+    border: none;
   }
 }
 
