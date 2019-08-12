@@ -36,6 +36,8 @@ class MyApp extends App {
                 })
                 .catch(e => console.log(e));
         });
+
+        require('../pwa/install.js');
     }
 
     render() {
