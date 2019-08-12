@@ -28,16 +28,14 @@ class MyApp extends App {
         return {pageProps}
     }
 
-    componentDidMount() {
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('service-worker.js')
-                    .then((reg) => {
-                        console.log('Service worker registered.', reg);
-                    })
-                    .catch(e => console.log(e));
-            });
-        }
+    componentDidMount(){
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('service-worker.js')
+                .then((reg) => {
+                    console.log('Service worker registered.', reg);
+                })
+                .catch(e => console.log(e));
+        });
     }
 
     render() {
