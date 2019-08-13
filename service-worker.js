@@ -1,9 +1,8 @@
-
 const CACHE_NAME = 'woolta-blog-cache-v1';
 
 // CODELAB: Add list of files to cache here.
 const FILES_TO_CACHE = [
-    '/offline',
+    '/',
 ];
 
 self.addEventListener('install', function (event) {
@@ -12,9 +11,6 @@ self.addEventListener('install', function (event) {
     event.waitUntil(
         caches.open(CACHE_NAME)
             .then(function (cache) {
-                console.log('Opened cache');
-                console.log(cache);
-                console.log(FILES_TO_CACHE);
                 return cache.addAll(FILES_TO_CACHE);
             })
     );
@@ -22,20 +18,24 @@ self.addEventListener('install', function (event) {
 
 
 self.addEventListener('fetch', (evt) => {
-    console.log('[ServiceWorker] Fetch', evt.request.url);
-    // CODELAB: Add fetch event handler here.
-    if (evt.request.mode !== 'navigate') {
-        // Not a page navigation, bail.
-        return;
-    }
     evt.respondWith(
-        fetch(evt.request)
-            .catch(() => {
-                return caches.open(CACHE_NAME)
-                    .then((cache) => {
-                        return cache.match('offline');
-                    });
-            }))
+        caches.open(CACHE_NAME).then((cache) => {
+            return fetch(evt.request)
+                .then((response) => {
+                    console.log('online');
+                    if (response.status === 200 || response.status === 0) {
+                        cache.put(evt.request.url, response.clone());
+                    }
+                    return response;
+                }).catch((err) => {
+                    /*let isExistCacheRequest = false;
+
+                    cache.match(evt.request).then(() => isExistCacheRequest = true)
+                    console.log(isExistCacheRequest);
+                    const cacheFile = isExistCacheRequest ? evt.request : 'offline.html';*/
+                    return cache.match(evt.request);
+                });
+        }));
 });
 
 
