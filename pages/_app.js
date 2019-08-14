@@ -6,6 +6,7 @@ import withRedux from 'next-redux-wrapper';
 import * as categoryAction from "../store/actions/CategoryAction";
 import LayoutContainer from '../container/LayoutContainer/LayoutContainer';
 import UserInfoLoadContainer from '../container/UserInfoLoadContainer/UserInfoLoadContainer';
+import {subscribeUser} from '../pwa/pushConfig';
 
 import store from '../store'
 import '../style/scss/DefaultSetting.scss';
@@ -28,16 +29,19 @@ class MyApp extends App {
         return {pageProps}
     }
 
-    componentDidMount(){
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('service-worker.js')
-                .then((reg) => {
-                    console.log('Service worker registered.', reg);
-                })
-                .catch(e => console.log(e));
-        });
+    componentDidMount() {
+        if ('serviceWorker' in navigator && 'PushManager' in window) {
+            console.log('Service Worker and Push is supported');
 
-        require('../pwa/install.js');
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('service-worker.js')
+                    .then((reg) => {
+                        console.log('Service worker registered.', reg);
+                        subscribeUser(reg);
+                    })
+                    .catch(e => console.log(e));
+            });
+        }
     }
 
     render() {

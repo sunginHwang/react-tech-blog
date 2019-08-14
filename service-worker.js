@@ -40,3 +40,28 @@ self.addEventListener('fetch', (evt) => {
 
 
 
+self.addEventListener('push', function(event) {
+    console.log('[Service Worker] Push Received.');
+    console.log(`[Service Worker] Push had this data: "${event.data.text()}"`);
+    const title = '성인이 푸쉬';
+    const options = {
+        body: '푸쉬 메세지 테스트',
+        data:{
+            url:'https://blog.woolta.com'
+        }
+    };
+
+    event.waitUntil(self.registration.showNotification(title, options));
+});
+
+self.addEventListener('notificationclick', function(event) {
+    console.log('[Service Worker] Notification click Received.');
+    console.log(event);
+    event.notification.close();
+
+    event.waitUntil(
+        clients.openWindow('https://developers.google.com/web/')
+    );
+});
+
+
