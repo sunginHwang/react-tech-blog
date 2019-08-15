@@ -2,7 +2,7 @@ import React from "react";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import classNames from 'classnames';
-import * as _ from 'lodash';
+import throttle from 'lodash/throttle';
 
 import NanoBarLoading from '../../component/common/loading/NanoBarLoading/NanoBarLoading';
 import SpinnerLoading from '../../component/common/loading/SpinnerLoading/SpinnerLoading';
@@ -34,7 +34,7 @@ class LayoutContainer extends React.Component {
 
         const {layoutAction, sideBar} = this.props;
 
-        window.onscroll = _.throttle(() => {
+        window.onscroll = throttle(() => {
             if (!sideBar) {
                 const currentScroll = Math.max(window.pageYOffset, document.documentElement.scrollTop, document.body.scrollTop);
                 let isScrollDown = lastScroll < currentScroll && currentScroll >= 0;
@@ -100,7 +100,7 @@ class LayoutContainer extends React.Component {
                 />
                 <SpinnerLoading loading={spinnerLoading}/>
                 <NanoBarLoading/>
-                <div className={cx(cn.contentWrapper, !editMode && cn.contentWidth)} >
+                <div className={cx(cn.contentWrapper, !editMode && cn.contentWidth)}>
                     {
                         this.props.children
                     }
