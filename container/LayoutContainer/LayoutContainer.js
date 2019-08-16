@@ -32,14 +32,12 @@ class LayoutContainer extends React.Component {
     onDetectMobileScrollUpAndDown = () => {
         let lastScroll = 0;
 
-        const {layoutAction, sideBar} = this.props;
-
         window.onscroll = throttle(() => {
-            if (!sideBar) {
+            if (!this.props.sideBar) {
                 const currentScroll = Math.max(window.pageYOffset, document.documentElement.scrollTop, document.body.scrollTop);
                 let isScrollDown = lastScroll < currentScroll && currentScroll >= 0;
                 lastScroll = currentScroll;
-                layoutAction.showMobileHeader(isScrollDown);
+                this.props.layoutAction.showMobileHeader(isScrollDown);
             }
         },100);
     };
