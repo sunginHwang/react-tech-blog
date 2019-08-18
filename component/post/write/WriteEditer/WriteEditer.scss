@@ -12,17 +12,21 @@
   -ms-overflow-style: none;
 }
 .writeTitleArea{
+  display: flex;
   height: 60px;
+  margin-bottom: 20px;
+  align-items: center;
+  justify-content: space-between;
 }
 .writeTitle{
-  float: left;
+  width: 75%;
   border: none;
   outline-style: none;
   font-size: 24px;
-  margin-bottom: 20px;
 }
 
 .imageInsertBtn{
+  width: 20%;
   float: right;
   @extend .main-button
 }
