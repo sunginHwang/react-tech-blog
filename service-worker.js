@@ -1,4 +1,4 @@
-const CACHE_NAME = 'woolta-blog-cache-v1';
+const CACHE_NAME = 'woolta-blog-cache-v20';
 
 // CODELAB: Add list of files to cache here.
 const FILES_TO_CACHE = [
@@ -38,29 +38,28 @@ self.addEventListener('fetch', (evt) => {
         }));
 });
 
-
-
-self.addEventListener('push', function(event) {
+self.addEventListener('push', function (event) {
     console.log('[Service Worker] Push Received.');
     console.log(`[Service Worker] Push had this data: "${event.data.text()}"`);
-    const title = '성인이 푸쉬';
+    const pushInfo = JSON.parse(event.data.text());
+
     const options = {
-        body: '푸쉬 메세지 테스트',
-        data:{
-            url:'https://blog.woolta.com'
+        body: pushInfo.content,
+        icon: 'static/icon192x192.png',
+        data: {
+            url: pushInfo.url
         }
     };
 
-    event.waitUntil(self.registration.showNotification(title, options));
+    event.waitUntil(self.registration.showNotification(pushInfo.title, options));
 });
 
-self.addEventListener('notificationclick', function(event) {
+self.addEventListener('notificationclick', function (event) {
     console.log('[Service Worker] Notification click Received.');
-    console.log(event);
     event.notification.close();
 
     event.waitUntil(
-        clients.openWindow('https://developers.google.com/web/')
+        clients.openWindow(event.notification.data.url)
     );
 });
 
