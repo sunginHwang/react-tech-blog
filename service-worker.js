@@ -1,6 +1,5 @@
 const CACHE_NAME = 'woolta-blog-cache';
 
-// CODELAB: Add list of files to cache here.
 const FILES_TO_CACHE = [
     '/offline',
 ];
@@ -15,6 +14,19 @@ self.addEventListener('install', function (event) {
             })
     );
 });
+
+self.addEventListener('activate', function (event) {
+    console.log('[ServiceWorker] activate');
+    event.waitUntil(
+        caches.keys().then(function (cacheName) {
+            return Promise.all(
+                cacheName.filter(n => FILES_TO_CACHE.indexOf(n) === -1)
+                    .map(n => caches.delete(n))
+            )
+        })
+    )
+})
+
 
 self.addEventListener('fetch', (event) => {
 
