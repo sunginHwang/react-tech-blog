@@ -1,6 +1,8 @@
-const applicationServerPublicKey = 'BB6dRyJUjlJrY6GVBkF14G-RmLmsxW2apfauEjdyLDIfdqCPKHpDA9MZwpIgG-B6HdkbSPEegTeY2eyQHeH_gBc';
+import {pushSubscription} from '../core/apis/PushApi';
 
-const urlB64ToUint8Array =(base64String) => {
+const applicationServerPublicKey = 'BBUmILImgSCb6wcUMIDPKj1B-kxu_x4VtHeQYVkLIRAlFCtTTFblcRsANxQCBfBYR8jOSx4OsvoFjObsyWc5p9Y';
+
+const urlB64ToUint8Array = (base64String) => {
     const padding = '='.repeat((4 - base64String.length % 4) % 4);
     const base64 = (base64String + padding)
         .replace(/\-/g, '+')
@@ -15,18 +17,17 @@ const urlB64ToUint8Array =(base64String) => {
     return outputArray;
 }
 
-export const subscribeUser = (swReg) => {
+export const subscribeUser = (swRegistration) => {
     const applicationServerKey = urlB64ToUint8Array(applicationServerPublicKey);
-
-    swReg.pushManager.subscribe({
+    swRegistration.pushManager.subscribe({
         userVisibleOnly: true,
         applicationServerKey: applicationServerKey
     })
         .then((subscription) => {
             console.log('User is subscribed');
-            console.log(JSON.stringify(subscription));
+            pushSubscription(JSON.parse(JSON.stringify(subscription)));
         })
-        .catch(function (err) {
+        .catch((err) => {
             console.log('Failed to subscribe the user: ', err);
         });
 }
