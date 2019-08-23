@@ -1,8 +1,8 @@
-const CACHE_NAME = 'woolta-blog-cache-v20';
+const CACHE_NAME = 'woolta-blog-cache';
 
 // CODELAB: Add list of files to cache here.
 const FILES_TO_CACHE = [
-    '/',
+    '/offline',
 ];
 
 self.addEventListener('install', function (event) {
@@ -16,26 +16,33 @@ self.addEventListener('install', function (event) {
     );
 });
 
+self.addEventListener('fetch', (event) => {
 
-self.addEventListener('fetch', (evt) => {
-    evt.respondWith(
-        caches.open(CACHE_NAME).then((cache) => {
-            return fetch(evt.request)
+    if (event.request.method !== 'GET') { // GET 요청만 캐싱 지원 처리
+        return;
+    }
+
+    const fetchRequest = event.request.clone();
+
+    event.respondWith(
+        caches.match(CACHE_NAME).then((res) => {
+            return res || fetch(fetchRequest)
                 .then((response) => {
-                    console.log('online');
-                    if (response.status === 200 || response.status === 0) {
-                        cache.put(evt.request.url, response.clone());
-                    }
-                    return response;
-                }).catch((err) => {
-                    /*let isExistCacheRequest = false;
 
-                    cache.match(evt.request).then(() => isExistCacheRequest = true)
-                    console.log(isExistCacheRequest);
-                    const cacheFile = isExistCacheRequest ? evt.request : 'offline.html';*/
-                    return cache.match(evt.request);
-                });
-        }));
+                    if (response.status === 200 || response.status === 0) {
+                        const cloneResponse = response.clone();
+                        caches.open(CACHE_NAME) // 네트워크 요청 성공시 해당 결과값 캐싱
+                            .then(cache => cache.put(event.request.url, cloneResponse));
+                    }
+
+                    return response;
+                })
+                .catch(() => {
+                    return caches.match(event.request.url)
+                        .then(cache => {return cache;}) // 네트워크 요청 실패시 캐싱된 요청으로 응답.
+                })
+        })
+    );
 });
 
 self.addEventListener('push', function (event) {
