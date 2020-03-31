@@ -27,7 +27,7 @@
     "immutable": "^3.8.2",
     "lodash": "^4.17.11",
     "nanobar": "^0.4.2",
-    "next": "6.1.2",
+    "next": "9.3.3",
     "next-compose": "0.0.2",
     "next-redux-wrapper": "^3.0.0-alpha.1",
     "next-routes": "^1.4.2",
